@@ -1,30 +1,10 @@
 /**
  * Página Home - Landing Page
  */
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
 
 function Home() {
   const navigate = useNavigate();
-  const [apiStatus, setApiStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    checkApiStatus();
-  }, []);
-
-  const checkApiStatus = async () => {
-    try {
-      const response = await api.get('/status');
-      setApiStatus(response.data.ok ? 'online' : 'offline');
-    } catch (error) {
-      console.error('Erro ao verificar status da API:', error);
-      setApiStatus('offline');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -47,7 +27,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Status da API */}
+      {/* Status do Sistema */}
       <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
         <div className="flex items-center justify-between">
           <div>
@@ -55,26 +35,15 @@ function Home() {
               Status do Sistema
             </h2>
             <p className="text-sm text-gray-600">
-              Verifique se a API está respondendo
+              Cálculos processados diretamente no navegador
             </p>
           </div>
-          {loading ? (
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-              <span className="text-gray-600">Verificando...</span>
-            </div>
-          ) : (
-            <div className="flex items-center gap-3">
-              <span className={`inline-block w-4 h-4 rounded-full ${
-                apiStatus === 'online' ? 'bg-green-500 animate-pulse' : 'bg-red-500'
-              }`}></span>
-              <span className={`font-bold text-lg ${
-                apiStatus === 'online' ? 'text-green-600' : 'text-red-600'
-              }`}>
-                {apiStatus === 'online' ? '✓ Online' : '✗ Offline'}
-              </span>
-            </div>
-          )}
+          <div className="flex items-center gap-3">
+            <span className="inline-block w-4 h-4 rounded-full bg-green-500 animate-pulse"></span>
+            <span className="font-bold text-lg text-green-600">
+              ✓ Pronto para usar
+            </span>
+          </div>
         </div>
       </div>
 
