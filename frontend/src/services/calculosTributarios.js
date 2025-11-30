@@ -62,7 +62,9 @@ const calcularAliquotaEfetiva = (rbt12, faixas) => {
 };
 
 export const calcularSimples = (data) => {
-  const { rbt12, atividade, folha = 0 } = data;
+  const rbt12 = parseFloat(data.rbt12) || 0;
+  const atividade = data.atividade;
+  const folha = parseFloat(data.folha) || 0;
 
   let resultado;
   let anexo;
@@ -136,7 +138,8 @@ const ALIQUOTAS_PRESUMIDO = {
 const LIMITE_ADICIONAL_IRPJ = 240000;
 
 export const calcularPresumido = (data) => {
-  const { rbt12, atividade } = data;
+  const rbt12 = parseFloat(data.rbt12) || 0;
+  const atividade = data.atividade;
 
   const presuncaoIrpj = PRESUNCAO_IRPJ[atividade];
   const presuncaoCsll = PRESUNCAO_CSLL[atividade];
@@ -203,7 +206,10 @@ const ALIQUOTAS_REAL = {
 };
 
 export const calcularReal = (data) => {
-  const { rbt12, despesas = 0, folha = 0, atividade } = data;
+  const rbt12 = parseFloat(data.rbt12) || 0;
+  const despesas = parseFloat(data.despesas) || 0;
+  const folha = parseFloat(data.folha) || 0;
+  const atividade = data.atividade;
 
   const despesasTotais = despesas + folha;
   const lucroLiquido = rbt12 - despesasTotais;
@@ -279,13 +285,15 @@ export const calcularReal = (data) => {
 // ============================================
 
 export const compararRegimes = (dados) => {
-  const { receita, folha, atividade, despesas } = dados;
+  // Aceita tanto "receita" quanto "rbt12" como nome do campo
+  const receita = dados.receita || dados.rbt12;
+  const { folha, atividade, despesas } = dados;
 
   const dataCalculo = {
-    rbt12: receita,
-    folha: folha || 0,
+    rbt12: parseFloat(receita) || 0,
+    folha: parseFloat(folha) || 0,
     atividade: atividade,
-    despesas: despesas || 0
+    despesas: parseFloat(despesas) || 0
   };
 
   const simples = calcularSimples(dataCalculo);
