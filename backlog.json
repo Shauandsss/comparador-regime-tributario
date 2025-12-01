@@ -1,0 +1,206 @@
+{
+  "columns": [
+    {
+      "name": "📌 Backlog",
+      "cards": []
+    },
+    {
+      "name": "🚧 Em andamento",
+      "cards": []
+    },
+    {
+      "name": "✅ Concluído",
+      "cards": [
+        {
+          "title": "Planejador Tributário Visual",
+          "description": "Usuário testa cenários: aumentar folha, despesas, etc.",
+          "tech": ["React"],
+          "prompt": "Crie sliders (faturamento, folha, despesas) e mostre impacto em cada regime em tempo real. Use gráficos comparativos.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "frontend/src/pages/PlanejadorTributario.jsx"
+          ]
+        },
+        {
+          "title": "Simulador de Migração MEI → ME (Simples)",
+          "description": "Calcula tributos antes/depois da migração.",
+          "tech": ["React"],
+          "prompt": "Componente com input de faturamento. Compare MEI (DAS fixo) com Simples (anexos) e mostre quanto muda após ultrapassar 81k.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "frontend/src/pages/SimuladorMigracao.jsx"
+          ]
+        },
+        {
+          "title": "Comparador de Meses (Histórico Tributário)",
+          "description": "Guarda dados mês a mês e gera gráficos.",
+          "tech": ["React", "Node"],
+          "prompt": "Crie endpoint POST /historico e GET /historico. Salve meses e valores tributários. React: gráfico de linha mostrando evolução dos impostos pagos.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/data/historico-store.js",
+            "backend/src/services/historico.service.js",
+            "backend/src/controllers/historico.controller.js",
+            "backend/src/routes/historico.routes.js",
+            "frontend/src/pages/HistoricoTributario.jsx"
+          ]
+        },
+        {
+          "title": "Calculadora de Margem + Tributos",
+          "description": "Preço final considerando impostos.",
+          "tech": ["React", "Node"],
+          "prompt": "Usuário informa custo, despesas, regime. Sistema calcula preço mínimo e margem líquida. Mostrar gráfico e cenários alternativos.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/services/margem.service.js",
+            "backend/src/controllers/margem.controller.js",
+            "backend/src/routes/margem.routes.js",
+            "frontend/src/pages/CalculadoraMargem.jsx"
+          ]
+        },
+        {
+          "title": "Explicador Visual do Simples Nacional",
+          "description": "Graus visuais da alíquota efetiva.",
+          "tech": ["React"],
+          "prompt": "Com D3.js gere gráfico mostrando RBT12 x alíquota efetiva por anexo, com pontos clicáveis e tooltip explicando parcela redutora.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "frontend/src/pages/ExplicadorSimples.jsx"
+          ]
+        },
+        {
+          "title": "Guia CNAE → Anexo/Regime",
+          "description": "Usuário digita CNAE e vê anexos aplicáveis.",
+          "tech": ["Node", "React"],
+          "prompt": "Crie banco local JSON com CNAE → anexos. Endpoint GET /cnae/{id}. React: input com autocomplete e card mostrando anexo, fator R, % presunção e riscos.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/data/cnae-database.js",
+            "backend/src/services/cnae.service.js",
+            "backend/src/controllers/cnae.controller.js",
+            "backend/src/routes/cnae.routes.js",
+            "frontend/src/pages/GuiaCnae.jsx",
+            "backend/tests/cnae.unit.test.js",
+            "backend/tests/cnae.integration.test.js"
+          ]
+        },
+        {
+          "title": "Criar Calculadora de DAS do Simples Nacional",
+          "description": "Ferramenta para calcular DAS pós-2018 com alíquota efetiva, anexo correto e cálculo por RBT12.",
+          "tech": ["React", "Node", "Express"],
+          "prompt": "Crie uma API em Node/Express com endpoint GET /simples/das que receba { rbt12, faturamentoMes, cnae, folha12 }. Identifique o anexo correto, aplique fator R quando necessário e calcule: (RBT12 x Aliquota - ParcelaRedutora) / RBT12. Retorne JSON com aliquotaEfetiva, valorDas e detalhes. No React, crie um formulário com 4 inputs e um card com o resultado formatado.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/services/simples.das.service.js",
+            "backend/src/controllers/simples.das.controller.js",
+            "backend/src/routes/simples.routes.js",
+            "frontend/src/pages/CalculadoraDAS.jsx"
+          ]
+        },
+        {
+          "title": "Simulador do Fator R",
+          "description": "Define se empresa cai no Anexo III ou V.",
+          "tech": ["React", "Node"],
+          "prompt": "Crie endpoint GET /simples/fator-r que receba { folha12, rbt12 }. Calcule fator = folha12 / rbt12. Identifique se fator >= 0.28 → Anexo III; senão → Anexo V. React: crie um componente com gauge mostrando o fator e cards explicativos.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/services/fator-r.service.js",
+            "backend/src/controllers/fator-r.controller.js",
+            "frontend/src/pages/SimuladorFatorR.jsx"
+          ]
+        },
+        {
+          "title": "Simulador de Desenquadramento Simples/MEI",
+          "description": "Ferramenta para prever quando ultrapassa limites MEI/SN.",
+          "tech": ["React"],
+          "prompt": "Crie componente que recebe faturamento mensal em array [12 meses]. Some RBT12 e identifique: ultrapassa MEI (81k), ultrapassa Simples (4.8M). Gere timeline com meses críticos.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "frontend/src/pages/SimuladorDesenquadramento.jsx"
+          ]
+        },
+        {
+          "title": "Calculadora IRPJ/CSLL Lucro Presumido",
+          "description": "Cálculo trimestral ou mensal com presunção por atividade.",
+          "tech": ["Node", "React"],
+          "prompt": "Crie endpoint POST /presumido/calcular com { receita, atividade, pis, cofins, iss }. Use 8%, 16%, 32% conforme CNAE. Calcule IRPJ, CSLL, PIS, COFINS cumulativo. React: tabela com detalhamento linha a linha.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/services/lucro-presumido.service.js",
+            "backend/src/controllers/lucro-presumido.controller.js",
+            "backend/src/routes/presumido.routes.js",
+            "frontend/src/pages/CalculadoraPresumido.jsx"
+          ]
+        },
+        {
+          "title": "Calculadora Lucro Real Simplificada",
+          "description": "Cálculo mostrando IRPJ/CSLL com lucro contábil real.",
+          "tech": ["Node", "React"],
+          "prompt": "Endpoint POST /real/calcular com { receita, despesas, folha, creditosPisCofins }. Calcule lucro real, IRPJ (15% + adicional), CSLL (9%), PIS/COFINS não cumulativos com créditos. Retorne JSON detalhado.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/services/lucro-real.service.js",
+            "backend/src/controllers/lucro-real.controller.js",
+            "backend/src/routes/real.routes.js",
+            "frontend/src/pages/CalculadoraReal.jsx"
+          ]
+        },
+        {
+          "title": "Simulador de Créditos PIS/COFINS",
+          "description": "Calcula créditos permitidos pela legislação.",
+          "tech": ["React", "Node"],
+          "prompt": "Receba { energia, aluguel, insumos, fretes }. Aplique percentuais de crédito: insumos 1.65%/7.6%, outros conforme regras. Gere tabela comparativa antes/depois.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/services/creditos-pis-cofins.service.js",
+            "backend/src/controllers/creditos-pis-cofins.controller.js",
+            "backend/src/routes/creditos.routes.js",
+            "frontend/src/pages/SimuladorCreditos.jsx"
+          ]
+        },
+        {
+          "title": "Calculadora de Pró-Labore + INSS + IRPF",
+          "description": "Define pró-labore ideal para fator R.",
+          "tech": ["React"],
+          "prompt": "Formulário que receba pró-labore. Calcule INSS (11% autônomo + patronal se empresa assumir), IRPF com tabela progressiva e mostre pró-labore ideal para atingir 28% do fator R.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "frontend/src/pages/CalculadoraProLabore.jsx"
+          ]
+        },
+        {
+          "title": "Diagnóstico Tributário Inteligente",
+          "description": "Ferramenta que recomenda regime tributário.",
+          "tech": ["Node", "React"],
+          "prompt": "Receba { receita, despesas, folha, atividade }. Execute cálculo completo dos três regimes (Simples, Presumido, Real) chamando módulos internos. Retorne ranking com melhor regime e economia anual.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "backend/src/services/diagnostico.service.js",
+            "backend/src/controllers/diagnostico.controller.js",
+            "backend/src/routes/diagnostico.routes.js",
+            "frontend/src/pages/DiagnosticoTributario.jsx"
+          ]
+        },
+        {
+          "title": "Termômetro de Risco Fiscal",
+          "description": "Score de risco baseado em perguntas.",
+          "tech": ["React"],
+          "prompt": "Crie checklist com 15 itens. Cada item soma pontos. Gere score entre 0–100 com cores verde/laranja/vermelho e recomendações automáticas.",
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "frontend/src/pages/TermometroRisco.jsx"
+          ]
+        },
+        {
+          "title": "Glossário Tributário Inteligente",
+          "description": "Mini-explicações interativas com busca em tempo real e links entre termos.",
+          "tech": ["React"],
+          "implementado": "2025-12-01",
+          "arquivos": [
+            "frontend/src/pages/GlossarioTributario.jsx"
+          ]
+        }
+      ]
+    }
+  ]
+}

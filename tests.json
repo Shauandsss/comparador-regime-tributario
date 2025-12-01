@@ -1,0 +1,224 @@
+{
+  "tests": [
+    {
+      "feature": "Calculadora de DAS do Simples Nacional",
+      "endpoint": "GET /simples/das",
+      "cases": [
+        {
+          "name": "Cálculo básico Anexo III com RBT12 baixo",
+          "input": { "rbt12": 200000, "faturamentoMes": 20000, "cnae": "servico", "folha12": 60000 },
+          "expected": {
+            "anexo": "III",
+            "aliquotaEfetiva": "aprox 6%",
+            "valorDas": "entre 1100 e 1500"
+          }
+        },
+        {
+          "name": "Cálculo para Anexo V com Fator R baixo",
+          "input": { "rbt12": 800000, "faturamentoMes": 40000, "cnae": "servico", "folha12": 50000 },
+          "expected": {
+            "anexo": "V",
+            "aliquotaEfetiva": "> 13%",
+            "valorDas": "> 5200"
+          }
+        },
+        {
+          "name": "Entrada inválida: RBT12 negativo",
+          "input": { "rbt12": -100, "faturamentoMes": 10000, "cnae": "comercio", "folha12": 10000 },
+          "expected": {
+            "status": 400,
+            "error": "RBT12 inválido"
+          }
+        }
+      ]
+    },
+
+    {
+      "feature": "Simulador do Fator R",
+      "endpoint": "GET /simples/fator-r",
+      "cases": [
+        {
+          "name": "Fator R válido acima de 28%",
+          "input": { "folha12": 300000, "rbt12": 1000000 },
+          "expected": {
+            "fator": 0.30,
+            "anexo": "III"
+          }
+        },
+        {
+          "name": "Fator R abaixo de 28%",
+          "input": { "folha12": 100000, "rbt12": 1000000 },
+          "expected": {
+            "fator": 0.10,
+            "anexo": "V"
+          }
+        },
+        {
+          "name": "Entrada inválida: divisão por zero",
+          "input": { "folha12": 100000, "rbt12": 0 },
+          "expected": {
+            "status": 400,
+            "error": "RBT12 não pode ser zero"
+          }
+        }
+      ]
+    },
+
+    {
+      "feature": "Presunção Lucro Presumido",
+      "endpoint": "POST /presumido/calcular",
+      "cases": [
+        {
+          "name": "Cálculo comércio com presunção 8%",
+          "input": { "receita": 300000, "atividade": "comercio" },
+          "expected": {
+            "basePresumida": 24000,
+            "irpj": "entre 2600 e 3000",
+            "csll": "entre 2100 e 2400"
+          }
+        },
+        {
+          "name": "Serviços gerais presunção 32%",
+          "input": { "receita": 100000, "atividade": "servico" },
+          "expected": {
+            "basePresumida": 32000,
+            "irpj": "entre 4800 e 5800",
+            "csll": "aprox 2880"
+          }
+        },
+        {
+          "name": "Erro: atividade desconhecida",
+          "input": { "receita": 80000, "atividade": "alienigena" },
+          "expected": {
+            "status": 400,
+            "error": "Atividade não reconhecida"
+          }
+        }
+      ]
+    },
+
+    {
+      "feature": "Lucro Real",
+      "endpoint": "POST /real/calcular",
+      "cases": [
+        {
+          "name": "Lucro Real com lucro alto (Real perde)",
+          "input": { "receita": 3000000, "despesas": 2200000, "folha": 400000, "creditosPisCofins": 0 },
+          "expected": {
+            "lucroReal": 400000,
+            "comparativo": "Presumido mais vantajoso"
+          }
+        },
+        {
+          "name": "Lucro Real com lucro muito baixo (Real vence)",
+          "input": { "receita": 3000000, "despesas": 2600000, "folha": 400000, "creditosPisCofins": 0 },
+          "expected": {
+            "lucroReal": 0,
+            "comparativo": "Real mais vantajoso"
+          }
+        },
+        {
+          "name": "Erro: despesas maiores que receita + folha",
+          "input": { "receita": 100000, "despesas": 400000, "folha": 300000, "creditosPisCofins": 0 },
+          "expected": {
+            "status": 400,
+            "error": "Lucro não pode ser negativo extremo"
+          }
+        }
+      ]
+    },
+
+    {
+      "feature": "Simulador de créditos PIS/COFINS",
+      "endpoint": "POST /creditos",
+      "cases": [
+        {
+          "name": "Créditos básicos",
+          "input": { "energia": 10000, "aluguel": 5000, "insumos": 30000 },
+          "expected": {
+            "creditoPis": "> 500",
+            "creditoCofins": "> 2500"
+          }
+        },
+        {
+          "name": "Valores zerados",
+          "input": { "energia": 0, "aluguel": 0, "insumos": 0 },
+          "expected": {
+            "creditoPis": 0,
+            "creditoCofins": 0
+          }
+        }
+      ]
+    },
+
+    {
+      "feature": "Pró-Labore + INSS + IRPF",
+      "component": "React",
+      "cases": [
+        {
+          "name": "Pró-labore de 2.000",
+          "input": { "prolabore": 2000 },
+          "expected": {
+            "inss": 220,
+            "irpf": 0,
+            "liquido": 1780
+          }
+        },
+        {
+          "name": "Pró-labore de 8.000",
+          "input": { "prolabore": 8000 },
+          "expected": {
+            "inss": 880,
+            "irpf": "entre 350 e 1000",
+            "liquido": "< 7000"
+          }
+        }
+      ]
+    },
+
+    {
+      "feature": "Diagnóstico Tributário Inteligente",
+      "endpoint": "POST /diagnostico",
+      "cases": [
+        {
+          "name": "Empresa mão-de-obra intensiva — Simples vence",
+          "input": { "receita": 500000, "despesas": 100000, "folha": 200000, "atividade": "servico" },
+          "expected": {
+            "melhorRegime": "Simples",
+            "economiaAnual": "> 15000"
+          }
+        },
+        {
+          "name": "Empresa pouco intensiva — Presumido vence",
+          "input": { "receita": 2000000, "despesas": 200000, "folha": 100000, "atividade": "comercio" },
+          "expected": {
+            "melhorRegime": "Presumido"
+          }
+        }
+      ]
+    },
+
+    {
+      "feature": "Termômetro de Risco Fiscal",
+      "component": "React",
+      "cases": [
+        {
+          "name": "Empresa com baixo risco",
+          "input": { "respostas": [1,0,0,1,0,0,0,1,0,1,0,0,0,0,0] },
+          "expected": {
+            "score": "< 30",
+            "cor": "verde"
+          }
+        },
+        {
+          "name": "Empresa com alto risco",
+          "input": { "respostas": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+          "expected": {
+            "score": "> 90",
+            "cor": "vermelho"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,760 @@
+﻿
+> comparador-tributario-backend@1.0.0 test
+> node --experimental-vm-modules node_modules/jest/bin/jest.js
+
+node.exe : (node:2844) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+At C:\Program Files\nodejs\npm.ps1:29 char:3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:2844) Exp...nge at any time:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/lucro-real.unit.test.js
+  Lucro Real - Testes Unit├írios
+    Dado um Lucro Real com lucro alto (Real perde)
+      ΓêÜ Quando calcular com receita 3.000.000, despesas 2.200.000 e folha 400.000, Ent├úo deve retornar lucro real de 400.000 (67 
+ms)
+    Dado um Lucro Real com lucro muito baixo (Real vence)
+      ΓêÜ Quando calcular com receita 3.000.000, despesas 2.600.000 e folha 400.000, Ent├úo deve retornar lucro pr├│ximo a zero (7 
+ms)
+    Dado despesas excessivas resultando em preju├¡zo
+      ΓêÜ Quando calcular com preju├¡zo, Ent├úo IRPJ e CSLL devem ser zero (5 ms)
+    Dado valores inv├ílidos
+      ΓêÜ Quando calcular com receita zero, Ent├úo deve lan├ºar erro (8 ms)
+      ΓêÜ Quando calcular com despesas negativas, Ent├úo deve lan├ºar erro (2 ms)
+      ΓêÜ Quando calcular com folha negativa, Ent├úo deve lan├ºar erro (2 ms)
+    Dado c├ílculo de PIS/COFINS n├úo-cumulativo
+      ΓêÜ Quando calcular PIS e COFINS, Ent├úo deve usar al├¡quotas n├úo-cumulativas (1.65% e 7.6%) (4 ms)
+    Dado c├ílculo com cr├⌐ditos de PIS/COFINS
+      ΓêÜ Quando informar cr├⌐ditos, Ent├úo deve deduzir dos d├⌐bitos (4 ms)
+      ΓêÜ Quando cr├⌐ditos forem maiores que d├⌐bitos, Ent├úo valor a pagar deve ser zero (40 ms)
+    Dado c├ílculo de adicional de IRPJ
+      ΓêÜ Quando lucro ultrapassar R$ 20.000, Ent├úo deve calcular adicional de 10% (10 ms)
+      ΓêÜ Quando lucro for menor que R$ 20.000, Ent├úo n├úo deve haver adicional (4 ms)
+    Dado c├ílculo de carga tribut├íria
+      ΓêÜ Quando calcular todos os tributos, Ent├úo deve retornar carga tribut├íria total correta (13 ms)
+    Dado c├ílculo de lucro l├¡quido
+      ΓêÜ Quando calcular lucro l├¡quido, Ent├úo deve descontar IRPJ e CSLL do lucro cont├íbil (6 ms)
+
+(node:17572) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/creditos-pis-cofins.unit.test.js
+  Cr├⌐ditos PIS/COFINS - Testes Unit├írios
+    Dado um c├ílculo de cr├⌐ditos b├ísicos
+      ΓêÜ Quando calcular com energia 10.000, aluguel 5.000 e insumos 30.000, Ent├úo creditoPIS deve ser > 500 e creditoCOFINS > 
+2.500 (73 ms)
+    Dado valores zerados
+      ΓêÜ Quando calcular com todos os valores zerados, Ent├úo deve lan├ºar erro (46 ms)
+    Dado valores negativos
+      ΓêÜ Quando informar valores negativos, Ent├úo deve lan├ºar erro (9 ms)
+    Dado c├ílculo detalhado de cr├⌐ditos
+      ΓêÜ Quando calcular cr├⌐ditos, Ent├úo deve retornar detalhamento por categoria (5 ms)
+    Dado diferentes tipos de despesas
+      ΓêÜ Quando calcular com todas as categorias, Ent├úo deve processar corretamente (4 ms)
+    Dado simula├º├úo de economia
+      ΓêÜ Quando simular economia com receita 100.000 e despesas com cr├⌐ditos, Ent├úo deve calcular economia corretamente (7 ms)
+      ΓêÜ Quando simular sem receita, Ent├úo deve lan├ºar erro (1 ms)
+    Dado c├ílculo de percentuais corretos
+      ΓêÜ Quando calcular cr├⌐ditos, Ent├úo PIS deve ser 1.65% e COFINS 7.6% (3 ms)
+    Dado c├ílculo de economia anual
+      ΓêÜ Quando simular economia, Ent├úo deve calcular economia anual (mensal * 12) (3 ms)
+    Dado cr├⌐ditos maiores que d├⌐bitos
+      ΓêÜ Quando cr├⌐ditos forem maiores que d├⌐bitos, Ent├úo valor a pagar deve ser zero (4 ms)
+
+(node:6652) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL tests/lucro-presumido.unit.test.js
+  Lucro Presumido - Testes Unit├írios
+    Dado um c├ílculo de com├⌐rcio com presun├º├úo 8%
+      ├ù Quando calcular com receita de 300.000 e atividade com├⌐rcio, Ent├úo deve retornar base presumida de 24.000, IRPJ entre 
+2.600 e 3.000 e CSLL entre 2.100 e 2.400 (72 ms)
+    Dado servi├ºos gerais com presun├º├úo 32%
+      ΓêÜ Quando calcular com receita de 100.000 e atividade servicos, Ent├úo deve retornar base presumida de 32.000, IRPJ entre 
+4.800 e 5.800 e CSLL aproximadamente 2.880 (5 ms)
+    Dado uma atividade desconhecida
+      ΓêÜ Quando calcular com atividade n├úo reconhecida, Ent├úo deve lan├ºar erro de atividade inv├ílida (5 ms)
+    Dado receita inv├ílida
+      ΓêÜ Quando calcular com receita zero, Ent├úo deve lan├ºar erro (2 ms)
+      ΓêÜ Quando calcular com receita negativa, Ent├úo deve lan├ºar erro (2 ms)
+    Dado c├ílculo com adicional de IRPJ
+      ΓêÜ Quando base presumida ultrapassar R$ 20.000, Ent├úo deve calcular adicional de 10% (3 ms)
+    Dado c├ílculo de PIS e COFINS cumulativos
+      ├ù Quando calcular tributos, Ent├úo PIS deve ser 0.65% e COFINS 3% (4 ms)
+    Dado c├ílculo com ISS
+      ΓêÜ Quando informar al├¡quota de ISS, Ent├úo deve calcular o imposto (4 ms)
+      ΓêÜ Quando n├úo informar al├¡quota de ISS, Ent├úo ISS deve ser zero (2 ms)
+    Dado c├ílculo de carga tribut├íria
+      ΓêÜ Quando calcular todos os tributos, Ent├úo deve retornar carga tribut├íria total correta (35 ms)
+    Testes da fun├º├úo listarAtividades
+      ΓêÜ Quando listar atividades, Ent├úo deve retornar array com todas as atividades dispon├¡veis (7 ms)
+      ΓêÜ Quando listar atividades, Ent├úo deve incluir com├⌐rcio e servi├ºos (2 ms)
+
+  ΓùÅ Lucro Presumido - Testes Unit├írios ΓÇ║ Dado um c├ílculo de com├⌐rcio com presun├º├úo 8% ΓÇ║ Quando calcular com receita de 
+300.000 e atividade com├⌐rcio, Ent├úo deve retornar base presumida de 24.000, IRPJ entre 2.600 e 3.000 e CSLL entre 2.100 e 2.400
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 2200
+    Received:    3240
+
+    [0m [90m 28 |[39m       [36mconst[39m csll [33m=[39m resultado[33m.[39mtributos[33m.[39mcsll[33m.[39mcsll[33m;[39m
+     [90m 29 |[39m       expect(csll)[33m.[39mtoBeGreaterThanOrEqual([35m2100[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 30 |[39m       expect(csll)[33m.[39mtoBeLessThanOrEqual([35m2200[39m)[33m;[39m
+     [90m    |[39m                    [31m[1m^[22m[39m
+     [90m 31 |[39m     })[33m;[39m
+     [90m 32 |[39m   })[33m;[39m
+     [90m 33 |[39m[0m
+
+      at Object.<anonymous> (tests/lucro-presumido.unit.test.js:30:20)
+
+  ΓùÅ Lucro Presumido - Testes Unit├írios ΓÇ║ Dado c├ílculo de PIS e COFINS cumulativos ΓÇ║ Quando calcular tributos, Ent├úo PIS 
+deve ser 0.65% e COFINS 3%
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 650
+    Received: 650.0000000000001
+
+    [0m [90m 127 |[39m       [90m// Ent├úo[39m
+     [90m 128 |[39m       
+expect(resultado[33m.[39mtributos[33m.[39mpis[33m.[39maliquota)[33m.[39mtoBe([32m'0.65%'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 129 |[39m       
+expect(resultado[33m.[39mtributos[33m.[39mpis[33m.[39mpis)[33m.[39mtoBe([35m650[39m)[33m;[39m [90m// 100.000 * 
+0.65%[39m
+     [90m     |[39m                                          [31m[1m^[22m[39m
+     [90m 130 |[39m       
+     [90m 131 |[39m       
+expect(resultado[33m.[39mtributos[33m.[39mcofins[33m.[39maliquota)[33m.[39mtoBe([32m'3%'[39m)[33m;[39m
+     [90m 132 |[39m       
+expect(resultado[33m.[39mtributos[33m.[39mcofins[33m.[39mcofins)[33m.[39mtoBe([35m3000[39m)[33m;[39m [90m// 100.000 * 
+3%[39m[0m
+
+      at Object.<anonymous> (tests/lucro-presumido.unit.test.js:129:42)
+
+(node:2400) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL tests/diagnostico.unit.test.js
+  Diagn├│stico Tribut├írio - Testes Unit├írios
+    Dado uma empresa m├úo-de-obra intensiva (Simples vence)
+      ├ù Quando diagnosticar com receita 500.000, despesas 100.000, folha 200.000 e atividade servi├ºo, Ent├úo melhor regime deve 
+ser Simples com economia anual > 15.000 (31 ms)
+    Dado uma empresa pouco intensiva em folha (Presumido vence)
+      ├ù Quando diagnosticar com receita 2.000.000, despesas 200.000, folha 100.000 e atividade com├⌐rcio, Ent├úo melhor regime deve 
+ser Presumido (1 ms)
+    Dado valores inv├ílidos
+      ΓêÜ Quando diagnosticar sem receita bruta, Ent├úo deve lan├ºar erro (6 ms)
+      ΓêÜ Quando diagnosticar sem receita mensal, Ent├úo deve lan├ºar erro (1 ms)
+    Dado empresa acima do limite do Simples
+      ├ù Quando diagnosticar com receita > 4,8 milh├╡es, Ent├úo Simples n├úo deve ser aplic├ível (1 ms)
+    Dado empresa com preju├¡zo (Real vence)
+      ├ù Quando diagnosticar com despesas muito altas gerando preju├¡zo, Ent├úo Real deve ser vantajoso (1 ms)
+    Dado recomenda├º├╡es personalizadas
+      ├ù Quando diagnosticar, Ent├úo deve gerar recomenda├º├╡es (1 ms)
+    Dado c├ílculo de economia
+      ├ù Quando diagnosticar e houver m├║ltiplos regimes, Ent├úo deve calcular economia do melhor vs segundo melhor (2 ms)
+    Dado diferentes atividades
+      ├ù Quando diagnosticar atividade de com├⌐rcio, Ent├úo deve usar presun├º├úo de 8% (1 ms)
+      ├ù Quando diagnosticar atividade de servi├ºos, Ent├úo deve usar presun├º├úo de 32%
+    Dado ranking de regimes
+      ├ù Quando diagnosticar, Ent├úo ranking deve estar ordenado do menor para o maior valor (2 ms)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado uma empresa m├úo-de-obra intensiva (Simples vence) ΓÇ║ Quando 
+diagnosticar com receita 500.000, despesas 100.000, folha 200.000 e atividade servi├ºo, Ent├úo melhor regime deve ser Simples com 
+economia anual > 15.000
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:22:25)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado uma empresa pouco intensiva em folha (Presumido vence) ΓÇ║ Quando 
+diagnosticar com receita 2.000.000, despesas 200.000, folha 100.000 e atividade com├⌐rcio, Ent├úo melhor regime deve ser Presumido
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:61:25)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado empresa acima do limite do Simples ΓÇ║ Quando diagnosticar com receita > 
+4,8 milh├╡es, Ent├úo Simples n├úo deve ser aplic├ível
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:113:25)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado empresa com preju├¡zo (Real vence) ΓÇ║ Quando diagnosticar com despesas 
+muito altas gerando preju├¡zo, Ent├úo Real deve ser vantajoso
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:136:25)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado recomenda├º├╡es personalizadas ΓÇ║ Quando diagnosticar, Ent├úo deve 
+gerar recomenda├º├╡es
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:162:25)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado c├ílculo de economia ΓÇ║ Quando diagnosticar e houver m├║ltiplos 
+regimes, Ent├úo deve calcular economia do melhor vs segundo melhor
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:188:25)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado diferentes atividades ΓÇ║ Quando diagnosticar atividade de com├⌐rcio, 
+Ent├úo deve usar presun├º├úo de 8%
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:212:25)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado diferentes atividades ΓÇ║ Quando diagnosticar atividade de servi├ºos, 
+Ent├úo deve usar presun├º├úo de 32%
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:231:25)
+
+  ΓùÅ Diagn├│stico Tribut├írio - Testes Unit├írios ΓÇ║ Dado ranking de regimes ΓÇ║ Quando diagnosticar, Ent├úo ranking deve estar 
+ordenado do menor para o maior valor
+
+    TypeError: Cannot read properties of undefined (reading 'regime')
+
+    [0m [90m 277 |[39m     presumido[33m,[39m
+     [90m 278 |[39m     real[33m,[39m
+    [31m[1m>[22m[39m[90m 279 |[39m     melhorRegime[33m:[39m melhorRegime[33m.[39mregime[33m,[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 280 |[39m     atividade[33m,[39m
+     [90m 281 |[39m     despesasMes[33m,[39m
+     [90m 282 |[39m     folhaMes[33m,[39m[0m
+
+      at diagnosticar (src/services/diagnostico.service.js:279:32)
+      at Object.<anonymous> (tests/diagnostico.unit.test.js:254:25)
+
+FAIL tests/simples.das.integration.test.js
+  ΓùÅ Test suite failed to run
+
+    SyntaxError: Identifier 'request' has already been declared
+
+      at Runtime.loadEsmModule (node_modules/jest-runtime/build/index.js:516:20)
+
+FAIL tests/simples.das.unit.test.js
+  ΓùÅ Test suite failed to run
+
+    SyntaxError: The requested module '../src/services/simples.das.service.js' does not provide an export named 'calcularFatorR'
+
+      at Runtime.linkAndEvaluateModule (node_modules/jest-runtime/build/index.js:708:5)
+
+FAIL tests/lucro-real.integration.test.js
+  ΓùÅ Test suite failed to run
+
+    SyntaxError: Identifier 'request' has already been declared
+
+      at Runtime.loadEsmModule (node_modules/jest-runtime/build/index.js:516:20)
+
+PASS tests/fator-r.unit.test.js
+  Simulador do Fator R - Testes Unit├írios
+    Dado um Fator R v├ílido acima de 28%
+      ΓêÜ Quando calcular com folha de 300.000 e RBT12 de 1.000.000, Ent├úo deve retornar fator 0.30 e Anexo III (6 ms)
+    Dado um Fator R abaixo de 28%
+      ΓêÜ Quando calcular com folha de 100.000 e RBT12 de 1.000.000, Ent├úo deve retornar fator 0.10 e Anexo V (3 ms)
+    Dado uma entrada inv├ílida com RBT12 zero
+      ΓêÜ Quando calcular com RBT12 zero, Ent├úo deve lan├ºar erro informando que RBT12 n├úo pode ser zero (8 ms)
+    Dado uma entrada inv├ílida com folha negativa
+      ΓêÜ Quando calcular com folha negativa, Ent├úo deve lan├ºar erro (1 ms)
+    Dado c├ílculos no limite de 28%
+      ΓêÜ Quando calcular exatamente com 28% (280.000 / 1.000.000), Ent├úo deve enquadrar no Anexo III (3 ms)
+      ΓêÜ Quando calcular com 27.9% (279.000 / 1.000.000), Ent├úo deve enquadrar no Anexo V (2 ms)
+    Testes da fun├º├úo calcularCenarios
+      ΓêÜ Quando calcular cen├írios para diferentes percentuais, Ent├úo deve retornar array com 5 cen├írios (12 ms)
+      ΓêÜ Quando calcular cen├írios, Ent├úo deve identificar corretamente os anexos (7 ms)
+    Testes de an├ílise e recomenda├º├╡es
+      ΓêÜ Quando fator R estiver abaixo de 20%, Ent├úo situa├º├úo deve ser "Muito Abaixo" e n├¡vel de risco "baixo" (2 ms)
+      ΓêÜ Quando fator R estiver acima de 32%, Ent├úo situa├º├úo deve ser "Enquadrado (Confort├ível)" (2 ms)
+    Testes de c├ílculo de a├º├╡es necess├írias
+      ΓêÜ Quando folha estiver abaixo de 28%, Ent├úo deve informar quanto precisa aumentar (2 ms)
+      ΓêÜ Quando folha estiver acima de 28%, Ent├úo deve informar que j├í est├í na faixa ideal (3 ms)
+
+FAIL tests/diagnostico.integration.test.js
+  ΓùÅ Test suite failed to run
+
+    SyntaxError: Identifier 'request' has already been declared
+
+      at Runtime.loadEsmModule (node_modules/jest-runtime/build/index.js:516:20)
+
+FAIL tests/fator-r.integration.test.js
+  ΓùÅ Test suite failed to run
+
+    SyntaxError: Identifier 'request' has already been declared
+
+      at Runtime.loadEsmModule (node_modules/jest-runtime/build/index.js:516:20)
+
+FAIL tests/creditos-pis-cofins.integration.test.js
+  ΓùÅ Test suite failed to run
+
+    SyntaxError: Identifier 'request' has already been declared
+
+      at Runtime.loadEsmModule (node_modules/jest-runtime/build/index.js:516:20)
+
+(node:5572) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/status.test.js
+  GET /status
+    ΓêÜ should return status 200 and { ok: true } (41 ms)
+  GET /
+    ΓêÜ should return API information (8 ms)
+
+(node:22160) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15008) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL tests/calculos.test.js
+  C├ílculos Tribut├írios
+    POST /calcular/simples
+      ├ù deve calcular corretamente o Simples Nacional para servi├ºo (75 ms)
+      ├ù deve calcular corretamente o Simples Nacional para com├⌐rcio (7 ms)
+      ├ù deve calcular corretamente o Simples Nacional para ind├║stria (6 ms)
+      ΓêÜ deve retornar erro se rbt12 for inv├ílido (8 ms)
+      ΓêÜ deve retornar erro se atividade for inv├ílida (7 ms)
+      ΓêÜ deve retornar erro se rbt12 estiver ausente (5 ms)
+    POST /calcular/presumido
+      ΓêÜ deve calcular corretamente o Lucro Presumido (4 ms)
+    POST /calcular/real
+      ΓêÜ deve calcular corretamente o Lucro Real (3 ms)
+      ΓêÜ deve tratar lucro negativo corretamente (5 ms)
+    POST /calcular/comparar
+      ├ù deve comparar todos os regimes corretamente (6 ms)
+      ├ù deve identificar o melhor regime (7 ms)
+    GET /calcular/info
+      ΓêÜ deve retornar informa├º├╡es sobre os regimes (6 ms)
+
+  ΓùÅ C├ílculos Tribut├írios ΓÇ║ POST /calcular/simples ΓÇ║ deve calcular corretamente o Simples Nacional para servi├ºo
+
+    expect(received).toHaveProperty(path, value)
+
+    Expected path: "aliquota"
+
+    Expected value: 15.5
+    Received value: 13.03
+
+    [0m [90m 27 |[39m       expect(response[33m.[39mbody[33m.[39mdata)[33m.[39mtoHaveProperty([32m'regime'[39m[33m,[39m 
+[32m'Simples Nacional'[39m)[33m;[39m
+     [90m 28 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata)[33m.[39mtoHaveProperty([32m'impostoTotal'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 29 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata)[33m.[39mtoHaveProperty([32m'aliquota'[39m[33m,[39m [35m15.5[39m)[33m;[39m
+     [90m    |[39m                                  [31m[1m^[22m[39m
+     [90m 30 |[39m       
+     [90m 31 |[39m       [90m// Verificar c├ílculo: 1.200.000 * 15,5% = 186.000[39m
+     [90m 32 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata[33m.[39mimpostoTotal)[33m.[39mtoBe([35m186000[39m)[33m;[39m[0m
+
+      at Object.<anonymous> (tests/calculos.test.js:29:34)
+
+  ΓùÅ C├ílculos Tribut├írios ΓÇ║ POST /calcular/simples ΓÇ║ deve calcular corretamente o Simples Nacional para com├⌐rcio
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 8
+    Received: 8.45
+
+    [0m [90m 44 |[39m
+     [90m 45 |[39m       expect(response[33m.[39mstatus)[33m.[39mtoBe([35m200[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 46 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata[33m.[39maliquota)[33m.[39mtoBe([35m8.0[39m)[33m;[39m
+     [90m    |[39m                                           [31m[1m^[22m[39m
+     [90m 47 |[39m       [90m// 1.000.000 * 8% = 80.000[39m
+     [90m 48 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata[33m.[39mimpostoTotal)[33m.[39mtoBe([35m80000[39m)[33m;[39m
+     [90m 49 |[39m     })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/calculos.test.js:46:43)
+
+  ΓùÅ C├ílculos Tribut├írios ΓÇ║ POST /calcular/simples ΓÇ║ deve calcular corretamente o Simples Nacional para ind├║stria
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 10
+    Received: 7.23
+
+    [0m [90m 60 |[39m
+     [90m 61 |[39m       expect(response[33m.[39mstatus)[33m.[39mtoBe([35m200[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 62 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata[33m.[39maliquota)[33m.[39mtoBe([35m10.0[39m)[33m;[39m
+     [90m    |[39m                                           [31m[1m^[22m[39m
+     [90m 63 |[39m       [90m// 500.000 * 10% = 50.000[39m
+     [90m 64 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata[33m.[39mimpostoTotal)[33m.[39mtoBe([35m50000[39m)[33m;[39m
+     [90m 65 |[39m     })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/calculos.test.js:62:43)
+
+  ΓùÅ C├ílculos Tribut├írios ΓÇ║ POST /calcular/comparar ΓÇ║ deve comparar todos os regimes corretamente
+
+    expect(received).toHaveProperty(path)
+
+    Expected path: "comparacao"
+    Received path: []
+
+    Received value: {"economia": {"percentual": 54.87, "regime_comparado": "real", "valor": 156577.5}, "melhor_opcao": "presumido", 
+"regimes": {"presumido": {"aliquota_efetiva": 10.73, "detalhes": {"aliquotaEfetiva": 10.73, "atividade": "servico", "detalhamento": 
+{"cofins": 36000, "csll": 12960, "irpj": 57600, "irpjAdicional": 14400, "irpjCsll": 84960, "iss": 0, "lucroPresumidoCsll": 144000, 
+"lucroPresumidoIrpj": 384000, "pis": 7800, "pisCofins": 43800, "presuncaoLucroCsll": "12.00%", "presuncaoLucroIrpj": "32.00%"}, 
+"impostoTotal": 128760, "lucroPresumido": 384000, "rbt12": 1200000, "regime": "Lucro Presumido"}, "imposto_total": 128760}, "real": 
+{"aliquota_efetiva": 23.78, "detalhes": {"aliquotaEfetiva": 23.78, "atividade": "servico", "despesas": 550000, "detalhamento": 
+{"cofins": 72580, "cofinsCredito": 18620, "cofinsDebito": 91200, "csll": 58500, "despesasOperacionais": 350000, "despesasTotais": 
+550000, "folhaPagamento": 200000, "irpj": 97500, "irpjAdicional": 41000, "irpjCsll": 197000, "iss": 0, "lucroApurado": 650000, 
+"observacao": "PIS/COFINS n├úo-cumulativo com cr├⌐ditos sobre 70% das despesas operacionais (exceto folha)", 
+"percentualCreditoPisCofins": "70%", "pis": 15757.5, "pisCofins": 88337.5, "pisCredito": 4042.5, "pisDebito": 19800, "receita": 
+1200000}, "impostoTotal": 285337.5, "lucroLiquido": 650000, "rbt12": 1200000, "regime": "Lucro Real"}, "imposto_total": 285337.5}, 
+"simples": {"aliquota_efetiva": 13.03, "detalhes": {"aliquota": 13.03, "aliquotaEfetiva": 13.03, "aliquotaNominal": 16, "anexo": 
+"Anexo III (Servi├ºos)", "atividade": "servico", "deducao": 35640, "detalhamento": {"aliquotaEfetiva": "13.03%", "aliquotaNominal": 
+"16%", "baseCalculo": 1200000, "formula": "[(1200000 ├ù 16%) - 35640] / 1200000", "observacao": "Anexo III (Servi├ºos) - Al├¡quota 
+efetiva: 13.03%", "parcelaDeducao": 35640}, "folha": 200000, "impostoTotal": 156360, "rbt12": 1200000, "regime": "Simples 
+Nacional"}, "imposto_total": 156360}}}
+
+    [0m [90m 152 |[39m       expect(response[33m.[39mstatus)[33m.[39mtoBe([35m200[39m)[33m;[39m
+     [90m 153 |[39m       expect(response[33m.[39mbody)[33m.[39mtoHaveProperty([32m'success'[39m[33m,[39m 
+[36mtrue[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 154 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata)[33m.[39mtoHaveProperty([32m'comparacao'[39m)[33m;[39m
+     [90m     |[39m                                  [31m[1m^[22m[39m
+     [90m 155 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata)[33m.[39mtoHaveProperty([32m'melhor_regime'[39m)[33m;[39m
+     [90m 156 |[39m       expect(response[33m.[39mbody[33m.[39mdata)[33m.[39mtoHaveProperty([32m'economia'[39m)[33m;[39m
+     [90m 157 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata)[33m.[39mtoHaveProperty([32m'detalhes'[39m)[33m;[39m[0m
+
+      at Object.<anonymous> (tests/calculos.test.js:154:34)
+
+  ΓùÅ C├ílculos Tribut├írios ΓÇ║ POST /calcular/comparar ΓÇ║ deve identificar o melhor regime
+
+    expect(received).toHaveProperty(path)
+
+    Expected path: "melhor_regime"
+    Received path: []
+
+    Received value: {"economia": {"percentual": 69.88, "regime_comparado": "real", "valor": 137575}, "melhor_opcao": "presumido", 
+"regimes": {"presumido": {"aliquota_efetiva": 5.93, "detalhes": {"aliquotaEfetiva": 5.93, "atividade": "comercio", "detalhamento": 
+{"cofins": 30000, "csll": 10800, "irpj": 12000, "irpjAdicional": 0, "irpjCsll": 22800, "iss": 0, "lucroPresumidoCsll": 120000, 
+"lucroPresumidoIrpj": 80000, "pis": 6500, "pisCofins": 36500, "presuncaoLucroCsll": "12.00%", "presuncaoLucroIrpj": "8.00%"}, 
+"impostoTotal": 59300, "lucroPresumido": 80000, "rbt12": 1000000, "regime": "Lucro Presumido"}, "imposto_total": 59300}, "real": 
+{"aliquota_efetiva": 19.69, "detalhes": {"aliquotaEfetiva": 19.69, "atividade": "comercio", "despesas": 500000, "detalhamento": 
+{"cofins": 41800, "cofinsCredito": 34200, "cofinsDebito": 76000, "csll": 45000, "despesasOperacionais": 500000, "despesasTotais": 
+500000, "folhaPagamento": 0, "irpj": 75000, "irpjAdicional": 26000, "irpjCsll": 146000, "iss": 0, "lucroApurado": 500000, 
+"observacao": "PIS/COFINS n├úo-cumulativo com cr├⌐ditos sobre 90% das despesas operacionais (exceto folha)", 
+"percentualCreditoPisCofins": "90%", "pis": 9075, "pisCofins": 50875, "pisCredito": 7425, "pisDebito": 16500, "receita": 1000000}, 
+"impostoTotal": 196875, "lucroLiquido": 500000, "rbt12": 1000000, "regime": "Lucro Real"}, "imposto_total": 196875}, "simples": 
+{"aliquota_efetiva": 8.45, "detalhes": {"aliquota": 8.45, "aliquotaEfetiva": 8.45, "aliquotaNominal": 10.7, "anexo": "Anexo I 
+(Com├⌐rcio)", "atividade": "comercio", "deducao": 22500, "detalhamento": {"aliquotaEfetiva": "8.45%", "aliquotaNominal": "10.7%", 
+"baseCalculo": 1000000, "formula": "[(1000000 ├ù 10.7%) - 22500] / 1000000", "observacao": "Anexo I (Com├⌐rcio) - Al├¡quota efetiva: 
+8.45%", "parcelaDeducao": 22500}, "folha": 0, "impostoTotal": 84500, "rbt12": 1000000, "regime": "Simples Nacional"}, 
+"imposto_total": 84500}}}
+
+    [0m [90m 179 |[39m
+     [90m 180 |[39m       expect(response[33m.[39mstatus)[33m.[39mtoBe([35m200[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 181 |[39m       
+expect(response[33m.[39mbody[33m.[39mdata)[33m.[39mtoHaveProperty([32m'melhor_regime'[39m)[33m;[39m
+     [90m     |[39m                                  [31m[1m^[22m[39m
+     [90m 182 |[39m       expect([36mtypeof[39m 
+response[33m.[39mbody[33m.[39mdata[33m.[39mmelhor_regime)[33m.[39mtoBe([32m'string'[39m)[33m;[39m
+     [90m 183 |[39m     })[33m;[39m
+     [90m 184 |[39m   })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/calculos.test.js:181:34)
+
+  console.error
+    Erro ao calcular Lucro Presumido: Error: Atividade inv├ílida
+        at calcularLucroPresumido (D:\Git R\comparador-regime-tributario\backend\src\services\lucro-presumido.service.js:204:11)
+        at calcularPresumidoController (D:\Git R\comparador-regime-tributario\backend\src\controllers\lucro-presumido.controller.js:32:23)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\route.js:149:13)
+        at Route.dispatch (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\route.js:119:3)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:284:15
+        at Function.process_params (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:346:12)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:280:10)
+        at Function.handle (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:175:3)
+        at router (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:47:12)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at trim_prefix (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:328:13)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:286:9
+        at Function.process_params (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:346:12)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:280:10)
+        at Function.handle (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:175:3)
+        at router (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:47:12)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at trim_prefix (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:328:13)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:286:9
+        at Function.process_params (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:346:12)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:280:10)
+        at urlencodedParser (D:\Git R\comparador-regime-tributario\backend\node_modules\body-parser\lib\types\urlencoded.js:85:7)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at trim_prefix (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:328:13)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:286:9
+        at Function.process_params (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:346:12)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:280:10)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\body-parser\lib\read.js:137:5
+        at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+        at invokeCallback (D:\Git R\comparador-regime-tributario\backend\node_modules\raw-body\index.js:238:16)
+        at done (D:\Git R\comparador-regime-tributario\backend\node_modules\raw-body\index.js:227:7)
+        at IncomingMessage.onEnd (D:\Git R\comparador-regime-tributario\backend\node_modules\raw-body\index.js:287:7)
+        at IncomingMessage.emit (node:events:518:28)
+        at endReadableNT (node:internal/streams/readable:1698:12)
+        at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+    [0m [90m 35 |[39m     
+     [90m 36 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 37 |[39m     console[33m.[39merror([32m'Erro ao calcular Lucro Presumido:'[39m[33m,[39m error)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 38 |[39m     
+     [90m 39 |[39m     [36mreturn[39m res[33m.[39mstatus([33mHTTP_STATUS[39m[33m.[39m[33mBAD_REQUEST[39m)[33m.[39mjson({
+     [90m 40 |[39m       sucesso[33m:[39m [36mfalse[39m[33m,[39m[0m
+
+      at calcularPresumidoController (src/controllers/lucro-presumido.controller.js:37:13)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at urlencodedParser (node_modules/body-parser/lib/types/urlencoded.js:85:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/body-parser/lib/read.js:137:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  console.error
+    Erro ao calcular Lucro Presumido: Error: Receita ├⌐ obrigat├│ria e deve ser maior que zero
+        at calcularLucroPresumido (D:\Git R\comparador-regime-tributario\backend\src\services\lucro-presumido.service.js:200:11)
+        at calcularPresumidoController (D:\Git R\comparador-regime-tributario\backend\src\controllers\lucro-presumido.controller.js:32:23)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\route.js:149:13)
+        at Route.dispatch (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\route.js:119:3)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:284:15
+        at Function.process_params (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:346:12)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:280:10)
+        at Function.handle (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:175:3)
+        at router (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:47:12)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at trim_prefix (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:328:13)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:286:9
+        at Function.process_params (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:346:12)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:280:10)
+        at Function.handle (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:175:3)
+        at router (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:47:12)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at trim_prefix (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:328:13)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:286:9
+        at Function.process_params (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:346:12)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:280:10)
+        at urlencodedParser (D:\Git R\comparador-regime-tributario\backend\node_modules\body-parser\lib\types\urlencoded.js:85:7)
+        at Layer.handle [as handle_request] (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\layer.js:95:5)
+        at trim_prefix (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:328:13)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:286:9
+        at Function.process_params (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:346:12)
+        at next (D:\Git R\comparador-regime-tributario\backend\node_modules\express\lib\router\index.js:280:10)
+        at D:\Git R\comparador-regime-tributario\backend\node_modules\body-parser\lib\read.js:137:5
+        at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+        at invokeCallback (D:\Git R\comparador-regime-tributario\backend\node_modules\raw-body\index.js:238:16)
+        at done (D:\Git R\comparador-regime-tributario\backend\node_modules\raw-body\index.js:227:7)
+        at IncomingMessage.onEnd (D:\Git R\comparador-regime-tributario\backend\node_modules\raw-body\index.js:287:7)
+        at IncomingMessage.emit (node:events:518:28)
+        at endReadableNT (node:internal/streams/readable:1698:12)
+        at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+    [0m [90m 35 |[39m     
+     [90m 36 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 37 |[39m     console[33m.[39merror([32m'Erro ao calcular Lucro Presumido:'[39m[33m,[39m error)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 38 |[39m     
+     [90m 39 |[39m     [36mreturn[39m res[33m.[39mstatus([33mHTTP_STATUS[39m[33m.[39m[33mBAD_REQUEST[39m)[33m.[39mjson({
+     [90m 40 |[39m       sucesso[33m:[39m [36mfalse[39m[33m,[39m[0m
+
+      at calcularPresumidoController (src/controllers/lucro-presumido.controller.js:37:13)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at urlencodedParser (node_modules/body-parser/lib/types/urlencoded.js:85:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/body-parser/lib/read.js:137:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+FAIL tests/lucro-presumido.integration.test.js
+  POST /presumido/calcular - Testes de Integra├º├úo
+    Dado um c├ílculo de com├⌐rcio com presun├º├úo 8%
+      ├ù Quando fazer POST /presumido/calcular com atividade comercio, Ent├úo deve retornar 200 e c├ílculos corretos (105 ms)
+    Dado servi├ºos gerais com presun├º├úo 32%
+      ΓêÜ Quando fazer POST com atividade servicos, Ent├úo deve retornar base presumida de 32% (8 ms)
+    Dado uma atividade desconhecida
+      ΓêÜ Quando fazer POST com atividade inv├ílida, Ent├úo deve retornar 400 com erro (87 ms)
+    Dado receita inv├ílida
+      ΓêÜ Quando fazer POST sem receita, Ent├úo deve retornar 400 (5 ms)
+      ΓêÜ Quando fazer POST com receita negativa, Ent├úo deve retornar 400 (11 ms)
+    Dado c├ílculo com ISS
+      ΓêÜ Quando fazer POST com al├¡quota de ISS, Ent├úo deve incluir ISS no c├ílculo (4 ms)
+    Dado valores altos
+      ├ù Quando fazer POST com receita alta, Ent├úo deve calcular adicional de IRPJ (5 ms)
+
+  ΓùÅ POST /presumido/calcular - Testes de Integra├º├úo ΓÇ║ Dado um c├ílculo de com├⌐rcio com presun├º├úo 8% ΓÇ║ Quando fazer POST 
+/presumido/calcular com atividade comercio, Ent├úo deve retornar 200 e c├ílculos corretos
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 2200
+    Received:    3240
+
+    [0m [90m 36 |[39m       [36mconst[39m csll [33m=[39m 
+response[33m.[39mbody[33m.[39mtributos[33m.[39mcsll[33m.[39mcsll[33m;[39m
+     [90m 37 |[39m       expect(csll)[33m.[39mtoBeGreaterThanOrEqual([35m2100[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 38 |[39m       expect(csll)[33m.[39mtoBeLessThanOrEqual([35m2200[39m)[33m;[39m
+     [90m    |[39m                    [31m[1m^[22m[39m
+     [90m 39 |[39m     })[33m;[39m
+     [90m 40 |[39m   })[33m;[39m
+     [90m 41 |[39m[0m
+
+      at Object.<anonymous> (tests/lucro-presumido.integration.test.js:38:20)
+
+  ΓùÅ POST /presumido/calcular - Testes de Integra├º├úo ΓÇ║ Dado valores altos ΓÇ║ Quando fazer POST com receita alta, Ent├úo deve 
+calcular adicional de IRPJ
+
+    expect(received).toBeGreaterThan(expected)
+
+    Matcher error: received value must be a number or bigint
+
+    Received has value: undefined
+
+    [0m [90m 168 |[39m       [90m// Adicional IRPJ: (256.000 - 20.000) * 10% = 23.600[39m
+     [90m 169 |[39m       expect(response[33m.[39mbody[33m.[39mtributos[33m.[39mirpj)[33m.[39mtoBeDefined()[33m;[39m
+    [31m[1m>[22m[39m[90m 170 |[39m       expect(response[33m.[39mbody[33m.[39mtributos[33m.[39mirpj[33m.[39mirpjAdicion
+al)[33m.[39mtoBeGreaterThan([35m23000[39m)[33m;[39m
+     [90m     |[39m                                                         [31m[1m^[22m[39m
+     [90m 171 |[39m     })[33m;[39m
+     [90m 172 |[39m   })[33m;[39m
+     [90m 173 |[39m })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/lucro-presumido.integration.test.js:170:57)
+
+Test Suites: 10 failed, 4 passed, 14 total
+Tests:       18 failed, 61 passed, 79 total
+Snapshots:   0 total
+Time:        3.811 s, estimated 4 s
+Ran all test suites.

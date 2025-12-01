@@ -1,5 +1,13 @@
 import express from 'express';
 import calculosRoutes from './calculos.routes.js';
+import simplesRoutes from './simples.routes.js';
+import presumidoRoutes from './presumido.routes.js';
+import realRoutes from './real.routes.js';
+import creditosRoutes from './creditos.routes.js';
+import diagnosticoRoutes from './diagnostico.routes.js';
+import cnaeRoutes from './cnae.routes.js';
+import margemRoutes from './margem.routes.js';
+import historicoRoutes from './historico.routes.js';
 
 const router = express.Router();
 
@@ -26,5 +34,29 @@ router.get('/', (req, res) => {
 
 // Rotas de cálculos tributários
 router.use('/calcular', calculosRoutes);
+
+// Rotas do Simples Nacional
+router.use('/simples', simplesRoutes);
+
+// Rotas do Lucro Presumido
+router.use('/presumido', presumidoRoutes);
+
+// Rotas do Lucro Real
+router.use('/real', realRoutes);
+
+// Rotas de Créditos PIS/COFINS
+router.use('/creditos', creditosRoutes);
+
+// Rotas de Diagnóstico Tributário
+router.use('/diagnostico', diagnosticoRoutes);
+
+// Rotas de CNAE
+router.use('/cnae', cnaeRoutes);
+
+// Rotas de Margem e Tributos
+router.use('/margem', margemRoutes);
+
+// Rotas de Histórico Tributário
+router.use('/historico', historicoRoutes);
 
 export default router;

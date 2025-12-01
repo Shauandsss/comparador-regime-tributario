@@ -1,0 +1,47 @@
+{
+  "startup_tools": [],
+  "feitos": [
+    {
+      "title": "Calculadora de Runway",
+      "description": "Calcula quantos meses de operação a startup consegue se manter com o caixa atual e o burn rate mensal.",
+      "route": "/calculadora-runway",
+      "component": "CalculadoraRunway.jsx"
+    },
+    {
+      "title": "Calculadora de Valuation",
+      "description": "Calcula valuation pre-money e post-money com base em investimento e equity.",
+      "route": "/calculadora-valuation",
+      "component": "CalculadoraValuation.jsx"
+    },
+    {
+      "title": "Cap Table Simulator",
+      "description": "Simula distribuição de porcentagens entre sócios, investimentos e diluição por rodada.",
+      "route": "/cap-table",
+      "component": "CapTableSimulator.jsx"
+    },
+    {
+      "title": "CAC, LTV e Payback Calculator",
+      "description": "Calcula CAC, LTV, LTV/CAC e tempo de payback.",
+      "route": "/calculadora-cac-ltv",
+      "component": "CalculadoraCacLtv.jsx"
+    },
+    {
+      "title": "Simulador de Crescimento (Growth Forecast)",
+      "description": "Projeção de crescimento de usuários ou MRR com base em taxa de crescimento e churn.",
+      "route": "/simulador-crescimento",
+      "component": "SimuladorCrescimento.jsx"
+    },
+    {
+      "title": "ROI Simulator para Novos Produtos",
+      "description": "Calcula ROI em 1 e 3 anos, além do ponto de retorno.",
+      "route": "/simulador-roi",
+      "component": "SimuladorROI.jsx"
+    },
+    {
+      "title": "Simulador de MRR (Planos e Preço)",
+      "description": "Simula crescimento de MRR e ARR com base em planos, preço, crescimento e churn.",
+      "route": "/simulador-mrr",
+      "component": "SimuladorMRR.jsx"
+    }
+  ]
+}

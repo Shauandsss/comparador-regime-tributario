@@ -156,7 +156,7 @@ function Formulario() {
           </div>
 
           {/* Grid com 2 colunas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Folha de Pagamento */}
             <Input
               label="Folha de Pagamento (Opcional)"
@@ -185,7 +185,7 @@ function Formulario() {
           </div>
 
           {/* Informação */}
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded text-sm md:text-base">
             <p className="text-sm text-blue-800">
               <strong>💡 Dica:</strong> As despesas são especialmente importantes para o cálculo do Lucro Real,
               pois afetam diretamente a base de cálculo do IRPJ e CSLL.
@@ -193,18 +193,18 @@ function Formulario() {
           </div>
 
           {/* Botões */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
             <button
               type="button"
               onClick={() => navigate('/')}
-              className="flex-1 bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition"
+              className="w-full sm:flex-1 bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition text-sm md:text-base"
             >
               ← Voltar
             </button>
             <button
               type="submit"
               disabled={isLoading}
-              className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
             >
               {isLoading ? 'Calculando...' : 'Calcular Regimes →'}
             </button>
@@ -214,9 +214,9 @@ function Formulario() {
 
       {/* Preview dos Valores */}
       {formData.rbt12 && (
-        <div className="mt-6 bg-gray-50 rounded-xl p-6 border border-gray-200">
-          <h3 className="font-bold text-gray-800 mb-3">📊 Resumo dos Dados</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="mt-6 bg-gray-50 rounded-xl p-4 md:p-6 border border-gray-200">
+          <h3 className="font-bold text-gray-800 mb-3 text-sm md:text-base">📊 Resumo dos Dados</h3>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             <div>
               <p className="text-xs text-gray-500 mb-1">Receita Bruta</p>
               <p className="font-bold text-gray-800">

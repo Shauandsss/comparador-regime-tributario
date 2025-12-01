@@ -73,7 +73,7 @@ function Resultado() {
       </div>
 
       {/* Cards dos Regimes */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
         <CardResultado
           regime="Simples Nacional"
           valor={regimes.simples.imposto_total}
@@ -150,7 +150,7 @@ function Resultado() {
           <span className="text-blue-600 mr-2">ℹ️</span>
           Informações dos Dados Fornecidos
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           <div>
             <p className="text-xs text-gray-500 mb-1">Receita Bruta (12 meses)</p>
             <p className="font-bold text-gray-800">
@@ -207,24 +207,24 @@ function Resultado() {
       </div>
 
       {/* Botões de Ação */}
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
         <button
           onClick={handleNovaConsulta}
-          className="flex-1 bg-blue-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg"
+          className="w-full sm:flex-1 bg-blue-600 text-white px-4 md:px-6 py-3 md:py-4 rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg text-sm md:text-base"
         >
           🔄 Nova Consulta
         </button>
         <button
           onClick={() => window.print()}
-          className="flex-1 bg-gray-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-gray-700 transition shadow-lg"
+          className="w-full sm:flex-1 bg-gray-600 text-white px-4 md:px-6 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-700 transition shadow-lg text-sm md:text-base"
         >
-          🖨️ Imprimir Resultado
+          🖨️ Imprimir
         </button>
         <button
           onClick={() => navigate('/')}
-          className="flex-1 bg-gray-200 text-gray-700 px-6 py-4 rounded-lg font-semibold hover:bg-gray-300 transition"
+          className="w-full sm:flex-1 bg-gray-200 text-gray-700 px-4 md:px-6 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-300 transition text-sm md:text-base"
         >
-          ← Voltar ao Início
+          ← Início
         </button>
       </div>
     </div>

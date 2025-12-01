@@ -28,25 +28,25 @@ const TabelaComparacao = ({ dados, ranking }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6">
-        <h2 className="text-2xl font-bold text-white">📊 Comparação Detalhada</h2>
-        <p className="text-blue-100 mt-1">Análise dos três regimes tributários</p>
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 md:p-6">
+        <h2 className="text-xl md:text-2xl font-bold text-white">📊 Comparação Detalhada</h2>
+        <p className="text-blue-100 mt-1 text-sm md:text-base">Análise dos três regimes tributários</p>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full min-w-[600px]">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Ranking
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Regime Tributário
               </th>
-              <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="px-3 md:px-6 py-3 md:py-4 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Imposto Total
               </th>
-              <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="px-3 md:px-6 py-3 md:py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Status
               </th>
             </tr>
@@ -61,23 +61,23 @@ const TabelaComparacao = ({ dados, ranking }) => {
                   ${item.posicao === 1 ? 'border-l-4 border-green-500' : ''}
                 `}
               >
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
                   <div className="flex items-center">
-                    <span className="text-2xl">{getMedalha(item.posicao)}</span>
-                    <span className="ml-2 text-sm font-medium text-gray-700">
+                    <span className="text-xl md:text-2xl">{getMedalha(item.posicao)}</span>
+                    <span className="ml-2 text-xs md:text-sm font-medium text-gray-700">
                       {item.posicao}º
                     </span>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-bold text-gray-900">{item.regime}</div>
+                <td className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                  <div className="text-xs md:text-sm font-bold text-gray-900">{item.regime}</div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right">
-                  <div className={`text-lg font-bold ${item.posicao === 1 ? 'text-green-600' : 'text-gray-900'}`}>
+                <td className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-right">
+                  <div className={`text-base md:text-lg font-bold ${item.posicao === 1 ? 'text-green-600' : 'text-gray-900'}`}>
                     {formatCurrency(item.impostoTotal)}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">
+                <td className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-center">
                   {item.posicao === 1 && (
                     <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                       Mais Econômico
