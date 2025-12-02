@@ -115,16 +115,245 @@ export const calcularSimples = (data) => {
 // LUCRO PRESUMIDO
 // ============================================
 
-const PRESUNCAO_IRPJ = {
+/**
+ * TABELA DE PERCENTUAIS DE PRESUNÇÃO - LEI 9.249/95 (art. 15 e 20)
+ * 
+ * Os percentuais de presunção determinam a base de cálculo presumida
+ * sobre a qual incidirão as alíquotas de IRPJ (15% + 10% adicional) e CSLL (9%)
+ */
+
+// Atividades detalhadas com percentuais de presunção conforme legislação
+export const ATIVIDADES_LUCRO_PRESUMIDO = {
+  // === ATIVIDADES COM PRESUNÇÃO 1,6% (IRPJ) ===
+  'revenda_combustiveis': {
+    codigo: 'revenda_combustiveis',
+    nome: 'Revenda de Combustíveis e Gás Natural',
+    descricao: 'Revenda, para consumo, de combustível derivado de petróleo, álcool etílico carburante e gás natural',
+    presuncaoIrpj: 0.016,  // 1,6%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'combustiveis'
+  },
+
+  // === ATIVIDADES COM PRESUNÇÃO 8% (IRPJ) ===
+  'comercio': {
+    codigo: 'comercio',
+    nome: 'Comércio em Geral',
+    descricao: 'Venda de mercadorias ou produtos (exceto revenda de combustíveis)',
+    presuncaoIrpj: 0.08,   // 8%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'comercio'
+  },
+  'industria': {
+    codigo: 'industria',
+    nome: 'Indústria e Fabricação',
+    descricao: 'Industrialização de produtos em que a matéria-prima, produto intermediário e material de embalagem tenham sido fornecidos por quem encomendou',
+    presuncaoIrpj: 0.08,   // 8%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'industria'
+  },
+  'transporte_cargas': {
+    codigo: 'transporte_cargas',
+    nome: 'Transporte de Cargas',
+    descricao: 'Serviços de transporte de cargas',
+    presuncaoIrpj: 0.08,   // 8%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'transporte'
+  },
+  'servicos_hospitalares': {
+    codigo: 'servicos_hospitalares',
+    nome: 'Serviços Hospitalares',
+    descricao: 'Serviços hospitalares e de auxílio diagnóstico e terapia, patologia clínica, imagenologia, anatomia patológica e citopatologia, medicina nuclear e análises e patologias clínicas (desde que organizados como sociedade empresária e atendam às normas da ANVISA)',
+    presuncaoIrpj: 0.08,   // 8%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'saude'
+  },
+  'atividade_rural': {
+    codigo: 'atividade_rural',
+    nome: 'Atividade Rural',
+    descricao: 'Atividade rural (agricultura, pecuária, extração e exploração vegetal e animal)',
+    presuncaoIrpj: 0.08,   // 8%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'rural'
+  },
+  'atividade_imobiliaria': {
+    codigo: 'atividade_imobiliaria',
+    nome: 'Atividade Imobiliária',
+    descricao: 'Venda de imóveis de empresas que exploram atividades imobiliárias (loteamentos, incorporações, construção de prédios para venda)',
+    presuncaoIrpj: 0.08,   // 8%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'imobiliaria'
+  },
+  'construcao_empreitada_materiais': {
+    codigo: 'construcao_empreitada_materiais',
+    nome: 'Construção por Empreitada (com materiais)',
+    descricao: 'Construção por empreitada, quando houver emprego de materiais próprios, em qualquer quantidade',
+    presuncaoIrpj: 0.08,   // 8%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'construcao'
+  },
+
+  // === ATIVIDADES COM PRESUNÇÃO 16% (IRPJ) ===
+  'transporte_passageiros': {
+    codigo: 'transporte_passageiros',
+    nome: 'Transporte de Passageiros',
+    descricao: 'Serviços de transporte de passageiros (exceto transporte internacional de cargas)',
+    presuncaoIrpj: 0.16,   // 16%
+    presuncaoCsll: 0.12,   // 12%
+    categoria: 'transporte'
+  },
+  'servicos_gerais_ate_120k': {
+    codigo: 'servicos_gerais_ate_120k',
+    nome: 'Serviços em Geral (receita até R$ 120 mil/ano)',
+    descricao: 'Prestação de serviços em geral, exceto hospitalares e profissões regulamentadas, cuja receita bruta anual não ultrapasse R$ 120.000,00',
+    presuncaoIrpj: 0.16,   // 16%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'servicos'
+  },
+
+  // === ATIVIDADES COM PRESUNÇÃO 32% (IRPJ) ===
+  'servico': {
+    codigo: 'servico',
+    nome: 'Serviços em Geral',
+    descricao: 'Prestação de serviços em geral (quando não se enquadrar nas demais categorias)',
+    presuncaoIrpj: 0.32,   // 32%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'servicos'
+  },
+  'servicos_profissionais': {
+    codigo: 'servicos_profissionais',
+    nome: 'Profissões Regulamentadas',
+    descricao: 'Serviços de profissões legalmente regulamentadas (medicina, advocacia, engenharia, arquitetura, contabilidade, auditoria, consultoria, economia, administração, psicologia, etc.)',
+    presuncaoIrpj: 0.32,   // 32%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'servicos'
+  },
+  'intermediacao_negocios': {
+    codigo: 'intermediacao_negocios',
+    nome: 'Intermediação de Negócios',
+    descricao: 'Intermediação de negócios, representação comercial, corretagem (seguros, imóveis, etc.)',
+    presuncaoIrpj: 0.32,   // 32%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'servicos'
+  },
+  'administracao_locacao_bens': {
+    codigo: 'administracao_locacao_bens',
+    nome: 'Administração, Locação ou Cessão de Bens',
+    descricao: 'Administração, locação ou cessão de bens imóveis, móveis e direitos de qualquer natureza',
+    presuncaoIrpj: 0.32,   // 32%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'servicos'
+  },
+  'construcao_empreitada_sem_materiais': {
+    codigo: 'construcao_empreitada_sem_materiais',
+    nome: 'Construção por Empreitada (sem materiais)',
+    descricao: 'Construção por empreitada, quando houver emprego unicamente de mão de obra (administração, fiscalização e empreitada)',
+    presuncaoIrpj: 0.32,   // 32%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'construcao'
+  },
+  'factoring': {
+    codigo: 'factoring',
+    nome: 'Factoring',
+    descricao: 'Prestação cumulativa e contínua de serviços de assessoria creditícia, mercadológica, gestão de crédito, seleção e riscos, administração de contas a pagar e a receber, compras de direitos creditórios resultantes de vendas mercantis a prazo ou de prestação de serviços (factoring)',
+    presuncaoIrpj: 0.32,   // 32%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'financeiro'
+  },
+  'servicos_tecnicos': {
+    codigo: 'servicos_tecnicos',
+    nome: 'Serviços Técnicos',
+    descricao: 'Prestação de serviços técnicos, científicos, de design, de assessoria e consultoria',
+    presuncaoIrpj: 0.32,   // 32%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'servicos'
+  },
+  'publicidade_propaganda': {
+    codigo: 'publicidade_propaganda',
+    nome: 'Publicidade e Propaganda',
+    descricao: 'Propaganda e publicidade, inclusive serviços de agenciamento',
+    presuncaoIrpj: 0.32,   // 32%
+    presuncaoCsll: 0.32,   // 32%
+    categoria: 'servicos'
+  },
+
+  // === ATIVIDADES COM PRESUNÇÃO 38,4% (IRPJ) ===
+  'esc': {
+    codigo: 'esc',
+    nome: 'Empresa Simples de Crédito (ESC)',
+    descricao: 'Empresa Simples de Crédito - operações de empréstimo, financiamento e desconto de títulos',
+    presuncaoIrpj: 0.384,  // 38,4%
+    presuncaoCsll: 0.384,  // 38,4%
+    categoria: 'financeiro'
+  }
+};
+
+// Mapeamento para manter compatibilidade com código antigo (tipos simples)
+const PRESUNCAO_IRPJ_LEGACY = {
   'comercio': 0.08,
   'industria': 0.08,
   'servico': 0.32
 };
 
-const PRESUNCAO_CSLL = {
+const PRESUNCAO_CSLL_LEGACY = {
   'comercio': 0.12,
   'industria': 0.12,
-  'servico': 0.12
+  'servico': 0.32
+};
+
+// Lista de atividades agrupadas por categoria para uso em selects/dropdowns
+export const CATEGORIAS_ATIVIDADES_PRESUMIDO = {
+  'combustiveis': {
+    nome: 'Combustíveis',
+    atividades: ['revenda_combustiveis']
+  },
+  'comercio': {
+    nome: 'Comércio',
+    atividades: ['comercio']
+  },
+  'industria': {
+    nome: 'Indústria',
+    atividades: ['industria']
+  },
+  'transporte': {
+    nome: 'Transporte',
+    atividades: ['transporte_cargas', 'transporte_passageiros']
+  },
+  'saude': {
+    nome: 'Saúde',
+    atividades: ['servicos_hospitalares']
+  },
+  'rural': {
+    nome: 'Rural',
+    atividades: ['atividade_rural']
+  },
+  'imobiliaria': {
+    nome: 'Imobiliária',
+    atividades: ['atividade_imobiliaria']
+  },
+  'construcao': {
+    nome: 'Construção Civil',
+    atividades: ['construcao_empreitada_materiais', 'construcao_empreitada_sem_materiais']
+  },
+  'servicos': {
+    nome: 'Serviços',
+    atividades: ['servico', 'servicos_gerais_ate_120k', 'servicos_profissionais', 'intermediacao_negocios', 'administracao_locacao_bens', 'servicos_tecnicos', 'publicidade_propaganda']
+  },
+  'financeiro': {
+    nome: 'Financeiro',
+    atividades: ['factoring', 'esc']
+  }
+};
+
+// Lista simplificada para exibição em dropdown
+export const getListaAtividadesPresumido = () => {
+  return Object.values(ATIVIDADES_LUCRO_PRESUMIDO).map(atividade => ({
+    value: atividade.codigo,
+    label: atividade.nome,
+    descricao: atividade.descricao,
+    presuncaoIrpj: atividade.presuncaoIrpj,
+    presuncaoCsll: atividade.presuncaoCsll,
+    categoria: atividade.categoria
+  })).sort((a, b) => a.presuncaoIrpj - b.presuncaoIrpj); // Ordena por % de presunção
 };
 
 const ALIQUOTAS_PRESUMIDO = {
@@ -140,12 +369,28 @@ const LIMITE_ADICIONAL_IRPJ = 240000;
 export const calcularPresumido = (data) => {
   const rbt12 = parseFloat(data.rbt12) || 0;
   const atividade = data.atividade;
+  // Campo opcional para atividade específica do Lucro Presumido
+  const atividadeEspecifica = data.atividadePresumido || data.atividadeEspecifica || atividade;
 
-  const presuncaoIrpj = PRESUNCAO_IRPJ[atividade];
-  const presuncaoCsll = PRESUNCAO_CSLL[atividade];
-
-  if (presuncaoIrpj === undefined) {
-    throw new Error(`Atividade "${atividade}" não encontrada`);
+  // Primeiro tenta encontrar na tabela detalhada
+  let presuncaoIrpj, presuncaoCsll, nomeAtividade, descricaoAtividade;
+  
+  if (ATIVIDADES_LUCRO_PRESUMIDO[atividadeEspecifica]) {
+    const atividadeInfo = ATIVIDADES_LUCRO_PRESUMIDO[atividadeEspecifica];
+    presuncaoIrpj = atividadeInfo.presuncaoIrpj;
+    presuncaoCsll = atividadeInfo.presuncaoCsll;
+    nomeAtividade = atividadeInfo.nome;
+    descricaoAtividade = atividadeInfo.descricao;
+  } 
+  // Fallback para compatibilidade com tipos simples (comercio/industria/servico)
+  else if (PRESUNCAO_IRPJ_LEGACY[atividade] !== undefined) {
+    presuncaoIrpj = PRESUNCAO_IRPJ_LEGACY[atividade];
+    presuncaoCsll = PRESUNCAO_CSLL_LEGACY[atividade];
+    nomeAtividade = atividade.charAt(0).toUpperCase() + atividade.slice(1);
+    descricaoAtividade = `Atividade genérica de ${atividade}`;
+  }
+  else {
+    throw new Error(`Atividade "${atividadeEspecifica || atividade}" não encontrada`);
   }
 
   const lucroPresumidoIrpj = rbt12 * presuncaoIrpj;
@@ -167,18 +412,22 @@ export const calcularPresumido = (data) => {
 
   const iss = 0;
   const impostoTotal = irpjCsll + pisCofins + iss;
-  const aliquotaEfetiva = (impostoTotal / rbt12) * 100;
+  const aliquotaEfetiva = rbt12 > 0 ? (impostoTotal / rbt12) * 100 : 0;
 
   return {
     regime: 'Lucro Presumido',
     rbt12: parseFloat(rbt12.toFixed(2)),
     atividade,
+    atividadeEspecifica: atividadeEspecifica,
+    nomeAtividade,
     lucroPresumido: parseFloat(lucroPresumidoIrpj.toFixed(2)),
     impostoTotal: parseFloat(impostoTotal.toFixed(2)),
     aliquotaEfetiva: parseFloat(aliquotaEfetiva.toFixed(2)),
     detalhamento: {
-      presuncaoLucroIrpj: `${(presuncaoIrpj * 100).toFixed(2)}%`,
-      presuncaoLucroCsll: `${(presuncaoCsll * 100).toFixed(2)}%`,
+      atividadeNome: nomeAtividade,
+      atividadeDescricao: descricaoAtividade,
+      presuncaoLucroIrpj: `${(presuncaoIrpj * 100).toFixed(1)}%`,
+      presuncaoLucroCsll: `${(presuncaoCsll * 100).toFixed(1)}%`,
       lucroPresumidoIrpj: parseFloat(lucroPresumidoIrpj.toFixed(2)),
       lucroPresumidoCsll: parseFloat(lucroPresumidoCsll.toFixed(2)),
       irpj: parseFloat(irpj.toFixed(2)),
@@ -188,7 +437,8 @@ export const calcularPresumido = (data) => {
       pis: parseFloat(pis.toFixed(2)),
       cofins: parseFloat(cofins.toFixed(2)),
       pisCofins: parseFloat(pisCofins.toFixed(2)),
-      iss: parseFloat(iss.toFixed(2))
+      iss: parseFloat(iss.toFixed(2)),
+      observacaoLegal: 'Percentuais de presunção conforme Lei 9.249/95, art. 15 (IRPJ) e art. 20 (CSLL)'
     }
   };
 };
@@ -233,10 +483,15 @@ export const calcularReal = (data) => {
   const pisDebito = rbt12 * ALIQUOTAS_REAL.PIS;
   const cofinsDebito = rbt12 * ALIQUOTAS_REAL.COFINS;
   
-  const percentualCredito = (atividade === 'servico') ? 0.70 : 0.90;
-  const despesasComCredito = despesas * percentualCredito;
-  const pisCredito = despesasComCredito * ALIQUOTAS_REAL.PIS;
-  const cofinsCredito = despesasComCredito * ALIQUOTAS_REAL.COFINS;
+  // Créditos: sobre despesas que geram crédito (insumos, mercadorias, etc.)
+  // Nem todas as despesas geram crédito - folha, por exemplo, não gera
+  // Percentual estimado de despesas creditáveis por tipo de atividade:
+  // - Comércio/Indústria: ~70% (mercadorias, matéria-prima, fretes, energia)
+  // - Serviços: ~30% (menos insumos, mais mão de obra que não gera crédito)
+  const percentualCredito = (atividade === 'servico') ? 0.30 : 0.70;
+  const despesasCreditaveis = despesas * percentualCredito;
+  const pisCredito = despesasCreditaveis * ALIQUOTAS_REAL.PIS;
+  const cofinsCredito = despesasCreditaveis * ALIQUOTAS_REAL.COFINS;
   
   const pis = Math.max(0, pisDebito - pisCredito);
   const cofins = Math.max(0, cofinsDebito - cofinsCredito);
@@ -272,10 +527,11 @@ export const calcularReal = (data) => {
       cofins: parseFloat(cofins.toFixed(2)),
       pisCofins: parseFloat(pisCofins.toFixed(2)),
       iss: parseFloat(iss.toFixed(2)),
+      despesasCreditaveis: parseFloat(despesasCreditaveis.toFixed(2)),
       percentualCreditoPisCofins: `${percentualCredito * 100}%`,
       observacao: lucroLiquido <= 0 
         ? 'Lucro zero ou negativo - IRPJ/CSLL = 0' 
-        : `PIS/COFINS não-cumulativo com créditos sobre ${percentualCredito * 100}% das despesas`
+        : `PIS/COFINS não-cumulativo com créditos sobre ${percentualCredito * 100}% das despesas (exceto folha)`
     }
   };
 };
@@ -287,13 +543,15 @@ export const calcularReal = (data) => {
 export const compararRegimes = (dados) => {
   // Aceita tanto "receita" quanto "rbt12" como nome do campo
   const receita = dados.receita || dados.rbt12;
-  const { folha, atividade, despesas } = dados;
+  const { folha, atividade, despesas, atividadePresumido } = dados;
 
   const dataCalculo = {
     rbt12: parseFloat(receita) || 0,
     folha: parseFloat(folha) || 0,
     atividade: atividade,
-    despesas: parseFloat(despesas) || 0
+    despesas: parseFloat(despesas) || 0,
+    // Para Lucro Presumido: usa atividade específica se fornecida
+    atividadePresumido: atividadePresumido || atividade
   };
 
   const simples = calcularSimples(dataCalculo);

@@ -276,7 +276,7 @@ function Home() {
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-green-500 font-bold text-xl">✓</span>
-                  <span className="text-sm text-gray-700">Presunção de lucro entre 8% e 32%</span>
+                  <span className="text-sm text-gray-700">Presunção de lucro entre 1,6% e 38,4%</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-green-500 font-bold text-xl">✓</span>
@@ -289,7 +289,7 @@ function Home() {
               </div>
               <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
                 <div className="text-xs text-gray-600 mb-1">Presunção de Lucro</div>
-                <div className="text-2xl font-bold text-purple-600">8% - 32%</div>
+                <div className="text-2xl font-bold text-purple-600">1,6% - 38,4%</div>
               </div>
             </div>
           </div>

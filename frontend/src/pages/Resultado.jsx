@@ -178,6 +178,24 @@ function Resultado() {
             </p>
           </div>
         </div>
+
+        {/* Detalhes do Lucro Presumido (se atividade específica foi selecionada) */}
+        {regimes.presumido.detalhes?.nomeAtividade && 
+         regimes.presumido.detalhes.atividadeEspecifica !== entrada?.atividade && (
+          <div className="mt-4 pt-4 border-t border-blue-200">
+            <p className="text-xs text-purple-600 font-semibold mb-2">
+              📈 Atividade Específica para Lucro Presumido:
+            </p>
+            <div className="bg-purple-50 rounded-lg p-3">
+              <p className="font-bold text-purple-800 text-sm">
+                {regimes.presumido.detalhes.nomeAtividade}
+              </p>
+              <p className="text-xs text-purple-700 mt-1">
+                Presunção: IRPJ {regimes.presumido.detalhes.detalhamento?.presuncaoLucroIrpj} / CSLL {regimes.presumido.detalhes.detalhamento?.presuncaoLucroCsll}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Observações */}

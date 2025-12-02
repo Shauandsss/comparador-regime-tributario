@@ -3,7 +3,7 @@
  */
 import React from 'react';
 
-const TabelaComparacao = ({ dados, ranking }) => {
+const TabelaComparacao = ({ regimes, melhorOpcao }) => {
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -25,6 +25,15 @@ const TabelaComparacao = ({ dados, ranking }) => {
     'Lucro Presumido': 'bg-purple-50 border-purple-200',
     'Lucro Real': 'bg-orange-50 border-orange-200'
   };
+
+  // Criar ranking a partir dos regimes
+  const ranking = regimes ? [
+    { regime: 'Simples Nacional', impostoTotal: regimes.simples?.imposto_total || 0, key: 'simples' },
+    { regime: 'Lucro Presumido', impostoTotal: regimes.presumido?.imposto_total || 0, key: 'presumido' },
+    { regime: 'Lucro Real', impostoTotal: regimes.real?.imposto_total || 0, key: 'real' }
+  ].sort((a, b) => a.impostoTotal - b.impostoTotal)
+   .map((item, index) => ({ ...item, posicao: index + 1 }))
+  : [];
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -94,27 +103,6 @@ const TabelaComparacao = ({ dados, ranking }) => {
           </tbody>
         </table>
       </div>
-
-      {dados && dados.economia && (
-        <div className="bg-green-50 border-t-2 border-green-200 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-bold text-green-800">💰 Economia Potencial</h3>
-              <p className="text-sm text-green-600 mt-1">
-                Comparado com: {dados.economia.comparadoCom}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-3xl font-bold text-green-600">
-                {formatCurrency(dados.economia.valor)}
-              </p>
-              <p className="text-sm text-green-700 font-semibold mt-1">
-                {dados.economia.percentual}% de economia
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

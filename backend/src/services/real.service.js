@@ -68,13 +68,16 @@ export const calcularReal = (data) => {
   const pisDebito = rbt12 * ALIQUOTAS.PIS;
   const cofinsDebito = rbt12 * ALIQUOTAS.COFINS;
   
-  // Créditos: sobre as despesas (insumos, serviços, etc.) - NÃO inclui folha
-  // Para indústria/comércio, considera ~90% das despesas como geradoras de crédito
-  // Para serviços, considera ~70% (menos insumos)
-  const percentualCredito = (atividade === 'servico') ? 0.70 : 0.90;
-  const despesasComCredito = despesas * percentualCredito;
-  const pisCredito = despesasComCredito * ALIQUOTAS.PIS;
-  const cofinsCredito = despesasComCredito * ALIQUOTAS.COFINS;
+  // Créditos: sobre despesas que geram crédito (insumos, mercadorias, etc.)
+  // Nem todas as despesas geram crédito - folha, por exemplo, não gera
+  // Percentual estimado de despesas creditáveis por tipo de atividade:
+  // - Comércio/Indústria: ~70% (mercadorias, matéria-prima, fretes, energia)
+  // - Serviços: ~30% (menos insumos, mais mão de obra que não gera crédito)
+  const percentualCreditavel = (atividade === 'servico') ? 0.30 : 0.70;
+  const despesasCreditaveis = despesas * percentualCreditavel;
+  
+  const pisCredito = despesasCreditaveis * ALIQUOTAS.PIS;
+  const cofinsCredito = despesasCreditaveis * ALIQUOTAS.COFINS;
   
   // Valor líquido a pagar (não pode ser negativo)
   const pis = Math.max(0, pisDebito - pisCredito);
@@ -119,10 +122,11 @@ export const calcularReal = (data) => {
       cofins: parseFloat(cofins.toFixed(2)),
       pisCofins: parseFloat(pisCofins.toFixed(2)),
       iss: parseFloat(iss.toFixed(2)),
-      percentualCreditoPisCofins: `${percentualCredito * 100}%`,
+      despesasCreditaveis: parseFloat(despesasCreditaveis.toFixed(2)),
+      percentualCreditavel: `${percentualCreditavel * 100}%`,
       observacao: lucroLiquido <= 0 
         ? 'Lucro zero ou negativo - IRPJ/CSLL = 0' 
-        : `PIS/COFINS não-cumulativo com créditos sobre ${percentualCredito * 100}% das despesas operacionais (exceto folha)`
+        : `PIS/COFINS não-cumulativo com créditos sobre ${percentualCreditavel * 100}% das despesas (exceto folha)`
     }
   };
 };

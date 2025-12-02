@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:3000/api';
+import { 
+  calcularPresumido, 
+  ATIVIDADES_LUCRO_PRESUMIDO, 
+  CATEGORIAS_ATIVIDADES_PRESUMIDO,
+  getListaAtividadesPresumido 
+} from '../services/calculosTributarios';
 
 export default function CalculadoraPresumido() {
   const navigate = useNavigate();
   
   // Estados
   const [loading, setLoading] = useState(false);
-  const [atividades, setAtividades] = useState([]);
   const [erro, setErro] = useState('');
   
   // Formulário
@@ -22,21 +24,26 @@ export default function CalculadoraPresumido() {
   // Resultado
   const [resultado, setResultado] = useState(null);
   
-  // Carregar atividades ao montar
-  useEffect(() => {
-    carregarAtividades();
+  // Lista de atividades ordenadas por categoria
+  const atividadesAgrupadas = useMemo(() => {
+    const grupos = {};
+    Object.entries(CATEGORIAS_ATIVIDADES_PRESUMIDO).forEach(([key, categoria]) => {
+      grupos[key] = {
+        nome: categoria.nome,
+        atividades: categoria.atividades.map(codigo => ({
+          ...ATIVIDADES_LUCRO_PRESUMIDO[codigo],
+          codigo
+        })).filter(Boolean)
+      };
+    });
+    return grupos;
   }, []);
   
-  const carregarAtividades = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/presumido/atividades`);
-      if (response.data.sucesso) {
-        setAtividades(response.data.atividades);
-      }
-    } catch (error) {
-      console.error('Erro ao carregar atividades:', error);
-    }
-  };
+  // Atividade selecionada com detalhes
+  const atividadeSelecionada = useMemo(() => {
+    if (!atividade) return null;
+    return ATIVIDADES_LUCRO_PRESUMIDO[atividade] || null;
+  }, [atividade]);
   
   const formatarMoedaInput = (valor) => {
     // Remove tudo exceto números
@@ -52,6 +59,13 @@ export default function CalculadoraPresumido() {
     });
   };
   
+  const formatarMoeda = (valor) => {
+    return valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    });
+  };
+  
   const handleReceitaChange = (e) => {
     const valor = e.target.value;
     setReceita(formatarMoedaInput(valor));
@@ -61,7 +75,7 @@ export default function CalculadoraPresumido() {
     return parseFloat(valorFormatado.replace(/[R$\s.]/g, '').replace(',', '.'));
   };
   
-  const handleCalcular = async (e) => {
+  const handleCalcular = (e) => {
     e.preventDefault();
     setErro('');
     setResultado(null);
@@ -89,22 +103,114 @@ export default function CalculadoraPresumido() {
     setLoading(true);
     
     try {
-      const response = await axios.post(`${API_URL}/presumido/calcular`, {
-        receita: receitaNumero,
-        atividade,
-        periodo,
-        aliquotaISS: issNumero
+      // Ajusta receita para anual se for período mensal (para cálculo do adicional de IRPJ)
+      const multiplicador = periodo === 'mensal' ? 12 : 4;
+      const receitaAnual = receitaNumero * multiplicador;
+      
+      // Calcular usando função client-side
+      const calc = calcularPresumido({
+        rbt12: receitaAnual,
+        atividade: atividade,
+        atividadePresumido: atividade
       });
       
-      if (response.data.sucesso) {
-        setResultado(response.data);
-      } else {
-        setErro(response.data.erro || 'Erro ao calcular');
-      }
+      // Calcular proporção para o período informado
+      const fatorPeriodo = 1 / multiplicador;
+      
+      // ISS (se aplicável)
+      const issValor = aplicaISS ? receitaNumero * (issNumero / 100) : 0;
+      
+      // Valores do período
+      const irpjPeriodo = calc.detalhamento.irpj * fatorPeriodo;
+      const irpjAdicionalPeriodo = calc.detalhamento.irpjAdicional * fatorPeriodo;
+      const csllPeriodo = calc.detalhamento.csll * fatorPeriodo;
+      const pisPeriodo = calc.detalhamento.pis * fatorPeriodo;
+      const cofinsPeriodo = calc.detalhamento.cofins * fatorPeriodo;
+      
+      const totalTributos = irpjPeriodo + irpjAdicionalPeriodo + csllPeriodo + pisPeriodo + cofinsPeriodo + issValor;
+      const cargaTributaria = (totalTributos / receitaNumero) * 100;
+      const lucroPresumido = calc.lucroPresumido * fatorPeriodo;
+      
+      setResultado({
+        entrada: {
+          receita: receitaNumero,
+          receitaFormatada: formatarMoeda(receitaNumero),
+          periodo,
+          atividade: atividadeSelecionada?.nome || atividade,
+          atividadeDescricao: atividadeSelecionada?.descricao,
+          presuncaoIRPJ: atividadeSelecionada?.presuncaoIrpj * 100,
+          presuncaoCSLL: atividadeSelecionada?.presuncaoCsll * 100
+        },
+        resumo: {
+          totalTributos,
+          totalTributosFormatado: formatarMoeda(totalTributos),
+          cargaTributaria: `${cargaTributaria.toFixed(2)}%`,
+          cargaTributariaDecimal: cargaTributaria.toFixed(2),
+          lucroPresumido,
+          lucroPresumidoFormatado: formatarMoeda(lucroPresumido),
+          receitaLiquida: receitaNumero - totalTributos,
+          receitaLiquidaFormatada: formatarMoeda(receitaNumero - totalTributos)
+        },
+        tributos: {
+          irpj: {
+            baseCalculo: lucroPresumido,
+            baseCalculoFormatado: formatarMoeda(lucroPresumido),
+            irpjBase: irpjPeriodo,
+            irpjBaseFormatado: formatarMoeda(irpjPeriodo),
+            adicional: irpjAdicionalPeriodo,
+            adicionalFormatado: formatarMoeda(irpjAdicionalPeriodo),
+            irpjTotal: irpjPeriodo + irpjAdicionalPeriodo,
+            irpjTotalFormatado: formatarMoeda(irpjPeriodo + irpjAdicionalPeriodo),
+            aliquotaEfetiva: `${((irpjPeriodo + irpjAdicionalPeriodo) / receitaNumero * 100).toFixed(2)}%`
+          },
+          csll: {
+            baseCalculo: calc.detalhamento.lucroPresumidoCsll * fatorPeriodo,
+            baseCalculoFormatado: formatarMoeda(calc.detalhamento.lucroPresumidoCsll * fatorPeriodo),
+            csll: csllPeriodo,
+            csllFormatado: formatarMoeda(csllPeriodo),
+            aliquota: '9%',
+            aliquotaEfetiva: `${(csllPeriodo / receitaNumero * 100).toFixed(2)}%`
+          },
+          pis: {
+            pis: pisPeriodo,
+            pisFormatado: formatarMoeda(pisPeriodo),
+            aliquota: '0,65%',
+            regime: 'Cumulativo'
+          },
+          cofins: {
+            cofins: cofinsPeriodo,
+            cofinsFormatado: formatarMoeda(cofinsPeriodo),
+            aliquota: '3%',
+            regime: 'Cumulativo'
+          },
+          iss: {
+            iss: issValor,
+            issFormatado: formatarMoeda(issValor),
+            aliquota: aplicaISS ? `${issNumero}%` : 'N/A',
+            observacao: aplicaISS ? 'Alíquota definida pelo município' : 'Não aplicável'
+          }
+        },
+        detalhamento: {
+          tributosPorTipo: [
+            { nome: 'IRPJ', valor: irpjPeriodo + irpjAdicionalPeriodo, percentual: ((irpjPeriodo + irpjAdicionalPeriodo) / receitaNumero * 100).toFixed(2) },
+            { nome: 'CSLL', valor: csllPeriodo, percentual: (csllPeriodo / receitaNumero * 100).toFixed(2) },
+            { nome: 'PIS', valor: pisPeriodo, percentual: (pisPeriodo / receitaNumero * 100).toFixed(2) },
+            { nome: 'COFINS', valor: cofinsPeriodo, percentual: (cofinsPeriodo / receitaNumero * 100).toFixed(2) },
+            ...(issValor > 0 ? [{ nome: 'ISS', valor: issValor, percentual: (issValor / receitaNumero * 100).toFixed(2) }] : [])
+          ],
+          observacoes: [
+            `Percentual de presunção IRPJ: ${(atividadeSelecionada?.presuncaoIrpj * 100).toFixed(1)}%`,
+            `Percentual de presunção CSLL: ${(atividadeSelecionada?.presuncaoCsll * 100).toFixed(1)}%`,
+            'PIS/COFINS calculados pelo regime cumulativo',
+            calc.detalhamento.irpjAdicional > 0 ? 'Aplica-se adicional de 10% sobre lucro presumido excedente a R$ 60.000/trimestre' : 'Não há adicional de IRPJ (lucro presumido até R$ 60.000/trimestre)',
+            calc.detalhamento.observacaoLegal || 'Percentuais conforme Lei 9.249/95'
+          ]
+        }
+      });
       
     } catch (error) {
       console.error('Erro ao calcular:', error);
-      setErro(error.response?.data?.erro || 'Erro ao calcular. Tente novamente.');
+      setErro(error.message || 'Erro ao calcular. Tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -203,16 +309,33 @@ export default function CalculadoraPresumido() {
                 required
               >
                 <option value="">Selecione a atividade</option>
-                {atividades.map((atv) => (
-                  <option key={atv.id} value={atv.id}>
-                    {atv.nome} - IRPJ {atv.presuncaoIRPJ} / CSLL {atv.presuncaoCSLL}
-                  </option>
+                {Object.entries(atividadesAgrupadas).map(([key, grupo]) => (
+                  <optgroup key={key} label={`📁 ${grupo.nome}`}>
+                    {grupo.atividades.map((atv) => (
+                      <option key={atv.codigo} value={atv.codigo}>
+                        {atv.nome} — IRPJ {(atv.presuncaoIrpj * 100).toFixed(1)}% / CSLL {(atv.presuncaoCsll * 100).toFixed(0)}%
+                      </option>
+                    ))}
+                  </optgroup>
                 ))}
               </select>
-              {atividade && (
-                <p className="mt-2 text-sm text-gray-600">
-                  {atividades.find(a => a.id === atividade)?.descricao}
-                </p>
+              {atividadeSelecionada && (
+                <div className="mt-3 p-4 bg-purple-50 rounded-lg border border-purple-200">
+                  <p className="text-sm text-purple-800 mb-2">
+                    <strong>📋 {atividadeSelecionada.nome}</strong>
+                  </p>
+                  <p className="text-xs text-purple-700 mb-2">
+                    {atividadeSelecionada.descricao}
+                  </p>
+                  <div className="flex gap-4 text-xs">
+                    <span className="bg-purple-200 text-purple-800 px-2 py-1 rounded">
+                      Presunção IRPJ: <strong>{(atividadeSelecionada.presuncaoIrpj * 100).toFixed(1)}%</strong>
+                    </span>
+                    <span className="bg-purple-200 text-purple-800 px-2 py-1 rounded">
+                      Presunção CSLL: <strong>{(atividadeSelecionada.presuncaoCsll * 100).toFixed(0)}%</strong>
+                    </span>
+                  </div>
+                </div>
               )}
             </div>
             

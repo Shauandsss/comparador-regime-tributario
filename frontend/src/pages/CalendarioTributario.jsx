@@ -1,5 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
+
+// Configuração do EmailJS
+const EMAILJS_SERVICE_ID = 'service_lg075qe';
+const EMAILJS_TEMPLATE_ID = 'template_86pvwv8';
+const EMAILJS_PUBLIC_KEY = 'kC-JZCqDSVJBInkHg';
 
 const MESES = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -49,6 +55,106 @@ export default function CalendarioTributario() {
   const [mesSelecionado, setMesSelecionado] = useState(new Date().getMonth());
   const [regimeFiltro, setRegimeFiltro] = useState('todos');
   const [visualizacao, setVisualizacao] = useState('lista'); // 'lista' ou 'calendario'
+
+  // Estados para captura de leads
+  const [nomeLead, setNomeLead] = useState(''); // Nome (opcional)
+  const [emailLead, setEmailLead] = useState('');
+  const [regimeLead, setRegimeLead] = useState(''); // Regime do lead
+  const [leadStatus, setLeadStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [leadMessage, setLeadMessage] = useState('');
+
+  // Mapeamento de regime para nome legível
+  const getNomeRegime = (regime) => {
+    const nomes = {
+      'simples': 'Simples Nacional',
+      'presumido': 'Lucro Presumido',
+      'real': 'Lucro Real',
+      'nao_sei': 'Ainda não sei / Preciso de ajuda'
+    };
+    return nomes[regime] || regime;
+  };
+
+  // Função para enviar e-mail via EmailJS
+  const sendLeadEmail = async (nome, email, regime) => {
+    try {
+      setLeadStatus('loading');
+      
+      const regimeFormatado = getNomeRegime(regime);
+      const nomeFormatado = nome ? nome : 'Não informado';
+      
+      // Parâmetros do template EmailJS (usando variáveis do template existente)
+      const templateParams = {
+        title: 'Novo Lead - Calendário Tributário',
+        name: nomeFormatado,
+        time: new Date().toLocaleString('pt-BR'),
+        message: `📧 Novo lead inscrito!\n\n👤 Nome: ${nomeFormatado}\n📧 E-mail: ${email}\n🏢 Regime: ${regimeFormatado}`,
+        email: email
+      };
+
+      // Enviar via EmailJS
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      console.log('EmailJS Response:', response);
+      
+      setLeadStatus('success');
+      setLeadMessage('Inscrição realizada! Você receberá os lembretes mensalmente.');
+      setNomeLead(''); // Limpar campos
+      setEmailLead('');
+      setRegimeLead('');
+      
+      // Resetar mensagem após 5 segundos
+      setTimeout(() => {
+        setLeadStatus('idle');
+        setLeadMessage('');
+      }, 5000);
+
+    } catch (error) {
+      console.error('Erro ao enviar email:', error);
+      setLeadStatus('error');
+      setLeadMessage('Ocorreu um erro no envio. Tente novamente.');
+      
+      // Resetar mensagem após 5 segundos
+      setTimeout(() => {
+        setLeadStatus('idle');
+        setLeadMessage('');
+      }, 5000);
+    }
+  };
+
+  // Handler do formulário de inscrição
+  const handleLeadSubmit = (e) => {
+    e.preventDefault();
+    
+    // Validação básica de e-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailLead || !emailRegex.test(emailLead)) {
+      setLeadStatus('error');
+      setLeadMessage('Por favor, insira um e-mail válido.');
+      setTimeout(() => {
+        setLeadStatus('idle');
+        setLeadMessage('');
+      }, 3000);
+      return;
+    }
+
+    // Validação do regime tributário (obrigatório)
+    if (!regimeLead) {
+      setLeadStatus('error');
+      setLeadMessage('Por favor, selecione seu regime tributário.');
+      setTimeout(() => {
+        setLeadStatus('idle');
+        setLeadMessage('');
+      }, 3000);
+      return;
+    }
+
+    sendLeadEmail(nomeLead, emailLead, regimeLead);
+  };
 
   // Obrigações do mês selecionado
   const obrigacoesMes = useMemo(() => {
@@ -134,6 +240,127 @@ export default function CalendarioTributario() {
           <p className="text-gray-600 text-lg">
             Nunca mais perca um prazo! Veja todas as obrigações fiscais do seu regime
           </p>
+        </div>
+
+        {/* 🔥 CTA Captura de Leads - DESTAQUE NO TOPO */}
+        <div className="mb-8 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 animate-gradient-x"></div>
+          <div className="relative bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl shadow-2xl p-6 md:p-8 text-white border-4 border-white/20">
+            {/* Badge de destaque */}
+            <div className="absolute -top-1 -right-1 md:top-4 md:right-4">
+              <div className="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs md:text-sm font-black animate-pulse shadow-lg">
+                🎁 GRÁTIS
+              </div>
+            </div>
+
+            <div className="flex flex-col lg:flex-row items-center gap-6">
+              {/* Ícone animado */}
+              <div className="flex-shrink-0">
+                <div className="relative">
+                  <div className="text-6xl md:text-7xl animate-bounce">🔔</div>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full"></div>
+                </div>
+              </div>
+
+              {/* Conteúdo */}
+              <div className="flex-1 text-center lg:text-left">
+                <h3 className="text-2xl md:text-3xl font-black mb-2">
+                  Nunca Mais Perca um Prazo! 
+                </h3>
+                <p className="text-emerald-100 text-sm md:text-base mb-4">
+                  Receba <strong>lembretes mensais</strong> das obrigações tributárias direto no seu e-mail. 
+                  <span className="hidden md:inline"> Mais de <strong>500 empresários</strong> já usam!</span>
+                </p>
+
+                {/* Formulário inline */}
+                <form onSubmit={handleLeadSubmit} className="flex flex-col gap-3 max-w-2xl mx-auto lg:mx-0">
+                  {/* Linha 1: Nome e Email */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">👤</span>
+                      <input
+                        type="text"
+                        value={nomeLead}
+                        onChange={(e) => setNomeLead(e.target.value)}
+                        placeholder="Nome (opcional)"
+                        disabled={leadStatus === 'loading'}
+                        className="w-full pl-10 pr-4 py-3 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/50 disabled:opacity-50 font-medium shadow-inner"
+                      />
+                    </div>
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">📧</span>
+                      <input
+                        type="email"
+                        value={emailLead}
+                        onChange={(e) => setEmailLead(e.target.value)}
+                        placeholder="E-mail *"
+                        disabled={leadStatus === 'loading'}
+                        className="w-full pl-10 pr-4 py-3 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/50 disabled:opacity-50 font-medium shadow-inner"
+                      />
+                    </div>
+                  </div>
+                  {/* Linha 2: Regime e Botão */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🏢</span>
+                      <select
+                        value={regimeLead}
+                        onChange={(e) => setRegimeLead(e.target.value)}
+                        disabled={leadStatus === 'loading'}
+                        className="w-full pl-10 pr-4 py-3 rounded-xl text-gray-800 focus:outline-none focus:ring-4 focus:ring-white/50 disabled:opacity-50 font-medium shadow-inner appearance-none bg-white cursor-pointer"
+                      >
+                        <option value="">Regime tributário *</option>
+                        <option value="simples">🟢 Simples Nacional</option>
+                        <option value="presumido">🟡 Lucro Presumido</option>
+                        <option value="real">🔴 Lucro Real</option>
+                        <option value="nao_sei">🤔 Não sei ainda</option>
+                      </select>
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={leadStatus === 'loading'}
+                      className={`px-8 py-3 rounded-xl font-bold transition-all shadow-lg whitespace-nowrap ${
+                        leadStatus === 'loading'
+                          ? 'bg-gray-400 cursor-not-allowed'
+                          : 'bg-yellow-400 text-yellow-900 hover:bg-yellow-300 hover:scale-105 hover:shadow-xl'
+                      }`}
+                    >
+                      {leadStatus === 'loading' ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Enviando...
+                        </span>
+                      ) : (
+                        '🚀 Quero Receber!'
+                      )}
+                    </button>
+                  </div>
+                </form>
+
+                {/* Feedback visual */}
+                {leadMessage && (
+                  <div className={`mt-3 p-3 rounded-lg font-semibold text-sm ${
+                    leadStatus === 'success' 
+                      ? 'bg-white/20 text-white' 
+                      : 'bg-red-500/30 text-white'
+                  }`}>
+                    {leadStatus === 'success' ? '✅' : '❌'} {leadMessage}
+                  </div>
+                )}
+
+                {/* Trust badges */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-3 text-xs text-emerald-200">
+                  <span className="flex items-center gap-1">🔒 100% Seguro</span>
+                  <span className="flex items-center gap-1">📬 Sem Spam</span>
+                  <span className="flex items-center gap-1">🎯 Lembretes Úteis</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Controles */}
@@ -417,7 +644,7 @@ export default function CalendarioTributario() {
           </div>
         </div>
 
-        {/* CTA */}
+        {/* CTA Calculadoras */}
         <div className="mt-8 bg-white rounded-2xl shadow-xl p-8 text-center">
           <h3 className="text-2xl font-bold text-gray-800 mb-4">
             🧮 Calcule Seus Impostos
