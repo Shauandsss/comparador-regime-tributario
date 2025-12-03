@@ -1,0 +1,32 @@
+# Comparador Tributário - robots.txt
+# Permite indexação completa do site para todos os mecanismos de busca
+
+User-agent: *
+Allow: /
+
+# Sitemap (atualizar com URL real quando publicado)
+Sitemap: https://comparador-tributario.com.br/sitemap.xml
+
+# Crawl-delay para respeitar o servidor
+Crawl-delay: 0
+
+# Permitir bots específicos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Bloquear apenas diretórios de build/dev (se houver)
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /.git/
