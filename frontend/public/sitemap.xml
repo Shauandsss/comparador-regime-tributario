@@ -6,130 +6,291 @@
 
   <!-- Home Page -->
   <url>
-    <loc>https://comparador-tributario.com.br/</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Comparador Principal -->
   <url>
-    <loc>https://comparador-tributario.com.br/comparador</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/formulario</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Calculadoras Simples Nacional -->
+  <!-- Calculadoras - Simples Nacional -->
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-das</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-das</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://comparador-tributario.com.br/simulador-fator-r</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-fator-r</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-difal</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-pro-labore</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>  
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-distribuicao-lucros</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Lucro Presumido & Real -->
+  <!-- Calculadoras - Lucro Presumido & Real -->
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-presumido</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-presumido</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-real</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-creditos</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Simuladores -->
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/diagnostico-tributario</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-real</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Ferramentas Avançadas -->
-  <url>
-    <loc>https://comparador-tributario.com.br/planejador-tributario</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/planejador-tributario</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://comparador-tributario.com.br/diagnostico-tributario</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Startups -->
-  <url>
-    <loc>https://comparador-tributario.com.br/calculadora-runway</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-migracao</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-valuation</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-desenquadramento</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/termometro-risco</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-margem</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/historico-tributario</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-cenarios</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-difal</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Educação -->
   <url>
-    <loc>https://comparador-tributario.com.br/glossario-tributario</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/guia-regimes</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/guia-cnae</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/explicador-simples</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://comparador-tributario.com.br/comparador-indicadores</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/glossario-tributario</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/blog</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/faq</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calendario</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/casos-sucesso</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/comparador-indicadores</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Margem & Créditos -->
+  <!-- Startups -->
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-margem</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-runway</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-valuation</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/cap-table</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-creditos-pis-cofins</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-cac-ltv</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-crescimento</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
-  <!-- Ferramentas Adicionais -->
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-pró-labore</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-roi</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
+  <!-- Trabalhista -->
   <url>
-    <loc>https://comparador-tributario.com.br/calculadora-distribuicao-lucros</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-custo-funcionario</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/comparador-clt-pj</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-rescisao</loc>
+    <lastmod>2025-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <!-- Financeiro -->
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-markup-margem</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/simulador-maquininha</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-ponto-equilibrio</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/#/calculadora-icms-st</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
 </urlset>
