@@ -569,6 +569,20 @@ export const ferramentas = [
     sinonimos: ['indices financeiros', 'taxas brasil', 'inflação', 'juros', 'benchmarking'],
     palavrasChave: ['comparar cdi selic', 'evolução ipca', 'gráfico indicadores', 'taxas financeiras brasil', 'variação acumulada'],
     cor: 'blue'
+  },
+  {
+    id: 'calculadora-icms-st',
+    nome: 'Calculadora de ICMS-ST',
+    descricao: 'Calcule o ICMS-ST (Substituição Tributária) com MVA, base de cálculo ST e valor total da nota',
+    descricaoCompleta: 'Calculadora completa de ICMS-ST para indústrias, distribuidores e varejistas. Calcula base ST com MVA, ICMS próprio, ICMS-ST a recolher e valor total da nota fiscal.',
+    rota: '/calculadora-icms-st',
+    icone: '🗂️',
+    categoria: 'calculadora',
+    subcategoria: 'tributario',
+    tags: ['icms-st', 'substituição tributária', 'mva', 'base st', 'indústria', 'distribuidor', 'varejista'],
+    sinonimos: ['substituicao tributaria', 'st', 'icms substituicao', 'calculo st', 'margem valor agregado'],
+    palavrasChave: ['icms st 2025', 'calcular icms st', 'mva substituição tributária', 'base cálculo st', 'substituição tributária'],
+    cor: 'orange'
   }
 ];
 

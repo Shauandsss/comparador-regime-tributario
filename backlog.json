@@ -3,17 +3,7 @@
   "lists": [
     {
       "name": "To Do - Alta Prioridade (Tráfego Imediato)",
-      "cards": [
-        {
-          "title": "Calculadora de ICMS-ST (Substituição Tributária)",
-          "labels": ["Tributário", "Alta Busca", "Alta Prioridade"],
-          "route": "/calculadora-st",
-          "description": "Calcula ICMS-ST: base, MVA, diferencial, alíquotas internas vs interestaduais. Uma das ferramentas mais procuradas por contadores e varejistas.",
-          "inputs": ["valorProduto", "ipi", "frete", "mva", "aliquotaInterna", "aliquotaInterestadual"],
-          "outputs": ["baseST", "icmsSt", "demonstrativo"],
-          "seo": ["icms st", "calcular substituição tributária", "icms st 2025"]
-        }
-      ]
+      "cards": []
     },
     {
       "name": "To Do - Média Prioridade (Crescimento Orgânico)",
@@ -128,6 +118,17 @@
           "inputs": ["estadoOrigem", "estadoDestino", "valorNota", "tipoOperacao"],
           "outputs": ["aliquotaInterestadual", "aliquotaInterna", "diferencaAliquota", "valorDifal", "valorFcp", "totalGnre", "partilhaOrigem", "partilhaDestino", "memoriaCalculo"],
           "seo": ["difal 2025", "gnre difal", "calcular difal", "simulador difal ecommerce", "icms interestadual consumidor final"],
+          "status": "completed",
+          "completedAt": "2025-12-02"
+        },
+        {
+          "title": "Calculadora de ICMS-ST (Substituição Tributária)",
+          "labels": ["Tributário", "Alta Busca", "Alta Prioridade"],
+          "route": "/calculadora-icms-st",
+          "description": "Calcula ICMS-ST completo: base de cálculo normal, MVA, base ST, ICMS próprio, ICMS-ST a recolher e valor total da nota fiscal. Ferramenta essencial para indústrias, distribuidores e varejistas.",
+          "inputs": ["valorProduto", "ipi", "frete", "outrasDespesas", "mva", "aliquotaInterna", "aliquotaInterestadual", "tipoOperacao"],
+          "outputs": ["baseCalculoNormal", "valorIcmsProprio", "baseCalculoSt", "valorIcmsTotal", "valorIcmsSt", "valorTotalNota", "percentualSt", "memoriaCalculo"],
+          "seo": ["icms st 2025", "calcular substituição tributária", "mva icms st", "base cálculo st", "substituição tributária"],
           "status": "completed",
           "completedAt": "2025-12-02"
         }

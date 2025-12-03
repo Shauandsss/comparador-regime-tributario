@@ -41,6 +41,7 @@ import CalculadoraMarkupMargem from './pages/CalculadoraMarkupMargem';
 import SimuladorMaquininha from './pages/SimuladorMaquininha';
 import CalculadoraPontoEquilibrio from './pages/CalculadoraPontoEquilibrio';
 import SimuladorDifal from './pages/SimuladorDifal';
+import CalculadoraIcmsSt from './pages/CalculadoraIcmsSt';
 import ComparadorIndicadores from './pages/ferramentas/ComparadorIndicadores';
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
           <Route path="/simulador-maquininha" element={<SimuladorMaquininha />} />
           <Route path="/calculadora-ponto-equilibrio" element={<CalculadoraPontoEquilibrio />} />
           <Route path="/simulador-difal" element={<SimuladorDifal />} />
+          <Route path="/calculadora-icms-st" element={<CalculadoraIcmsSt />} />
           <Route path="/comparador-indicadores" element={<ComparadorIndicadores />} />
         </Routes>
       </main>
