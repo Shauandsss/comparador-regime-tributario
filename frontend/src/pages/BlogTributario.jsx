@@ -148,6 +148,8 @@ R$ 46.250 - R$ 16.557,50 = **R$ 29.692,50**
 - Faça auditoria dos últimos 5 anos (pode recuperar créditos não aproveitados)
 - Capacite sua equipe contábil
 - Revise classificações fiscais
+
+
     `,
     tags: ['créditos', 'PIS', 'COFINS', 'lucro real', 'economia']
   },
