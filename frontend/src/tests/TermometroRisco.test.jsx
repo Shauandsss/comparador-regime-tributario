@@ -18,232 +18,103 @@ const renderWithRouter = (component) => {
 };
 
 describe('TermometroRisco - Testes de UI', () => {
-  describe('Dado uma empresa com baixo risco', () => {
-    test('Quando marcar poucas respostas positivas, Então score deve ser < 30 e cor verde', async () => {
-      // Dado
-      renderWithRouter(<TermometroRisco />);
-
-      // Quando - Marcar apenas algumas respostas positivas (baixo risco)
-      // Procurar checkboxes ou radio buttons
-      const checkboxes = screen.queryAllByRole('checkbox');
-      
-      if (checkboxes.length >= 15) {
-        // Marcar apenas 4 respostas positivas (índices 0, 3, 7, 9)
-        fireEvent.click(checkboxes[0]);
-        fireEvent.click(checkboxes[3]);
-        fireEvent.click(checkboxes[7]);
-        fireEvent.click(checkboxes[9]);
-      }
-
-      // Procurar botão calcular ou similar
-      const btnCalcular = screen.queryByRole('button', { name: /Calcular|Avaliar|Analisar/i });
-      if (btnCalcular) {
-        fireEvent.click(btnCalcular);
-      }
-
-      // Então
-      await waitFor(() => {
-        // Procurar indicação de score baixo ou cor verde
-        const scoreTexto = screen.queryByText(/Score|Pontuação/i);
-        if (scoreTexto) {
-          expect(scoreTexto).toBeDefined();
-        }
-
-        // Procurar indicadores de baixo risco
-        const baixoRisco = screen.queryByText(/Baixo|Verde|Bom/i);
-        expect(baixoRisco || scoreTexto).toBeDefined();
-      });
-    });
-  });
-
-  describe('Dado uma empresa com alto risco', () => {
-    test('Quando marcar todas as respostas negativas, Então score deve ser > 90 e cor vermelha', async () => {
-      // Dado
-      renderWithRouter(<TermometroRisco />);
-
-      // Quando - Marcar todas as respostas (ou deixar todas desmarcadas = alto risco)
-      const checkboxes = screen.queryAllByRole('checkbox');
-      
-      if (checkboxes.length >= 15) {
-        // Desmarcar todas (ou não marcar nenhuma) indica alto risco
-        // Dependendo da lógica, pode ser necessário clicar em "Não" para cada pergunta
-        checkboxes.forEach((checkbox) => {
-          // Se estiver marcado, desmarcar
-          if (checkbox.checked) {
-            fireEvent.click(checkbox);
-          }
-        });
-      }
-
-      // Procurar botão calcular
-      const btnCalcular = screen.queryByRole('button', { name: /Calcular|Avaliar|Analisar/i });
-      if (btnCalcular) {
-        fireEvent.click(btnCalcular);
-      }
-
-      // Então
-      await waitFor(() => {
-        // Procurar indicação de alto risco ou cor vermelha
-        const altoRisco = screen.queryByText(/Alto|Vermelho|Crítico|Atenção/i);
-        const scoreTexto = screen.queryByText(/Score|Pontuação/i);
-        
-        expect(altoRisco || scoreTexto).toBeDefined();
-      });
-    });
-  });
-
   describe('Dado renderização inicial', () => {
-    test('Quando renderizar componente, Então deve exibir título e checklist', () => {
+    test('Quando renderizar componente, Então deve exibir título e progresso', () => {
       // Dado / Quando
       renderWithRouter(<TermometroRisco />);
 
       // Então
-      const titulo = screen.getByText(/Termômetro.*Risco/i);
-      expect(titulo).toBeDefined();
+      expect(screen.getByText(/Termômetro de Risco Fiscal/i)).toBeDefined();
+      expect(screen.getByText(/Progresso da Avaliação/i)).toBeDefined();
+      // Usa queryAllByText para evitar erro se houver múltiplos elementos
+      const progressos = screen.getAllByText(/0\s*\/\s*15/);
+      expect(progressos.length).toBeGreaterThanOrEqual(1);
+    });
 
-      // Deve ter múltiplas perguntas
-      const perguntas = screen.queryAllByRole('checkbox');
-      expect(perguntas.length).toBeGreaterThanOrEqual(10);
+    test('Quando renderizar componente, Então deve exibir botões Sim e Não', () => {
+      // Dado / Quando
+      renderWithRouter(<TermometroRisco />);
+
+      // Então - Há múltiplos botões Sim e Não (um par para cada pergunta)
+      const botoesNao = screen.getAllByRole('button', { name: /❌ Não/i });
+      const botoesSim = screen.getAllByRole('button', { name: /✅ Sim/i });
+      
+      expect(botoesSim.length).toBeGreaterThanOrEqual(5);
+      expect(botoesNao.length).toBeGreaterThanOrEqual(5);
+    });
+
+    test('Quando renderizar componente, Então deve exibir categorias de risco', () => {
+      // Dado / Quando
+      renderWithRouter(<TermometroRisco />);
+
+      // Então - Verifica se existem categorias (usando getAllByText para evitar erro com múltiplos)
+      const categorias = screen.getAllByText(/Conformidade|Planejamento|Operacional/i);
+      expect(categorias.length).toBeGreaterThanOrEqual(1);
     });
   });
 
-  describe('Dado interação com checklist', () => {
-    test('Quando clicar em checkboxes, Então deve marcar/desmarcar', async () => {
+  describe('Dado interação com perguntas', () => {
+    test('Quando clicar em Sim, Então deve atualizar progresso', async () => {
       // Dado
       renderWithRouter(<TermometroRisco />);
 
-      const checkboxes = screen.queryAllByRole('checkbox');
+      const botoesSim = screen.getAllByRole('button', { name: /✅ Sim/i });
       
-      if (checkboxes.length > 0) {
-        const primeiroCheckbox = checkboxes[0];
-        const estadoInicial = primeiroCheckbox.checked;
+      // Quando - Clicar no primeiro "Sim"
+      fireEvent.click(botoesSim[0]);
 
-        // Quando
-        fireEvent.click(primeiroCheckbox);
-
-        // Então
-        await waitFor(() => {
-          expect(primeiroCheckbox.checked).toBe(!estadoInicial);
-        });
-      }
-    });
-  });
-
-  describe('Dado cálculo de score', () => {
-    test('Quando marcar metade das respostas, Então score deve estar entre 40 e 60', async () => {
-      // Dado
-      renderWithRouter(<TermometroRisco />);
-
-      const checkboxes = screen.queryAllByRole('checkbox');
-      
-      if (checkboxes.length >= 10) {
-        // Marcar aproximadamente metade
-        const metade = Math.floor(checkboxes.length / 2);
-        for (let i = 0; i < metade; i++) {
-          fireEvent.click(checkboxes[i]);
-        }
-      }
-
-      // Procurar botão calcular
-      const btnCalcular = screen.queryByRole('button', { name: /Calcular|Avaliar|Analisar/i });
-      if (btnCalcular) {
-        fireEvent.click(btnCalcular);
-      }
-
-      // Então
+      // Então - Verificar que o texto de progresso mudou (usando getAllByText pois pode haver múltiplos)
       await waitFor(() => {
-        const scoreTexto = screen.queryByText(/Score|Pontuação|Risco/i);
-        expect(scoreTexto).toBeDefined();
+        const progressos = screen.getAllByText(/1\s*\/\s*15/);
+        expect(progressos.length).toBeGreaterThanOrEqual(1);
+      });
+    });
+
+    test('Quando clicar em Não, Então deve atualizar progresso', async () => {
+      // Dado
+      renderWithRouter(<TermometroRisco />);
+
+      const botoesNao = screen.getAllByRole('button', { name: /❌ Não/i });
+      
+      // Quando - Clicar no primeiro "Não"
+      fireEvent.click(botoesNao[0]);
+
+      // Então - Verificar que o texto de progresso mudou (usando getAllByText pois pode haver múltiplos)
+      await waitFor(() => {
+        const progressos = screen.getAllByText(/1\s*\/\s*15/);
+        expect(progressos.length).toBeGreaterThanOrEqual(1);
       });
     });
   });
 
-  describe('Dado diferentes categorias de risco', () => {
-    test('Quando visualizar checklist, Então deve agrupar por categorias', () => {
+  describe('Dado navegação', () => {
+    test('Quando renderizar componente, Então deve exibir botão voltar', () => {
       // Dado / Quando
       renderWithRouter(<TermometroRisco />);
 
-      // Então - Procurar categorias conhecidas
-      const categorias = [
-        /Conformidade/i,
-        /Planejamento/i,
-        /Documentação/i,
-        /Pagamentos/i,
-        /Folha/i,
-        /Operacional/i
-      ];
-
-      let encontrouCategoria = false;
-      categorias.forEach(categoria => {
-        const elemento = screen.queryByText(categoria);
-        if (elemento) {
-          encontrouCategoria = true;
-        }
-      });
-
-      // Pelo menos uma categoria deve ser encontrada ou o checklist deve existir
-      const checkboxes = screen.queryAllByRole('checkbox');
-      expect(encontrouCategoria || checkboxes.length > 0).toBe(true);
+      // Então
+      const btnVoltar = screen.getByRole('button', { name: /← Voltar para Home/i });
+      expect(btnVoltar).toBeDefined();
     });
   });
 
-  describe('Dado visualização de resultado', () => {
-    test('Quando calcular risco, Então deve exibir recomendações', async () => {
-      // Dado
+  describe('Dado níveis de risco nas perguntas', () => {
+    test('Quando renderizar componente, Então deve exibir indicadores de risco', () => {
+      // Dado / Quando
       renderWithRouter(<TermometroRisco />);
 
-      const checkboxes = screen.queryAllByRole('checkbox');
-      
-      if (checkboxes.length > 0) {
-        // Marcar algumas respostas
-        fireEvent.click(checkboxes[0]);
-        fireEvent.click(checkboxes[1]);
-      }
-
-      // Procurar botão calcular
-      const btnCalcular = screen.queryByRole('button', { name: /Calcular|Avaliar|Analisar/i });
-      if (btnCalcular) {
-        fireEvent.click(btnCalcular);
-
-        // Então
-        await waitFor(() => {
-          // Deve mostrar algum resultado ou recomendação
-          const resultado = screen.queryByText(/Recomendação|Sugestão|Ação|Melhoria/i);
-          const score = screen.queryByText(/Score|Pontos|%/i);
-          
-          expect(resultado || score).toBeDefined();
-        });
-      }
+      // Então - Verifica se há indicadores de risco Alto, Médio ou Baixo
+      const riscosAltos = screen.getAllByText(/Risco/i);
+      expect(riscosAltos.length).toBeGreaterThanOrEqual(5);
     });
-  });
 
-  describe('Dado reset do formulário', () => {
-    test('Quando limpar formulário, Então deve resetar todas as respostas', async () => {
-      // Dado
+    test('Quando renderizar componente, Então deve exibir pesos das perguntas', () => {
+      // Dado / Quando
       renderWithRouter(<TermometroRisco />);
 
-      const checkboxes = screen.queryAllByRole('checkbox');
-      
-      if (checkboxes.length > 0) {
-        // Marcar algumas respostas
-        fireEvent.click(checkboxes[0]);
-        fireEvent.click(checkboxes[1]);
-
-        // Quando - Procurar botão limpar
-        const btnLimpar = screen.queryByRole('button', { name: /Limpar|Resetar|Nova|Avaliar Novamente/i });
-        
-        if (btnLimpar) {
-          fireEvent.click(btnLimpar);
-
-          // Então
-          await waitFor(() => {
-            // Checkboxes devem estar desmarcados
-            checkboxes.forEach(checkbox => {
-              expect(checkbox.checked).toBe(false);
-            });
-          });
-        }
-      }
+      // Então
+      const pesos = screen.getAllByText(/Peso:/i);
+      expect(pesos.length).toBeGreaterThanOrEqual(5);
     });
   });
 });

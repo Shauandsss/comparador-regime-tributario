@@ -17,8 +17,11 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "axios": "^1.6.2",
+    "chart.js": "^4.5.1",
     "d3": "^7.9.0",
+    "lucide-react": "^0.555.0",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.3.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
     "zustand": "^4.4.7"

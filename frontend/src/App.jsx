@@ -34,6 +34,14 @@ import CalculadoraCacLtv from './pages/CalculadoraCacLtv';
 import SimuladorCrescimento from './pages/SimuladorCrescimento';
 import SimuladorROI from './pages/SimuladorROI';
 import SimuladorMRR from './pages/SimuladorMRR';
+import CalculadoraCustoFuncionario from './pages/CalculadoraCustoFuncionario';
+import ComparadorCltPj from './pages/ComparadorCltPj';
+import CalculadoraRescisao from './pages/CalculadoraRescisao';
+import CalculadoraMarkupMargem from './pages/CalculadoraMarkupMargem';
+import SimuladorMaquininha from './pages/SimuladorMaquininha';
+import CalculadoraPontoEquilibrio from './pages/CalculadoraPontoEquilibrio';
+import SimuladorDifal from './pages/SimuladorDifal';
+import ComparadorIndicadores from './pages/ferramentas/ComparadorIndicadores';
 
 function App() {
   return (
@@ -75,6 +83,14 @@ function App() {
           <Route path="/simulador-crescimento" element={<SimuladorCrescimento />} />
           <Route path="/simulador-roi" element={<SimuladorROI />} />
           <Route path="/simulador-mrr" element={<SimuladorMRR />} />
+          <Route path="/calculadora-custo-funcionario" element={<CalculadoraCustoFuncionario />} />
+          <Route path="/comparador-clt-pj" element={<ComparadorCltPj />} />
+          <Route path="/calculadora-rescisao" element={<CalculadoraRescisao />} />
+          <Route path="/calculadora-markup-margem" element={<CalculadoraMarkupMargem />} />
+          <Route path="/simulador-maquininha" element={<SimuladorMaquininha />} />
+          <Route path="/calculadora-ponto-equilibrio" element={<CalculadoraPontoEquilibrio />} />
+          <Route path="/simulador-difal" element={<SimuladorDifal />} />
+          <Route path="/comparador-indicadores" element={<ComparadorIndicadores />} />
         </Routes>
       </main>
     </div>

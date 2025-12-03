@@ -1,21 +1,44 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import SearchBar from './SearchBar';
 
 function Header() {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [buscaAberta, setBuscaAberta] = useState(false);
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
 
+  // Atalho Ctrl+K para abrir busca
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setBuscaAberta(true);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Fecha busca ao mudar de rota
+  useEffect(() => {
+    setBuscaAberta(false);
+  }, [location.pathname]);
+
   return (
-    <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
-      {/* Barra superior decorativa */}
-      <div className="h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
-      
-      <div className="container mx-auto px-4">
-        <nav className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+    <>
+      {/* Modal de Busca */}
+      {buscaAberta && <SearchBar onClose={() => setBuscaAberta(false)} />}
+
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+        {/* Barra superior decorativa */}
+        <div className="h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+        
+        <div className="container mx-auto px-4">
+          <nav className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
               <span className="text-white text-xl">📊</span>
             </div>
@@ -244,6 +267,16 @@ function Header() {
                     <div className="text-xs text-gray-500">Empresas que economizaram</div>
                   </div>
                 </Link>
+                
+                <div className="border-t border-gray-100 my-2"></div>
+                <div className="px-4 py-2 text-xs font-bold text-blue-600 uppercase tracking-wider">Indicadores Financeiros</div>
+                <Link to="/comparador-indicadores" className="flex items-center gap-3 px-4 py-2.5 hover:bg-blue-50 transition-colors">
+                  <span className="text-xl">📊</span>
+                  <div>
+                    <div className="font-medium text-gray-800 text-sm">Comparador de Indicadores</div>
+                    <div className="text-xs text-gray-500">CDI, SELIC e IPCA</div>
+                  </div>
+                </Link>
               </div>
             </div>
             
@@ -303,10 +336,25 @@ function Header() {
               </div>
             </div>
             
+            {/* Botão de Busca */}
+            <button
+              onClick={() => setBuscaAberta(true)}
+              className="ml-2 px-3 py-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-all flex items-center gap-2 group"
+              title="Buscar ferramentas (Ctrl+K)"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <span className="hidden xl:flex items-center gap-1 text-xs text-gray-400 group-hover:text-gray-500">
+                <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200 font-mono">Ctrl</kbd>
+                <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200 font-mono">K</kbd>
+              </span>
+            </button>
+
             {/* Botão Comparador */}
             <Link 
               to="/formulario" 
-              className="ml-3 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all font-semibold text-sm shadow-lg hover:shadow-xl flex items-center gap-2"
+              className="ml-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all font-semibold text-sm shadow-lg hover:shadow-xl flex items-center gap-2"
             >
               <span>⚖️</span>
               Comparar
@@ -314,25 +362,51 @@ function Header() {
           </div>
 
           {/* Menu Mobile - Hamburger */}
-          <button 
-            onClick={() => setMenuAberto(!menuAberto)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-            aria-label="Menu"
-          >
-            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {menuAberto ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          <div className="lg:hidden flex items-center gap-2">
+            {/* Botão Busca Mobile */}
+            <button 
+              onClick={() => setBuscaAberta(true)}
+              className="p-2 rounded-lg hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              aria-label="Buscar"
+            >
+              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+            
+            {/* Hamburger */}
+            <button 
+              onClick={() => setMenuAberto(!menuAberto)}
+              className="p-2 rounded-lg hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              aria-label="Menu"
+            >
+              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {menuAberto ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </nav>
 
         {/* Menu Mobile Expandido */}
         {menuAberto && (
           <div className="lg:hidden pb-4 border-t border-gray-100 mt-2 pt-4 max-h-[80vh] overflow-y-auto">
             <div className="space-y-1">
+              {/* Barra de busca rápida mobile */}
+              <button 
+                onClick={() => { setMenuAberto(false); setBuscaAberta(true); }}
+                className="w-full flex items-center gap-3 mx-4 mb-4 px-4 py-3 bg-gray-100 rounded-xl text-gray-500 text-sm"
+                style={{ width: 'calc(100% - 2rem)' }}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Buscar ferramentas...
+              </button>
+              
               <Link to="/" className="block px-4 py-3 rounded-lg hover:bg-gray-50 text-sm font-medium text-gray-700" onClick={() => setMenuAberto(false)}>
                 🏠 Início
               </Link>
@@ -414,6 +488,9 @@ function Header() {
               <Link to="/casos-sucesso" className="block px-4 py-2 rounded-lg hover:bg-purple-50 text-sm text-gray-600" onClick={() => setMenuAberto(false)}>
                 Casos de Sucesso
               </Link>
+              <Link to="/comparador-indicadores" className="block px-4 py-2 rounded-lg hover:bg-purple-50 text-sm text-gray-600" onClick={() => setMenuAberto(false)}>
+                Comparador de Indicadores
+              </Link>
               
               {/* Startups */}
               <div className="px-4 py-2 text-xs font-bold text-violet-600 uppercase tracking-wider mt-4">🚀 Startups</div>
@@ -449,6 +526,7 @@ function Header() {
         )}
       </div>
     </header>
+    </>
   );
 }
 
