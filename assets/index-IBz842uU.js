@@ -236,6 +236,8 @@ R$ 46.250 - R$ 16.557,50 = **R$ 29.692,50**
 - Faça auditoria dos últimos 5 anos (pode recuperar créditos não aproveitados)
 - Capacite sua equipe contábil
 - Revise classificações fiscais
+
+
     `,tags:["créditos","PIS","COFINS","lucro real","economia"]},{id:3,titulo:"7 Erros Fatais que Empresas do Simples Cometem",categoria:"erros",resumo:"Evite armadilhas que podem custar caro e até excluir sua empresa do regime",dataPublicacao:"2025-01-05",tempoLeitura:"6 min",conteudo:`
 **Atenção: Esses erros podem custar MUITO dinheiro**
 
