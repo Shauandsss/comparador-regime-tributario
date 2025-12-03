@@ -336,6 +336,15 @@ function Header() {
               </div>
             </div>
             
+            {/* Botão Ver Todas as Ferramentas */}
+            <Link
+              to="/ferramentas"
+              className="ml-2 px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-purple-50 to-blue-50 text-purple-700 hover:from-purple-100 hover:to-blue-100 transition-all flex items-center gap-2 border border-purple-200"
+            >
+              <span>🗂️</span>
+              Ver Todas
+            </Link>
+
             {/* Botão de Busca */}
             <button
               onClick={() => setBuscaAberta(true)}
@@ -350,15 +359,6 @@ function Header() {
                 <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200 font-mono">K</kbd>
               </span>
             </button>
-
-            {/* Botão Comparador */}
-            <Link 
-              to="/formulario" 
-              className="ml-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all font-semibold text-sm shadow-lg hover:shadow-xl flex items-center gap-2"
-            >
-              <span>⚖️</span>
-              Comparar
-            </Link>
           </div>
 
           {/* Menu Mobile - Hamburger */}
@@ -513,13 +513,13 @@ function Header() {
                 ROI Simulator
               </Link>
               
-              {/* Botão Comparador */}
+              {/* Botão Ver Todas as Ferramentas */}
               <Link 
-                to="/formulario" 
-                className="block mt-6 mx-4 px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-bold text-center shadow-lg" 
+                to="/ferramentas" 
+                className="block mt-6 mx-4 px-4 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl font-bold text-center shadow-lg border-2 border-white/20" 
                 onClick={() => setMenuAberto(false)}
               >
-                ⚖️ Comparar Regimes
+                🗂️ Ver Todas as Ferramentas
               </Link>
             </div>
           </div>

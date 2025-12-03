@@ -42,6 +42,7 @@ import SimuladorMaquininha from './pages/SimuladorMaquininha';
 import CalculadoraPontoEquilibrio from './pages/CalculadoraPontoEquilibrio';
 import SimuladorDifal from './pages/SimuladorDifal';
 import CalculadoraIcmsSt from './pages/CalculadoraIcmsSt';
+import HubFerramentas from './pages/HubFerramentas';
 import ComparadorIndicadores from './pages/ferramentas/ComparadorIndicadores';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
       <main className="container mx-auto px-4 py-8">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/ferramentas" element={<HubFerramentas />} />
           <Route path="/formulario" element={<Formulario />} />
           <Route path="/resultado" element={<Resultado />} />
           <Route path="/calculadora-das" element={<CalculadoraDAS />} />

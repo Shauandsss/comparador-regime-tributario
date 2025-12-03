@@ -420,21 +420,20 @@ export const ferramentas = [
     cor: 'violet'
   },
 
-  // === PRINCIPAL ===
+  // === COMPARAÇÃO ===
   {
     id: 'comparador',
     nome: 'Comparador de Regimes',
     descricao: 'Compare Simples, Presumido e Real',
-    descricaoCompleta: 'Ferramenta principal que compara os três regimes tributários e mostra qual é mais vantajoso para sua empresa.',
+    descricaoCompleta: 'Compare os três regimes tributários e descubra qual é mais vantajoso para sua empresa.',
     rota: '/formulario',
     icone: '⚖️',
-    categoria: 'principal',
+    categoria: 'simulador',
     subcategoria: 'comparacao',
     tags: ['comparador', 'regimes', 'simples', 'presumido', 'real', 'economia', 'melhor'],
     sinonimos: ['comparar impostos', 'qual regime', 'melhor tributação'],
     palavrasChave: ['comparar regimes', 'qual melhor', 'simples ou presumido', 'economizar imposto'],
-    cor: 'gradient',
-    destaque: true
+    cor: 'emerald'
   },
   {
     id: 'calculadora-custo-funcionario',
@@ -613,12 +612,6 @@ export const categorias = {
     icone: '🚀',
     cor: 'violet',
     descricao: 'Métricas de startup'
-  },
-  principal: {
-    nome: 'Principal',
-    icone: '⚖️',
-    cor: 'gradient',
-    descricao: 'Ferramenta principal'
   }
 };
 

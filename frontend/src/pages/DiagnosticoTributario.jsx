@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:3001/api';
 
 const ATIVIDADES = [
   { value: 'comercio', label: 'Comércio' },
@@ -60,44 +57,29 @@ export default function DiagnosticoTributario() {
       return;
     }
     
-    setLoading(true);
-    
-    try {
-      const response = await axios.post(`${API_URL}/diagnostico/analisar`, {
+    // Redirecionar para o comparador de regimes que já funciona 100% frontend
+    navigate('/formulario', {
+      state: {
         receitaBruta12: rbt12,
         receitaMes: rm,
         despesasMes: converterParaNumero(despesasMes) || 0,
         folhaMes: converterParaNumero(folhaMes) || 0,
         atividade
-      });
-      
-      setResultado(response.data.dados);
-    } catch (error) {
-      setErro(error.response?.data?.mensagem || 'Erro ao processar diagnóstico');
-    } finally {
-      setLoading(false);
-    }
+      }
+    });
   };
   
   const simularCenarios = async () => {
-    setLoading(true);
-    
-    try {
-      const response = await axios.post(`${API_URL}/diagnostico/simular-cenarios`, {
+    // Redirecionar para o comparador que tem simulação de cenários
+    navigate('/formulario', {
+      state: {
         receitaBruta12: converterParaNumero(receitaBruta12),
         receitaMes: converterParaNumero(receitaMes),
         despesasMes: converterParaNumero(despesasMes) || 0,
         folhaMes: converterParaNumero(folhaMes) || 0,
         atividade
-      });
-      
-      setCenarios(response.data.dados);
-      setMostrarCenarios(true);
-    } catch (error) {
-      setErro('Erro ao simular cenários');
-    } finally {
-      setLoading(false);
-    }
+      }
+    });
   };
   
   const getTipoBadgeColor = (tipo) => {
@@ -529,6 +511,615 @@ export default function DiagnosticoTributario() {
           </div>
         )}
         
+      </div>
+
+      {/* ========== ARTIGO SEO ========== */}
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <article className="prose prose-lg max-w-none">
+          
+          {/* Introdução */}
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              🔍 Diagnóstico Tributário: Guia Completo para Reduzir Impostos Legalmente
+            </h2>
+            
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              O <strong>diagnóstico tributário</strong> é uma análise técnica e detalhada da situação fiscal de uma empresa, 
+              com o objetivo de identificar oportunidades de economia, corrigir irregularidades e otimizar a carga tributária 
+              de forma legal. Trata-se de um verdadeiro <strong>raio-x fiscal</strong> que examina regime tributário, apuração 
+              de impostos, obrigações acessórias, créditos não aproveitados e potenciais riscos de autuação.
+            </p>
+            
+            <p className="text-gray-700 leading-relaxed">
+              Este procedimento é <strong>essencial para empresas</strong> que desejam ter segurança jurídica, competitividade 
+              no mercado e máxima eficiência tributária. Segundo estudos, empresas que realizam diagnóstico tributário regularmente 
+              podem reduzir sua carga tributária entre <strong>15% e 40%</strong>, através da escolha correta do regime, 
+              aproveitamento de incentivos fiscais e correção de inconsistências.
+            </p>
+          </div>
+
+          {/* O que é */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span className="text-3xl">📋</span>
+              O que é um Diagnóstico Tributário?
+            </h2>
+            
+            <p className="text-gray-700 leading-relaxed mb-6">
+              É uma <strong>consultoria fiscal especializada</strong> que analisa todos os aspectos tributários da empresa, 
+              incluindo regime de tributação atual, cálculo de impostos, aproveitamento de benefícios e conformidade com 
+              legislação. O diagnóstico compara cenários, identifica oportunidades e propõe ações práticas de economia.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-blue-900 mb-4">🎯 Objetivos Principais</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span>Identificar <strong>regime tributário ideal</strong></span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span>Detectar <strong>créditos tributários</strong> não aproveitados</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span>Corrigir <strong>inconsistências</strong> antes de fiscalizações</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span>Mapear <strong>riscos fiscais</strong> e passivos ocultos</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span>Propor <strong>planejamento tributário</strong> estratégico</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-green-900 mb-4">✅ O que é Analisado</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">•</span>
+                    <span>Regime tributário (Simples, Presumido, Real)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">•</span>
+                    <span>Cálculo de IRPJ, CSLL, PIS, COFINS, ISS, ICMS</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">•</span>
+                    <span>Obrigações acessórias (SPED, ECF, DCTF, etc)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">•</span>
+                    <span>Créditos fiscais (PIS/COFINS, ICMS)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">•</span>
+                    <span>Enquadramento de atividades e CNAEs</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Quando Fazer */}
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span className="text-3xl">📅</span>
+              Quando Fazer um Diagnóstico Tributário?
+            </h2>
+            
+            <div className="space-y-6">
+              <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded">
+                <h3 className="text-lg font-bold text-green-900 mb-3">🟢 Situações Prioritárias</h3>
+                <ul className="space-y-2 text-green-800">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold">1.</span>
+                    <span><strong>Abertura de empresa:</strong> escolher regime tributário mais vantajoso desde o início</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold">2.</span>
+                    <span><strong>Virada de ano:</strong> antes de janeiro para avaliar mudança de regime (opção irretratável)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold">3.</span>
+                    <span><strong>Crescimento acelerado:</strong> quando faturamento aumenta significativamente (risco de desenquadramento)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold">4.</span>
+                    <span><strong>Prejuízos constantes:</strong> empresa pagando impostos mesmo sem lucro real</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold">5.</span>
+                    <span><strong>Antes de fiscalização:</strong> corrigir irregularidades e evitar autuações pesadas</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded">
+                <h3 className="text-lg font-bold text-blue-900 mb-3">🔵 Situações Recomendadas</h3>
+                <ul className="space-y-2 text-blue-800">
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span><strong>Mudança de atividade:</strong> inclusão de novos CNAEs ou alteração do core business</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span><strong>Fusões e aquisições:</strong> integração tributária de empresas diferentes</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span><strong>Expansão geográfica:</strong> abertura de filiais em outros estados (ICMS)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span><strong>Troca de contador:</strong> validar se apurações anteriores estavam corretas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">•</span>
+                    <span><strong>Análise periódica:</strong> recomenda-se diagnóstico anual ou bianual</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded">
+                <p className="text-sm text-yellow-900">
+                  <strong>💡 Dica:</strong> Empresas que realizam diagnóstico tributário <strong>antes de dezembro</strong> 
+                  têm tempo hábil para mudar de regime em janeiro, quando a opção se torna irretratável até dezembro do ano seguinte.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Metodologia */}
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span className="text-3xl">🔬</span>
+              Metodologia do Diagnóstico Tributário
+            </h2>
+            
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-purple-900 mb-4">Fase 1: Coleta de Informações</h3>
+                <p className="text-gray-700 mb-3">Levantamento completo de dados fiscais, contábeis e operacionais:</p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <ul className="space-y-1 text-gray-700 text-sm">
+                    <li>• Balanços e DRE (últimos 24 meses)</li>
+                    <li>• Declarações fiscais (PGDAS, ECF, DCTF)</li>
+                    <li>• Guias de impostos pagos</li>
+                    <li>• Contrato social e CNAEs</li>
+                  </ul>
+                  <ul className="space-y-1 text-gray-700 text-sm">
+                    <li>• Notas fiscais (entradas e saídas)</li>
+                    <li>• Folha de pagamento completa</li>
+                    <li>• Contratos de aluguel, serviços</li>
+                    <li>• Certidões negativas de débitos</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-indigo-900 mb-4">Fase 2: Análise do Regime Atual</h3>
+                <p className="text-gray-700 mb-3">Validação da apuração tributária e identificação de erros:</p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-indigo-600">✓</span>
+                    <span>Verificar cálculos de DAS, IRPJ, CSLL, PIS, COFINS</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-indigo-600">✓</span>
+                    <span>Conferir enquadramento de CNAEs e alíquotas aplicadas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-indigo-600">✓</span>
+                    <span>Analisar Fator R (Simples Nacional Anexo III vs V)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-indigo-600">✓</span>
+                    <span>Identificar créditos de PIS/COFINS não aproveitados</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-blue-900 mb-4">Fase 3: Simulação de Cenários</h3>
+                <p className="text-gray-700 mb-3">Comparação entre os três regimes tributários:</p>
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <p className="text-blue-900 font-mono text-sm mb-2">
+                    <strong>Cenário A:</strong> Simples Nacional (6 anexos)
+                  </p>
+                  <p className="text-blue-900 font-mono text-sm mb-2">
+                    <strong>Cenário B:</strong> Lucro Presumido (presunções por atividade)
+                  </p>
+                  <p className="text-blue-900 font-mono text-sm">
+                    <strong>Cenário C:</strong> Lucro Real (lucro efetivo + créditos)
+                  </p>
+                </div>
+                <p className="text-gray-700 mt-3 text-sm">
+                  Cada cenário considera: impostos federais, estaduais, municipais, obrigações acessórias e complexidade operacional.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-green-900 mb-4">Fase 4: Relatório de Recomendações</h3>
+                <p className="text-gray-700 mb-3">Documento técnico com análises e plano de ação:</p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">📊</span>
+                    <span>Comparativo de carga tributária nos 3 regimes</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">💰</span>
+                    <span>Economia estimada com mudança de regime</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">⚠️</span>
+                    <span>Riscos fiscais identificados e ações corretivas</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600">🎯</span>
+                    <span>Plano de implementação com prazos e responsáveis</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-orange-900 mb-4">Fase 5: Implementação e Monitoramento</h3>
+                <p className="text-gray-700 mb-3">Execução das recomendações com acompanhamento:</p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-orange-600">•</span>
+                    <span>Comunicação de mudança de regime à Receita Federal</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-orange-600">•</span>
+                    <span>Ajuste de sistemas contábeis e ERPs</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-orange-600">•</span>
+                    <span>Regularização de obrigações acessórias pendentes</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-orange-600">•</span>
+                    <span>Monitoramento mensal da carga tributária efetiva</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Indicadores Analisados */}
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span className="text-3xl">📊</span>
+              Principais Indicadores Analisados
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-blue-50 rounded-xl p-6">
+                <h3 className="text-lg font-bold text-blue-900 mb-3">Carga Tributária Efetiva</h3>
+                <p className="text-blue-800 text-sm mb-2">
+                  Percentual de impostos sobre faturamento bruto. Ideal comparar com média do setor:
+                </p>
+                <ul className="text-blue-700 text-sm space-y-1">
+                  <li>• Comércio: 8-12%</li>
+                  <li>• Indústria: 10-15%</li>
+                  <li>• Serviços: 12-18%</li>
+                  <li>• TI/Consultoria: 6-10%</li>
+                </ul>
+              </div>
+
+              <div className="bg-green-50 rounded-xl p-6">
+                <h3 className="text-lg font-bold text-green-900 mb-3">Margem de Lucro Líquida</h3>
+                <p className="text-green-800 text-sm mb-2">
+                  Lucro após impostos dividido pela receita. Indicador essencial para escolha do regime:
+                </p>
+                <ul className="text-green-700 text-sm space-y-1">
+                  <li>• &lt; 8%: considerar Lucro Real</li>
+                  <li>• 8-32%: analisar Presumido</li>
+                  <li>• &gt; 32%: Presumido geralmente melhor</li>
+                  <li>• &lt; 4,8 MM/ano: avaliar Simples</li>
+                </ul>
+              </div>
+
+              <div className="bg-purple-50 rounded-xl p-6">
+                <h3 className="text-lg font-bold text-purple-900 mb-3">Fator R (Simples Nacional)</h3>
+                <p className="text-purple-800 text-sm mb-2">
+                  Relação entre folha de pagamento e receita bruta (últimos 12 meses):
+                </p>
+                <ul className="text-purple-700 text-sm space-y-1">
+                  <li>• ≥ 28%: Anexo III (mais vantajoso)</li>
+                  <li>• &lt; 28%: Anexo V (alíquotas maiores)</li>
+                  <li>• Diferença pode chegar a 10 pontos %</li>
+                </ul>
+              </div>
+
+              <div className="bg-yellow-50 rounded-xl p-6">
+                <h3 className="text-lg font-bold text-yellow-900 mb-3">Créditos Fiscais Potenciais</h3>
+                <p className="text-yellow-800 text-sm mb-2">
+                  Valores recuperáveis via créditos de PIS/COFINS (Lucro Real):
+                </p>
+                <ul className="text-yellow-700 text-sm space-y-1">
+                  <li>• Insumos: 9,25% sobre aquisições</li>
+                  <li>• Energia: crédito integral</li>
+                  <li>• Aluguéis: 9,25% sobre valor</li>
+                  <li>• Economia: 30-50% dos débitos</li>
+                </ul>
+              </div>
+
+              <div className="bg-orange-50 rounded-xl p-6">
+                <h3 className="text-lg font-bold text-orange-900 mb-3">Nível de Conformidade</h3>
+                <p className="text-orange-800 text-sm mb-2">
+                  Percentual de obrigações acessórias cumpridas corretamente:
+                </p>
+                <ul className="text-orange-700 text-sm space-y-1">
+                  <li>• SPED Fiscal, EFD-Contribuições</li>
+                  <li>• ECF, DCTF, DCTFWeb</li>
+                  <li>• eSocial, DIRF, RAIS</li>
+                  <li>• Meta: 100% de conformidade</li>
+                </ul>
+              </div>
+
+              <div className="bg-red-50 rounded-xl p-6">
+                <h3 className="text-lg font-bold text-red-900 mb-3">Riscos Fiscais</h3>
+                <p className="text-red-800 text-sm mb-2">
+                  Passivos tributários potenciais (multas + juros + principal):
+                </p>
+                <ul className="text-red-700 text-sm space-y-1">
+                  <li>• CNAE inadequado</li>
+                  <li>• Créditos indevidos</li>
+                  <li>• Falta de retenções</li>
+                  <li>• Desenquadramento Simples</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Como Interpretar Resultados */}
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span className="text-3xl">📈</span>
+              Como Interpretar os Resultados
+            </h2>
+            
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl p-6 border-l-4 border-green-500">
+                <h3 className="text-xl font-bold text-green-900 mb-3">✅ Resultado Positivo</h3>
+                <p className="text-gray-700 mb-3">
+                  <strong>Economia potencial identificada:</strong> mudança de regime pode reduzir carga tributária
+                </p>
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <p className="text-green-900 mb-2"><strong>Exemplo:</strong></p>
+                  <p className="text-green-800 text-sm">
+                    "Empresa no Simples Anexo V pagando 18% efetivo. No Lucro Presumido pagaria 13,33% efetivo. 
+                    <strong>Economia anual de R$ 234.000</strong> sobre faturamento de R$ 5 milhões."
+                  </p>
+                </div>
+                <p className="text-gray-700 mt-3 text-sm">
+                  <strong>Ação:</strong> Planejar mudança para janeiro do próximo ano, ajustar processos e comunicar Receita.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border-l-4 border-yellow-500">
+                <h3 className="text-xl font-bold text-yellow-900 mb-3">⚠️ Resultado de Atenção</h3>
+                <p className="text-gray-700 mb-3">
+                  <strong>Pequena economia ou empate técnico:</strong> analisar fatores secundários
+                </p>
+                <div className="bg-yellow-50 p-4 rounded-lg">
+                  <p className="text-yellow-900 mb-2"><strong>Exemplo:</strong></p>
+                  <p className="text-yellow-800 text-sm">
+                    "Lucro Real economiza R$ 15.000/ano vs Presumido, mas custos de compliance aumentam R$ 20.000/ano 
+                    (contador especializado, sistemas, obrigações acessórias). <strong>Saldo negativo.</strong>"
+                  </p>
+                </div>
+                <p className="text-gray-700 mt-3 text-sm">
+                  <strong>Ação:</strong> Manter regime atual, otimizar apuração, monitorar crescimento para reavaliar futuramente.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border-l-4 border-blue-500">
+                <h3 className="text-xl font-bold text-blue-900 mb-3">🔵 Resultado Neutro</h3>
+                <p className="text-gray-700 mb-3">
+                  <strong>Regime atual é o mais adequado:</strong> foco em conformidade e otimizações pontuais
+                </p>
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <p className="text-blue-900 mb-2"><strong>Exemplo:</strong></p>
+                  <p className="text-blue-800 text-sm">
+                    "Empresa no Simples Anexo III com Fator R de 35%. Outros regimes resultariam em carga maior. 
+                    <strong>Simples é o ideal.</strong>"
+                  </p>
+                </div>
+                <p className="text-gray-700 mt-3 text-sm">
+                  <strong>Ação:</strong> Manter regime, garantir cumprimento de obrigações, monitorar Fator R mensalmente.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border-l-4 border-red-500">
+                <h3 className="text-xl font-bold text-red-900 mb-3">🚨 Resultado Crítico</h3>
+                <p className="text-gray-700 mb-3">
+                  <strong>Riscos fiscais graves identificados:</strong> necessidade de ação imediata
+                </p>
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <p className="text-red-900 mb-2"><strong>Exemplo:</strong></p>
+                  <p className="text-red-800 text-sm">
+                    "Empresa ultrapassou limite do Simples (R$ 4,8 MM) há 6 meses e não migrou. 
+                    <strong>Risco de autuação com multa de 75% sobre diferença de impostos.</strong>"
+                  </p>
+                </div>
+                <p className="text-gray-700 mt-3 text-sm">
+                  <strong>Ação:</strong> Regularização urgente, levantamento de passivo, parcelamento se necessário, mudança imediata.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Erros Comuns */}
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span className="text-3xl">❌</span>
+              Erros Comuns que o Diagnóstico Identifica
+            </h2>
+            
+            <div className="space-y-4">
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <h3 className="font-bold text-red-900 mb-2">1. Regime Tributário Inadequado</h3>
+                <p className="text-red-800 text-sm">
+                  Empresa permanece anos no mesmo regime sem reavaliar. Exemplo: empresa de serviços com margem de 45% 
+                  no Lucro Real pagando mais que pagaria no Presumido.
+                </p>
+              </div>
+
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <h3 className="font-bold text-red-900 mb-2">2. CNAE Principal Errado</h3>
+                <p className="text-red-800 text-sm">
+                  CNAE não reflete atividade principal, resultando em Anexo incorreto (Simples) ou alíquotas maiores. 
+                  Diferença pode ser de 10 pontos percentuais na tributação.
+                </p>
+              </div>
+
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <h3 className="font-bold text-red-900 mb-2">3. Fator R Mal Calculado</h3>
+                <p className="text-red-800 text-sm">
+                  Não incluir INSS patronal (20%) no cálculo da folha, ou usar período incorreto (últimos 12 meses). 
+                  Resultado: empresa enquadrada no Anexo V quando deveria estar no III.
+                </p>
+              </div>
+
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <h3 className="font-bold text-red-900 mb-2">4. Créditos de PIS/COFINS Não Aproveitados</h3>
+                <p className="text-red-800 text-sm">
+                  Empresas do Lucro Real deixam de tomar créditos sobre energia, aluguéis, insumos. Perda pode chegar 
+                  a R$ 50.000/ano em empresas médias.
+                </p>
+              </div>
+
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <h3 className="font-bold text-red-900 mb-2">5. Desenquadramento do Simples Ignorado</h3>
+                <p className="text-red-800 text-sm">
+                  Faturamento ultrapassa R$ 4,8 MM ou empresa descumpre vedações (sócios PJ, atividade impeditiva). 
+                  Permanência irregular gera multa pesada + cobrança retroativa.
+                </p>
+              </div>
+
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <h3 className="font-bold text-red-900 mb-2">6. Obrigações Acessórias Pendentes</h3>
+                <p className="text-red-800 text-sm">
+                  ECF, DCTF, EFD-Contribuições não enviadas ou com erros. Impossibilita emissão de CND e gera multas 
+                  de até R$ 5.000 por mês de atraso.
+                </p>
+              </div>
+
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <h3 className="font-bold text-red-900 mb-2">7. Distribuição de Lucros Acima do Contábil</h3>
+                <p className="text-red-800 text-sm">
+                  Sócios retiram mais que lucro contábil apurado. Excedente é tributado como pró-labore (até 27,5% IR + 11% INSS). 
+                  Falta de planejamento gera tributação desnecessária.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* FAQ */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span className="text-3xl">❓</span>
+              Perguntas Frequentes sobre Diagnóstico Tributário
+            </h2>
+            
+            <div className="space-y-6">
+              <div className="border-l-4 border-blue-500 pl-6 py-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">1. Quanto custa um diagnóstico tributário profissional?</h3>
+                <p className="text-gray-700">
+                  Varia de <strong>R$ 3.000 a R$ 30.000</strong> dependendo do porte da empresa e complexidade. Empresas 
+                  pequenas (até R$ 1 MM/ano): R$ 3-5 mil. Médias (R$ 1-10 MM): R$ 8-15 mil. Grandes: acima de R$ 20 mil. 
+                  O investimento se paga com economia identificada (geralmente em 1-3 meses).
+                </p>
+              </div>
+
+              <div className="border-l-4 border-green-500 pl-6 py-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">2. Quanto tempo demora um diagnóstico completo?</h3>
+                <p className="text-gray-700">
+                  <strong>15 a 45 dias</strong> em média. Coleta de documentos (5-10 dias), análise técnica (10-20 dias), 
+                  elaboração de relatório (3-5 dias), apresentação e discussão (1-2 dias). Empresas organizadas com documentação 
+                  digital aceleram o processo.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-yellow-500 pl-6 py-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">3. Posso fazer diagnóstico tributário sozinho?</h3>
+                <p className="text-gray-700">
+                  <strong>Parcialmente.</strong> Ferramentas online (como este site) ajudam na comparação básica de regimes. 
+                  Porém, análise profunda requer conhecimento técnico de legislação, jurisprudência, particularidades setoriais. 
+                  Recomenda-se contratar contador ou consultoria especializada para diagnóstico completo.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-purple-500 pl-6 py-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">4. Com que frequência devo fazer diagnóstico?</h3>
+                <p className="text-gray-700">
+                  <strong>Anualmente</strong> (antes de dezembro para avaliar mudança de regime) ou quando houver mudanças 
+                  significativas: crescimento &gt;30%, nova atividade, fusão/aquisição, prejuízos constantes, troca de contador. 
+                  Empresas em crescimento acelerado devem fazer semestralmente.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-red-500 pl-6 py-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">5. O diagnóstico pode identificar passivos tributários?</h3>
+                <p className="text-gray-700">
+                  <strong>Sim.</strong> É uma das funções principais. O diagnóstico detecta erros em apurações anteriores, 
+                  créditos indevidos, falta de retenções, desenquadramentos. Permite correção <strong>antes de fiscalização</strong>, 
+                  evitando multas pesadas (75% sobre diferença) e até crimes tributários.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-indigo-500 pl-6 py-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">6. Posso mudar de regime após o diagnóstico?</h3>
+                <p className="text-gray-700">
+                  Depende. <strong>Simples para Presumido/Real:</strong> comunicar exclusão até janeiro. <strong>Presumido/Real 
+                  entre si:</strong> mudar em janeiro do ano seguinte (primeiro pagamento ou escrituração). <strong>Para Simples:</strong> 
+                  solicitar opção em janeiro (se cumprir requisitos). A escolha é <strong>irretratável até dezembro</strong>.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-pink-500 pl-6 py-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">7. Empresa nova precisa de diagnóstico?</h3>
+                <p className="text-gray-700">
+                  <strong>Sim, é essencial!</strong> A escolha inicial do regime define tributação pelos próximos 12 meses. 
+                  Erro na abertura pode resultar em pagamento excessivo de impostos durante todo primeiro ano. Fazer diagnóstico 
+                  <strong>antes de abrir</strong> a empresa garante início com regime ideal e CNAEs corretos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Final */}
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl shadow-2xl p-8 text-center">
+            <h2 className="text-3xl font-bold mb-4">🔍 Faça seu Diagnóstico Tributário Agora</h2>
+            <p className="text-xl mb-6 opacity-90">
+              Use nossa ferramenta gratuita acima para ter uma análise preliminar da sua situação tributária. 
+              Descubra oportunidades de economia e identifique possíveis riscos fiscais!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+              >
+                📊 Iniciar Diagnóstico
+              </button>
+              <button
+                onClick={() => navigate('/comparador')}
+                className="bg-yellow-400 text-gray-900 px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors"
+              >
+                🔄 Comparador Completo
+              </button>
+            </div>
+          </div>
+
+        </article>
       </div>
     </div>
   );

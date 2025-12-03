@@ -66,20 +66,7 @@ function Home() {
         </div>
 
         {/* Grid de Ações Rápidas - Layout Equilibrado */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {/* Card Comparador */}
-          <div 
-            onClick={() => navigate('/formulario')}
-            className="group bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-6 text-white cursor-pointer hover:shadow-xl transition-all transform hover:-translate-y-1"
-          >
-            <div className="text-4xl mb-3">⚖️</div>
-            <h3 className="font-bold text-lg mb-2">Comparar Regimes</h3>
-            <p className="text-blue-100 text-sm mb-4">Compare os 3 regimes lado a lado</p>
-            <div className="flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all">
-              Iniciar <span>→</span>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {/* Card Diagnóstico */}
           <div 
             onClick={() => navigate('/diagnostico-tributario')}
@@ -210,6 +197,63 @@ function Home() {
           <p className="text-sm text-gray-600 text-center">
             <strong>Mais de 1.250 empresas</strong> já economizaram com nossas ferramentas
           </p>
+        </div>
+      </div>
+
+      {/* Hub de Ferramentas - Seção Destacada */}
+      <div className="mb-16 bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
+        {/* Decoração de fundo */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full -ml-48 -mb-48"></div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-5xl">🗂️</span>
+            <div className="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full">
+              NOVO
+            </div>
+          </div>
+          
+          <h2 className="text-3xl md:text-4xl font-black mb-4">
+            Explore Todas as {contagens.total} Ferramentas
+          </h2>
+          
+          <p className="text-xl text-blue-100 mb-6 max-w-2xl">
+            Acesse nosso Hub completo com calculadoras, simuladores e conteúdo educacional. 
+            Tudo 100% gratuito e sem cadastro.
+          </p>
+
+          {/* Grid de categorias */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="text-2xl mb-2">🧮</div>
+              <div className="font-bold text-lg">{contagens.calculadoras}</div>
+              <div className="text-sm text-blue-100">Calculadoras</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="text-2xl mb-2">🎯</div>
+              <div className="font-bold text-lg">{contagens.simuladores}</div>
+              <div className="text-sm text-blue-100">Simuladores</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="text-2xl mb-2">📚</div>
+              <div className="font-bold text-lg">{contagens.educacao}</div>
+              <div className="text-sm text-blue-100">Conteúdo</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="text-2xl mb-2">🚀</div>
+              <div className="font-bold text-lg">{contagens.startups}</div>
+              <div className="text-sm text-blue-100">Startups</div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => navigate('/ferramentas')}
+            className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group inline-flex"
+          >
+            Ver Todas as Ferramentas
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
+          </button>
         </div>
       </div>
 

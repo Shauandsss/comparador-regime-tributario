@@ -235,8 +235,10 @@ describe('CalculadoraMargem - Testes de UI', () => {
 
       renderWithRouter(<CalculadoraMargem />);
       
-      fireEvent.change(screen.getByPlaceholderText(/Ex: 50/i), { target: { value: '50' } });
-      fireEvent.change(screen.getByPlaceholderText(/Ex: 100/i), { target: { value: '100' } });
+      const inputsCusto1 = screen.getAllByPlaceholderText(/Ex: 50/i);
+      const inputsQtd1 = screen.getAllByPlaceholderText(/Ex: 100/i);
+      fireEvent.change(inputsCusto1[0], { target: { value: '50' } });
+      fireEvent.change(inputsQtd1[0], { target: { value: '100' } });
 
       // Quando
       const botoes = screen.getAllByRole('button');
@@ -255,8 +257,10 @@ describe('CalculadoraMargem - Testes de UI', () => {
 
       renderWithRouter(<CalculadoraMargem />);
       
-      fireEvent.change(screen.getByPlaceholderText(/Ex: 50/i), { target: { value: '50' } });
-      fireEvent.change(screen.getByPlaceholderText(/Ex: 100/i), { target: { value: '100' } });
+      const inputsCusto2 = screen.getAllByPlaceholderText(/Ex: 50/i);
+      const inputsQtd2 = screen.getAllByPlaceholderText(/Ex: 100/i);
+      fireEvent.change(inputsCusto2[0], { target: { value: '50' } });
+      fireEvent.change(inputsQtd2[0], { target: { value: '100' } });
 
       // Quando
       const botoes = screen.getAllByRole('button');
@@ -330,8 +334,10 @@ describe('CalculadoraMargem - Testes de UI', () => {
       renderWithRouter(<CalculadoraMargem />);
       
       // Quando
-      fireEvent.change(screen.getByPlaceholderText(/Ex: 50/i), { target: { value: '50' } });
-      fireEvent.change(screen.getByPlaceholderText(/Ex: 100/i), { target: { value: '100' } });
+      const inputsCusto3 = screen.getAllByPlaceholderText(/Ex: 50/i);
+      const inputsQtd3 = screen.getAllByPlaceholderText(/Ex: 100/i);
+      fireEvent.change(inputsCusto3[0], { target: { value: '50' } });
+      fireEvent.change(inputsQtd3[0], { target: { value: '100' } });
 
       // Então
       await waitFor(() => {

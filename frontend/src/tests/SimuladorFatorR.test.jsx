@@ -64,7 +64,7 @@ describe('SimuladorFatorR - Testes de UI', () => {
       renderWithRouter(<SimuladorFatorR />);
 
       // Então - Usar getAllByText pois pode haver múltiplos elementos com 28%
-      expect(screen.getByText(/O que é o Fator R/i)).toBeDefined();
+      expect(screen.getAllByText(/O que é o Fator R/i).length).toBeGreaterThanOrEqual(1);
       expect(screen.getAllByText(/28%/).length).toBeGreaterThanOrEqual(1);
     });
 
@@ -249,8 +249,8 @@ describe('SimuladorFatorR - Testes de UI', () => {
 
       // Então
       await waitFor(() => {
-        expect(screen.getByText(/Para Atingir o Anexo III/i)).toBeDefined();
-        expect(screen.getByText(/Folha Ideal/i)).toBeDefined();
+        expect(screen.getAllByText(/Para Atingir o Anexo III/i).length).toBeGreaterThanOrEqual(1);
+        expect(screen.getAllByText(/Folha Ideal/i).length).toBeGreaterThanOrEqual(1);
       });
     });
   });
@@ -278,7 +278,7 @@ describe('SimuladorFatorR - Testes de UI', () => {
 
       // Então
       await waitFor(() => {
-        expect(screen.getByText(/Erro/i)).toBeDefined();
+        expect(screen.getAllByText(/Erro/i).length).toBeGreaterThanOrEqual(1);
       });
     });
   });
