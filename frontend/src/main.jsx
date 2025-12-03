@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './styles/index.css';
 
-// Usando HashRouter para compatibilidade com GitHub Pages
+// Usando BrowserRouter com basename para GitHub Pages
+// O 404.html redireciona automaticamente para rotas SPA
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter basename="/comparador-regime-tributario">
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>,
 );
