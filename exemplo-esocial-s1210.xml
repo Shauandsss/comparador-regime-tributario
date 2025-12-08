@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eSocial xmlns="http://www.esocial.gov.br/schema/evt/evtPgtos/v_S_01_02_00">
+  <evento Id="ID1">
+    <evtPgtos>
+      <ideEvento>
+        <indRetif>1</indRetif>
+        <perApur>2025-01</perApur>
+        <tpAmb>1</tpAmb>
+        <procEmi>1</procEmi>
+        <verProc>1.0</verProc>
+      </ideEvento>
+      
+      <ideEmpregador>
+        <tpInsc>1</tpInsc>
+        <nrInsc>12345678000190</nrInsc>
+      </ideEmpregador>
+      
+      <!-- Beneficiário 1 -->
+      <ideBenef>
+        <cpfBenef>12345678901</cpfBenef>
+        <nmBenef>João da Silva</nmBenef>
+        
+        <infoPgto>
+          <dtPgto>2025-01-05</dtPgto>
+          
+          <!-- Rendimentos -->
+          <detPgto>
+            <codRubr>SALARIO</codRubr>
+            <tpRubr>1</tpRubr>
+            <vrPgto>5000.00</vrPgto>
+          </detPgto>
+          
+          <detPgto>
+            <codRubr>BONUS</codRubr>
+            <tpRubr>1</tpRubr>
+            <vrPgto>1000.00</vrPgto>
+          </detPgto>
+          
+          <!-- Descontos -->
+          <detPgto>
+            <codRubr>INSS</codRubr>
+            <tpRubr>2</tpRubr>
+            <vrPgto>660.00</vrPgto>
+          </detPgto>
+          
+          <detPgto>
+            <codRubr>IR</codRubr>
+            <tpRubr>2</tpRubr>
+            <vrPgto>450.00</vrPgto>
+          </detPgto>
+          
+          <detPgto>
+            <codRubr>PLANO_SAUDE</codRubr>
+            <tpRubr>2</tpRubr>
+            <vrPgto>350.00</vrPgto>
+          </detPgto>
+          
+          <!-- Informações de IRRF -->
+          <infoIR>
+            <vrIrrf>450.00</vrIrrf>
+            <vr13Trib>0.00</vr13Trib>
+            <vrIrrf13>0.00</vrIrrf13>
+          </infoIR>
+        </infoPgto>
+        
+        <!-- 13º Salário -->
+        <infoPgto>
+          <dtPgto>2024-12-20</dtPgto>
+          
+          <detPgto>
+            <codRubr>13_SALARIO</codRubr>
+            <tpRubr>1</tpRubr>
+            <vrPgto>6000.00</vrPgto>
+          </detPgto>
+          
+          <detPgto>
+            <codRubr>INSS</codRubr>
+            <tpRubr>2</tpRubr>
+            <vrPgto>660.00</vrPgto>
+          </detPgto>
+          
+          <detPgto>
+            <codRubr>IR</codRubr>
+            <tpRubr>2</tpRubr>
+            <vrPgto>500.00</vrPgto>
+          </detPgto>
+          
+          <infoIR>
+            <vrIrrf>0.00</vrIrrf>
+            <vr13Trib>6000.00</vr13Trib>
+            <vrIrrf13>500.00</vrIrrf13>
+          </infoIR>
+        </infoPgto>
+      </ideBenef>
+      
+      <!-- Beneficiário 2 -->
+      <ideBenef>
+        <cpfBenef>98765432100</cpfBenef>
+        <nmBenef>Maria dos Santos</nmBenef>
+        
+        <infoPgto>
+          <dtPgto>2025-01-05</dtPgto>
+          
+          <detPgto>
+            <codRubr>SALARIO</codRubr>
+            <tpRubr>1</tpRubr>
+            <vrPgto>7500.00</vrPgto>
+          </detPgto>
+          
+          <detPgto>
+            <codRubr>INSS</codRubr>
+            <tpRubr>2</tpRubr>
+            <vrPgto>908.86</vrPgto>
+          </detPgto>
+          
+          <detPgto>
+            <codRubr>IR</codRubr>
+            <tpRubr>2</tpRubr>
+            <vrPgto>850.00</vrPgto>
+          </detPgto>
+          
+          <detPgto>
+            <codRubr>PLANO_SAUDE</codRubr>
+            <tpRubr>2</tpRubr>
+            <vrPgto>450.00</vrPgto>
+          </detPgto>
+          
+          <infoIR>
+            <vrIrrf>850.00</vrIrrf>
+            <vr13Trib>0.00</vr13Trib>
+            <vrIrrf13>0.00</vrIrrf13>
+          </infoIR>
+        </infoPgto>
+      </ideBenef>
+    </evtPgtos>
+  </evento>
+</eSocial>

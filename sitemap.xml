@@ -20,6 +20,49 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Reforma Tributária 2026 - ALTA PRIORIDADE -->
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/simulador-impacto-reforma</loc>
+    <lastmod>2025-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/simulador-iva-simplificado</loc>
+    <lastmod>2025-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/simulador-transicao-reforma</loc>
+    <lastmod>2025-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/painel-creditos-acumulados</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/simulador-exportacao</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://shauandsss.github.io/comparador-regime-tributario/simulador-servicos-financeiros</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Calculadoras - Simples Nacional -->
   <url>
     <loc>https://shauandsss.github.io/comparador-regime-tributario/calculadora-das</loc>
