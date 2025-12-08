@@ -44,6 +44,30 @@ import SimuladorDifal from './pages/SimuladorDifal';
 import CalculadoraIcmsSt from './pages/CalculadoraIcmsSt';
 import HubFerramentas from './pages/HubFerramentas';
 import ComparadorIndicadores from './pages/ferramentas/ComparadorIndicadores';
+import SimuladorImpactoReforma from './pages/SimuladorImpactoReforma';
+import SimuladorIVASimplificado from './pages/SimuladorIVASimplificado';
+import SimuladorTransicaoReforma from './pages/SimuladorTransicaoReforma';
+import SimuladorNFeIBSCBS from './pages/SimuladorNFeIBSCBS';
+import CalculadoraAliquotaEfetiva from './pages/CalculadoraAliquotaEfetiva';
+import SimuladorIVADual from './pages/SimuladorIVADual';
+import SimuladorCashbackIBS from './pages/SimuladorCashbackIBS';
+import CalculadoraPartilhaIBS from './pages/CalculadoraPartilhaIBS';
+import AnalisadorImpactoTransicao from './pages/AnalisadorImpactoTransicao';
+import PlanejadorReforma from './pages/PlanejadorReforma';
+import SimuladorEcommerceReforma from './pages/SimuladorEcommerceReforma';
+import SimuladorIndustriaReforma from './pages/SimuladorIndustriaReforma';
+import SimuladorServicosReforma from './pages/SimuladorServicosReforma';
+import SimuladorCestaBasica from './pages/SimuladorCestaBasica';
+import SimuladorConstrucao from './pages/SimuladorConstrucao';
+import SimuladorImpostoSeletivo from './pages/SimuladorImpostoSeletivo';
+import CalculadoraCreditosIVA from './pages/CalculadoraCreditosIVA';
+import SimuladorST2026 from './pages/SimuladorST2026';
+import CalculadoraAliquotaReduzida from './pages/CalculadoraAliquotaReduzida';
+import CestaBasicaIVA from './pages/CestaBasicaIVA';
+import PainelCreditosAcumulados from './pages/PainelCreditosAcumulados';
+import SimuladorExportacao from './pages/SimuladorExportacao';
+import SimuladorServicosFinanceiros from './pages/SimuladorServicosFinanceiros';
+import GeradorComprovanteRendimentos from './pages/GeradorComprovanteRendimentos';
 
 function App() {
   return (
@@ -54,6 +78,29 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/ferramentas" element={<HubFerramentas />} />
+          <Route path="/simulador-impacto-reforma" element={<SimuladorImpactoReforma />} />
+          <Route path="/simulador-iva-simplificado" element={<SimuladorIVASimplificado />} />
+          <Route path="/simulador-transicao-reforma" element={<SimuladorTransicaoReforma />} />
+          <Route path="/simulador-nfe-ibscbs" element={<SimuladorNFeIBSCBS />} />
+          <Route path="/calculadora-aliquota-efetiva" element={<CalculadoraAliquotaEfetiva />} />
+          <Route path="/simulador-iva-dual" element={<SimuladorIVADual />} />
+          <Route path="/simulador-cashback-ibs" element={<SimuladorCashbackIBS />} />
+          <Route path="/calculadora-partilha-ibs" element={<CalculadoraPartilhaIBS />} />
+          <Route path="/analisador-impacto-transicao" element={<AnalisadorImpactoTransicao />} />
+          <Route path="/planejador-reforma" element={<PlanejadorReforma />} />
+          <Route path="/simulador-ecommerce-reforma" element={<SimuladorEcommerceReforma />} />
+          <Route path="/simulador-industria-reforma" element={<SimuladorIndustriaReforma />} />
+          <Route path="/simulador-servicos-reforma" element={<SimuladorServicosReforma />} />
+          <Route path="/simulador-cesta-basica" element={<SimuladorCestaBasica />} />
+          <Route path="/simulador-construcao-reforma" element={<SimuladorConstrucao />} />
+          <Route path="/simulador-imposto-seletivo" element={<SimuladorImpostoSeletivo />} />
+          <Route path="/calculadora-creditos-iva" element={<CalculadoraCreditosIVA />} />
+          <Route path="/simulador-st-2026" element={<SimuladorST2026 />} />
+          <Route path="/calculadora-aliquota-reduzida" element={<CalculadoraAliquotaReduzida />} />
+          <Route path="/cesta-basica-iva" element={<CestaBasicaIVA />} />
+          <Route path="/painel-creditos-acumulados" element={<PainelCreditosAcumulados />} />
+          <Route path="/simulador-exportacao" element={<SimuladorExportacao />} />
+          <Route path="/simulador-servicos-financeiros" element={<SimuladorServicosFinanceiros />} />
           <Route path="/formulario" element={<Formulario />} />
           <Route path="/resultado" element={<Resultado />} />
           <Route path="/calculadora-das" element={<CalculadoraDAS />} />
@@ -95,6 +142,7 @@ function App() {
           <Route path="/simulador-difal" element={<SimuladorDifal />} />
           <Route path="/calculadora-icms-st" element={<CalculadoraIcmsSt />} />
           <Route path="/comparador-indicadores" element={<ComparadorIndicadores />} />
+          <Route path="/gerador-comprovante-rendimentos" element={<GeradorComprovanteRendimentos />} />
         </Routes>
       </main>
     </div>

@@ -1,137 +1,483 @@
 {
   "name": "Backlog - Ferramentas Tributárias e Financeiras",
-  "lists": [
+  "lists":[
+      {
+    "title": "Simulador de Nota Fiscal com IBS/CBS",
+    "labels": ["NFe 2026", "Alta Demanda", "Desenvolvedores"],
+    "route": "/simulador-nfe-ibscbs",
+    "description": "Gera uma nota fiscal modelo com a nova estrutura pós-reforma tributária.",
+    "inputs": ["valorProduto", "estadoOrigem", "estadoDestino", "ncm", "servico"],
+    "outputs": ["nfeNova", "comparacaoCampos", "tributos"],
+    "seo": ["nota fiscal reforma tributária", "nfe 2026 ibs cbs", "modelo nf-e nova"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-06",
+    "arquivo": "frontend/src/pages/SimuladorNFeIBSCBS.jsx"
+  },
+  {
+    "title": "Calculadora de Alíquota Efetiva IBS + CBS",
+    "labels": ["Reforma 2026", "Indústria", "Alto Impacto"],
+    "route": "/calculadora-aliquota-efetiva",
+    "description": "Calcula a alíquota efetiva final considerando créditos, isenções e operações mistas.",
+    "inputs": ["receita", "credito", "operacoesIsentas", "setor"],
+    "outputs": ["aliquotaEfetiva", "tabelaTributacao"],
+    "seo": ["aliquota ibs", "aliquota cbs", "calcular aliquota efetiva 2026"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-06",
+    "arquivo": "frontend/src/pages/CalculadoraAliquotaEfetiva.jsx"
+  },
+  {
+    "title": "Simulador do IVA Dual",
+    "labels": ["IVA Brasil", "Reforma 2026"],
+    "route": "/simulador-iva-dual",
+    "description": "Mostra como o imposto é dividido entre CBS (União) e IBS (Estados/Municípios).",
+    "inputs": ["faturamento", "estado", "atividade"],
+    "outputs": ["percentualCBS", "percentualIBS", "graficos"],
+    "seo": ["iva brasil 2026", "iva dual simulador", "cbs ibs divisão"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-06",
+    "arquivo": "frontend/src/pages/SimuladorIVADual.jsx"
+  },
+  {
+    "title": "Simulador do Cashback do IBS",
+    "labels": ["Reforma 2026", "Social", "Baixa Renda"],
+    "route": "/simulador-cashback-ibs",
+    "description": "Simula o valor da devolução do IBS prevista para famílias de baixa renda.",
+    "inputs": ["consumoMensal", "categoriaGasto", "faixaCadastro"],
+    "outputs": ["valorDevolvido", "percentualDevolucao"],
+    "seo": ["cashback ibs", "devolução imposto baixa renda", "benefício reforma tributária"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-06",
+    "arquivo": "frontend/src/pages/SimuladorCashbackIBS.jsx"
+  },
+  {
+    "title": "Simulador da Transição Tributária (2026–2033)",
+    "labels": ["Transição", "Reforma 2026", "Alta Complexidade"],
+    "route": "/simulador-transicao-reforma",
+    "description": "Mostra o peso de cada tributo antigo e novo durante todos os anos da transição.",
+    "inputs": ["faturamento", "estado", "créditos", "segmento"],
+    "outputs": ["graficoTransicao", "projecoesAnuais", "cargaTributariaAnoAno"],
+    "seo": ["transição reforma tributária", "2026 2033 impostos", "mudança impostos ano a ano"]
+  },
+  {
+    "title": "Calculadora de Partilha do IBS",
+    "labels": ["Estados", "Municípios", "Transição"],
+    "route": "/calculadora-partilha-ibs",
+    "description": "Simula como o IBS será repartido entre origem e destino ao longo da transição.",
+    "inputs": ["estadoOrigem", "estadoDestino", "valorOperacao"],
+    "outputs": ["percentualDestino", "percentualOrigem", "evolucao"],
+    "seo": ["partilha ibs", "origem destino imposto", "repartição ibs estados"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/CalculadoraPartilhaIBS.jsx"
+  },
+  {
+    "title": "Analisador de Impacto Tributário na Transição",
+    "labels": ["Diagnóstico", "Reforma 2026"],
+    "route": "/analisador-impacto-transicao",
+    "description": "Score de risco e recomendações personalizadas para empresas durante a transição.",
+    "inputs": ["faturamento", "margem", "estado", "segmento", "usoCreditos"],
+    "outputs": ["riskScore", "recomendacoes", "relatorio"],
+    "seo": ["impacto reforma tributária", "diagnóstico tributário 2026", "análise empresa reforma"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/AnalisadorImpactoTransicao.jsx"
+  },
+  {
+    "title": "Planejador Tributário da Reforma",
+    "labels": ["Planejamento", "Simulador Visual"],
+    "route": "/planejador-reforma",
+    "description": "Sliders interativos para testar margens, faturamento e créditos e ver o impacto tributário.",
+    "inputs": ["receita", "custo", "credito", "estado"],
+    "outputs": ["simulacaoVisual", "graficos"],
+    "seo": ["planejamento reforma tributária", "calculadora reforma 2026 visual"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/PlanejadorReforma.jsx"
+  },
+  {
+    "title": "Simulador para E-commerce Interestadual",
+    "labels": ["E-commerce", "Alta Demanda"],
+    "route": "/simulador-ecommerce-reforma",
+    "description": "Simula vendas interestaduais e compara ICMS atual com IBS pós-reforma.",
+    "inputs": ["valorVenda", "estadoOrigem", "estadoDestino", "categoriaProduto"],
+    "outputs": ["tribAtual", "tribNovo", "diferenca"],
+    "seo": ["ICMS ecommerce reforma", "venda interestadual 2026", "ibs ecommerce"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/SimuladorEcommerceReforma.jsx"
+  },
+  {
+    "title": "Simulador para Indústrias (Créditos IBS/CBS)",
+    "labels": ["Indústria", "Créditos"],
+    "route": "/simulador-industria-reforma",
+    "description": "Simula créditos de IBS/CBS sobre insumos, energia, logística e ativos.",
+    "inputs": ["insumos", "energia", "frete", "ativopermanente"],
+    "outputs": ["creditos", "aliquotaFinal", "economia"],
+    "seo": ["crédito ibs", "crédito cbs", "indústria reforma tributária"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/SimuladorIndustriaReforma.jsx"
+  },
+  {
+    "title": "Simulador para Prestadores de Serviços",
+    "labels": ["Serviços", "Alta Busca"],
+    "route": "/simulador-servicos-reforma",
+    "description": "Simula impacto do fim do ISS e substituição pelo IBS/CBS.",
+    "inputs": ["valorServico", "estado", "atividade"],
+    "outputs": ["comparativoISSvsIBS", "aliquota", "custoFinal"],
+    "seo": ["tributação serviços reforma", "ibs serviços", "fim do ISS 2026"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/SimuladorServicosReforma.jsx"
+  },
+  {
+    "title": "Simulador para Supermercados (Cesta Básica Nacional)",
+    "labels": ["Alimentos", "Cesta Básica", "E-commerce"],
+    "route": "/simulador-cesta-basica",
+    "description": "Compara alíquota zero, reduzida e padrão para produtos da cesta básica.",
+    "inputs": ["ncm", "valor", "estado"],
+    "outputs": ["aliquota", "economia", "comparativo"],
+    "seo": ["cesta básica nacional", "alíquota zero reforma", "ibs alimentos"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/SimuladorCestaBasica.jsx"
+  },
+  {
+    "title": "Simulador para Construção Civil",
+    "labels": ["Construção", "Alta Demanda"],
+    "route": "/simulador-construcao-reforma",
+    "description": "Calcula a incidência de IBS/CBS na construção civil e obras.",
+    "inputs": ["materiais", "maoDeObra", "estado", "ncm"],
+    "outputs": ["tributos", "custoFinal"],
+    "seo": ["reforma tributária construção civil", "ibs cbs construção", "tributo obra 2026"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/SimuladorConstrucao.jsx"
+  },
     {
-      "name": "To Do - Alta Prioridade (Tráfego Imediato)",
-      "cards": []
-    },
-    {
-      "name": "To Do - Média Prioridade (Crescimento Orgânico)",
-      "cards": [
-        {
-          "title": "Gerador de Recibo Online",
-          "labels": ["Lead Magnet", "Baixo Esforço", "Topo de Funil"],
-          "route": "/gerador-recibo",
-          "description": "Gera recibos em PDF (pagamento, aluguel, prestação de serviços). Altíssima busca e captura de leads.",
-          "inputs": ["pagador", "recebedor", "valor", "descricao"],
-          "outputs": ["pdfRecibo"],
-          "seo": ["gerar recibo", "modelo recibo", "recibo pdf"]
-        },
-        {
-          "title": "Atualizador de Valores por IPCA/IGP-M",
-          "labels": ["Lead Magnet", "Média Busca", "Médio Esforço"],
-          "route": "/atualizador-ipca",
-          "description": "Atualiza aluguéis, dívidas e contratos pelo IPCA ou IGP-M.",
-          "inputs": ["valor", "dataInicio", "dataFim", "indice"],
-          "outputs": ["valorCorrigido"],
-          "seo": ["atualizar valor ipca", "correção igpm 2025"]
-        },
-        {
-          "title": "Simulador de Diluição (Cap Table Evolution)",
-          "labels": ["Startup", "Médio Esforço", "Alta Retenção"],
-          "route": "/simulador-diluicao",
-          "description": "Simula rodadas de investimento e a diluição dos sócios. Exibe gráfico de pizza por rodada.",
-          "inputs": ["preMoney", "aporte", "optionPool"],
-          "outputs": ["capTableRodada", "graficos"],
-          "seo": ["cap table", "diluição startup", "valuation x participação"]
-        }
-      ]
-    },
-    {
-      "name": "In Progress",
-      "cards": []
-    },
-    {
-      "name": "Done",
-      "cards": [
-        {
-          "title": "Calculadora de Custo de Funcionário (CLT Eficiente)",
-          "labels": ["DP/RH", "Alta Busca", "Alta Prioridade"],
-          "route": "/calculadora-custo-funcionario",
-          "description": "Calcula o custo real de um funcionário CLT considerando provisões (13º, férias, FGTS, encargos). Gera multiplicador ('custo total = 1.7x o salário'). Altamente buscada no Google.",
-          "inputs": ["salarioBruto", "valeTransporte", "valeRefeicao", "regimeTributario"],
-          "outputs": ["custoTotal", "multiplicador", "tabelaDetalhada"],
-          "seo": ["custo funcionário", "custo CLT 2025", "contratar funcionário custa quanto"],
-          "status": "completed",
-          "completedAt": "2025-12-02"
-        },
-        {
-          "title": "Comparador CLT x PJ (Tira-Teima)",
-          "labels": ["DP/RH", "Alta Busca", "Médio Esforço"],
-          "route": "/comparador-clt-pj",
-          "description": "Compara quanto o profissional ganha no final do ano sendo CLT vs PJ. Mostra líquido anual, líquido mensal e gráfico comparativo. Excelente para tráfego de candidatos e RH.",
-          "inputs": ["salarioClt", "valorPJ", "beneficiosClt"],
-          "outputs": ["liquidoCLT", "liquidoPJ", "graficoComparativo"],
-          "seo": ["CLT vs PJ", "vale a pena ser PJ", "salário clt comparativo"],
-          "status": "completed",
-          "completedAt": "2025-12-02"
-        },
-        {
-          "title": "Calculadora de Rescisão Trabalhista",
-          "labels": ["DP/RH", "Muito Alta Busca", "Alta Prioridade"],
-          "route": "/calculadora-rescisao",
-          "description": "Calcula rescisão: saldo de salário, férias, 13º, aviso prévio progressivo, multa FGTS. Ferramenta com volume imenso de buscas.",
-          "inputs": ["dataAdmissao", "dataSaida", "motivo", "feriasVencidas", "avisoPrevio", "dependentes"],
-          "outputs": ["itemizacao", "valorTotal", "memoriaCalculo", "direitosAdicionais"],
-          "seo": ["calcular rescisão", "rescisão 2025", "quanto vou receber demissão"],
-          "status": "completed",
-          "completedAt": "2025-12-02"
-        },
-        {
-          "title": "Calculadora de Markup vs Margem",
-          "labels": ["Financeiro", "SEO Médio", "Médio Esforço"],
-          "route": "/calculadora-markup-margem",
-          "description": "Mostra a diferença entre markup e margem e educa o empresário. Compara preço ideal por Margem vs Markup com cálculo detalhado.",
-          "inputs": ["custo", "impostos", "despesas", "lucroDesejado", "metodoCalculo"],
-          "outputs": ["precoMarkup", "precoMargem", "comparativo", "composicaoPreco"],
-          "seo": ["markup", "margem", "formar preço corretamente", "markup vs margem"],
-          "status": "completed",
-          "completedAt": "2025-12-02"
-        },
-        {
-          "title": "Simulador de Taxas de Maquininha",
-          "labels": ["Financeiro", "Alta Busca", "Médio Esforço"],
-          "route": "/simulador-maquininha",
-          "description": "Calcula o valor real recebido após taxas de cartão (débito, crédito, parcelado). Mostra CET e custo da antecipação.",
-          "inputs": ["valorVenda", "taxaDebito", "taxaCredito", "parcelas", "antecipar", "bandeira"],
-          "outputs": ["valorRecebido", "cet", "perdaFinanceira", "custoAntecipacao"],
-          "seo": ["taxas maquininhas", "taxa cartão 2025", "simulador maquininha", "antecipação recebíveis"],
-          "status": "completed",
-          "completedAt": "2025-12-02"
-        },
-        {
-          "title": "Calculadora de Ponto de Equilíbrio (Break-Even)",
-          "labels": ["Financeiro", "Alta Busca", "Baixo Esforço"],
-          "route": "/calculadora-ponto-equilibrio",
-          "description": "Calcula o faturamento mínimo necessário para cobrir os custos fixos com base na margem de contribuição. Mostra gráfico de break-even e simulação de cenários.",
-          "inputs": ["custosFixos", "precoVenda", "custoVariavel", "diasOperacao"],
-          "outputs": ["pontoEquilibrioUnidades", "faturamentoNecessario", "margemContribuicao", "vendasPorDia", "graficoBreakEven"],
-          "seo": ["ponto de equilíbrio", "break even calculator", "quanto preciso vender", "margem de contribuição"],
-          "status": "completed",
-          "completedAt": "2025-12-02"
-        },
-        {
-          "title": "Simulador de DIFAL",
-          "labels": ["Tributário", "Alta Prioridade", "Alta Busca"],
-          "route": "/simulador-difal",
-          "description": "Calcula o DIFAL (Diferencial de Alíquota do ICMS) para vendas interestaduais a consumidor final. Gera o valor exato da GNRE com FCP e partilha entre estados.",
-          "inputs": ["estadoOrigem", "estadoDestino", "valorNota", "tipoOperacao"],
-          "outputs": ["aliquotaInterestadual", "aliquotaInterna", "diferencaAliquota", "valorDifal", "valorFcp", "totalGnre", "partilhaOrigem", "partilhaDestino", "memoriaCalculo"],
-          "seo": ["difal 2025", "gnre difal", "calcular difal", "simulador difal ecommerce", "icms interestadual consumidor final"],
-          "status": "completed",
-          "completedAt": "2025-12-02"
-        },
-        {
-          "title": "Calculadora de ICMS-ST (Substituição Tributária)",
-          "labels": ["Tributário", "Alta Busca", "Alta Prioridade"],
-          "route": "/calculadora-icms-st",
-          "description": "Calcula ICMS-ST completo: base de cálculo normal, MVA, base ST, ICMS próprio, ICMS-ST a recolher e valor total da nota fiscal. Ferramenta essencial para indústrias, distribuidores e varejistas.",
-          "inputs": ["valorProduto", "ipi", "frete", "outrasDespesas", "mva", "aliquotaInterna", "aliquotaInterestadual", "tipoOperacao"],
-          "outputs": ["baseCalculoNormal", "valorIcmsProprio", "baseCalculoSt", "valorIcmsTotal", "valorIcmsSt", "valorTotalNota", "percentualSt", "memoriaCalculo"],
-          "seo": ["icms st 2025", "calcular substituição tributária", "mva icms st", "base cálculo st", "substituição tributária"],
-          "status": "completed",
-          "completedAt": "2025-12-02"
-        }
-      ]
-  ]
+    "title": "Simulador do Imposto Seletivo",
+    "labels": ["Imposto Seletivo", "Alta Busca", "2026"],
+    "route": "/simulador-imposto-seletivo",
+    "description": "Calcula o Imposto Seletivo para produtos geradores de externalidade negativa.",
+    "inputs": ["valorProduto", "categoria", "ncm"],
+    "outputs": ["aliquota", "valorSeletivo", "totalComImposto"],
+    "seo": ["imposto seletivo 2026", "simulador pecado", "ibs imposto seletivo"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/SimuladorImpostoSeletivo.jsx"
+  },
+  {
+    "title": "Calculadora de Créditos IBS/CBS",
+    "labels": ["Créditos", "Avançado"],
+    "route": "/calculadora-creditos-iva",
+    "description": "Calcula créditos recuperáveis em insumos, energia, frete e investimentos.",
+    "inputs": ["insumos", "energia", "frete", "ativoPermanente"],
+    "outputs": ["creditosTotais", "creditosMes", "tabelaDetalhada"],
+    "seo": ["crédito ibs", "crédito cbs", "simulador crédito iva"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/CalculadoraCreditosIVA.jsx"
+  },
+  {
+    "title": "Simulador de Substituição Tributária (pós-reforma)",
+    "labels": ["ST", "Reforma 2026"],
+    "route": "/simulador-st-2026",
+    "description": "Mostra como a ST atual será convertida para IBS/CBS e como isso afeta o preço final.",
+    "inputs": ["valorProduto", "mva", "ncm", "estado"],
+    "outputs": ["stAtual", "stNova", "comparacao"],
+    "seo": ["icms st 2026", "substituição tributária reforma", "st ibs cbs"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/SimuladorST2026.jsx"
+  },
+  {
+    "title": "Regras de Alíquota Reduzida e Alíquota Zero",
+    "labels": ["Benefícios", "Cesta Básica"],
+    "route": "/calculadora-aliquota-reduzida",
+    "description": "Simula alíquota reduzida e zero para os setores beneficiados na reforma.",
+    "inputs": ["categoriaProduto", "ncm", "valor"],
+    "outputs": ["aliquota", "economia"],
+    "seo": ["aliquota zero 2026", "aliquota reduzida reforma", "produtos isentos reforma"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/CalculadoraAliquotaReduzida.jsx"
+  },
+  {
+    "title": "Calculadora da Cesta Básica Nacional",
+    "labels": ["Cesta Básica", "Alimentos"],
+    "route": "/cesta-basica-iva",
+    "description": "Simula os tributos de produtos incluídos e excluídos da Cesta Básica Nacional.",
+    "inputs": ["ncm", "valor", "estado"],
+    "outputs": ["tributos", "comparativo"],
+    "seo": ["cesta básica nacional 2026", "cesta ibs cbs", "produtos tributados reforma"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/CestaBasicaIVA.jsx"
+  },
+  {
+    "title": "Painel de Créditos Acumulados (E-commerce e Indústria)",
+    "labels": ["Créditos", "Industria", "E-commerce"],
+    "route": "/painel-creditos-acumulados",
+    "description": "Mostra créditos acumulados por compra de insumos e consumo.",
+    "inputs": ["compras", "estoques", "frete"],
+    "outputs": ["creditosAcumulados", "relatorio"],
+    "seo": ["créditos acumulados iva", "creditos ibs ecommerce", "creditos cbs industria"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/PainelCreditosAcumulados.jsx"
+  },
+  {
+    "title": "Simulador de Exportações (Crédito 100%)",
+    "labels": ["Exportação", "IBS/CBS"],
+    "route": "/simulador-exportacao",
+    "description": "Simula créditos totais devolvidos em operações de exportação.",
+    "inputs": ["insumos", "custoOperacional", "frete"],
+    "outputs": ["creditoARecuperar", "relatorio"],
+    "seo": ["exportação ibs cbs", "crédito exportação reforma", "tributação exportação 2026"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-08",
+    "arquivo": "frontend/src/pages/SimuladorExportacao.jsx"
+  },
+  {
+    "title": "Simulador de Serviços Financeiros",
+    "labels": ["Financeiro", "Bancos"],
+    "route": "/simulador-servicos-financeiros",
+    "description": "Calcula o novo modelo de tributação para bancos, cooperativas e fintechs.",
+    "inputs": ["tarifa", "spread", "tipoServiço"],
+    "outputs": ["tributo", "comparativoAtualNovo"],
+    "seo": ["tributação bancos reforma", "fintech imposto 2026", "serviços financeiros ibs"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-08",
+    "arquivo": "frontend/src/pages/SimuladorServicosFinanceiros.jsx"
+  },
+  {
+    "title": "Simulador do Agro (IBS/CBS no Campo)",
+    "labels": ["Agronegócio", "Setorial"],
+    "route": "/simulador-agro-reforma",
+    "description": "Mostra tributos sobre insumos, fertilizantes, defensivos e produção rural.",
+    "inputs": ["insumos", "produto", "ncm"],
+    "outputs": ["tributos", "créditos", "comparativo"],
+    "seo": ["tributação agro reforma", "ibs agro 2026", "cbs fertilizantes"]
+  },
+  {
+    "title": "Simulador do Turismo e Eventos",
+    "labels": ["Turismo", "Setorial"],
+    "route": "/simulador-turismo-reforma",
+    "description": "Impacto da reforma em hotéis, agências, restaurantes e eventos.",
+    "inputs": ["faturamento", "categoria", "estado"],
+    "outputs": ["tributoAtual", "tributoNovo"],
+    "seo": ["turismo reforma tributária", "ibs turismo", "restaurantes imposto 2026"]
+  },
+  {
+    "title": "Calculadora de Imunidades (Saúde, Educação e Transportes)",
+    "labels": ["Benefícios", "Social"],
+    "route": "/calculadora-imunidades",
+    "description": "Simula imunidades totais e parciais para os setores beneficiados.",
+    "inputs": ["tipoServico", "valor", "instituicao"],
+    "outputs": ["imunidade", "custoFinal"],
+    "seo": ["imunidade tributária saúde", "educação ibs cbs", "transporte imposto 2026"]
+  },
+  {
+    "title": "Simulador de Regimes Especiais",
+    "labels": ["Regimes Especiais", "Avançado"],
+    "route": "/regimes-especiais-reforma",
+    "description": "Simula regimes diferenciados como combustíveis, energia elétrica e meios de pagamento.",
+    "inputs": ["categoria", "valor", "estado"],
+    "outputs": ["beneficio", "tributoCalculado"],
+    "seo": ["regime especial ibs", "energia elétrica reforma", "combustível imposto 2026"]
+  },
+  {
+    "title": "Comparador Pré-Reforma vs Pós-Reforma por Setor",
+    "labels": ["Comparador", "SEO Forte"],
+    "route": "/comparador-setorial-2026",
+    "description": "Ferramenta para comparar carga tributária antes e depois da reforma por setor.",
+    "inputs": ["setor", "faturamento", "estado"],
+    "outputs": ["custoAntigo", "custoNovo", "graficos"],
+    "seo": ["comparador reforma tributária", "antes e depois reforma", "impacto por setor"]
+  },
+  {
+    "title": "Calculadora do IVA para Profissionais Autônomos",
+    "labels": ["Autônomos", "Simples"],
+    "route": "/iva-autonomo",
+    "description": "Mostra como IBS/CBS afeta autônomos, freelancers e tomadores de serviço.",
+    "inputs": ["valorServico", "deducoes", "estado"],
+    "outputs": ["tributo", "comparativoISS"],
+    "seo": ["autônomo reforma tributária", "serviço ibs", "freelancer imposto 2026"]
+  },
+  {
+    "title": "Simulador para Franquias",
+    "labels": ["Franquias", "Negócios"],
+    "route": "/simulador-franquia-reforma",
+    "description": "Calcula IBS/CBS sobre royalties, publicidade e taxa de franquia.",
+    "inputs": ["faturamento", "royalties", "taxas"],
+    "outputs": ["tributo", "comparativo"],
+    "seo": ["tributação franquia 2026", "ibs franquia", "royalties imposto"]
+  },
+  {
+    "title": "Calculadora de Benefícios Sociais Vinculados (Cashback + Alíquotas Reduzidas)",
+    "labels": ["Social", "Transição"],
+    "route": "/calculadora-beneficios-sociais",
+    "description": "Combina cashback, isenções e reduções para famílias de baixa renda.",
+    "inputs": ["consumo", "categoriaGasto", "faixaDeRenda"],
+    "outputs": ["devolucao", "economia"],
+    "seo": ["benefícios reforma tributária", "cashback 2026", "alíquota reduzida ibs"]
+  },
+  {
+    "title": "Gerador de NF-e 2026 (Modelo Novo)",
+    "labels": ["NFe", "Desenvolvedores", "Alta Demanda"],
+    "route": "/gerador-nfe-2026",
+    "description": "Gera uma NF-e completa já adaptada para IBS/CBS.",
+    "inputs": ["produto", "valor", "estadoOrigem", "estadoDestino", "ncm"],
+    "outputs": ["xmlNfeNovo", "comparativoCamposAntigoNovo"],
+    "seo": ["nfe 2026 ibs cbs", "modelo nota fiscal nova", "campos nf-e reforma"]
+  },
+  {
+    "title": "Simulador de Obrigações Acessórias 2026",
+    "labels": ["Compliance", "Empresas"],
+    "route": "/obrigacoes-2026",
+    "description": "Lista as obrigações acessórias exigidas antes e depois da reforma.",
+    "inputs": ["porteEmpresa", "estado", "regime"],
+    "outputs": ["listaAntiga", "listaNova", "mudancas"],
+    "seo": ["obrigações acessórias 2026", "dctf ibs cbs", "declarações reforma"]
+  },
+  {
+    "title": "Painel de Conformidade IBS/CBS",
+    "labels": ["Compliance", "Score"],
+    "route": "/conformidade-ibs",
+    "description": "Gera um score de conformidade tributária para a empresa.",
+    "inputs": ["faturamento", "compras", "documentacao", "creditos"],
+    "outputs": ["score", "alertas", "recomendacoes"],
+    "seo": ["compliance ibs", "conformidade reforma tributária", "score tributário"]
+  },
+  {
+    "title": "Cronograma Completo da Reforma (2026–2033)",
+    "labels": ["Calendário", "SEO"],
+    "route": "/cronograma-reforma",
+    "description": "Linha do tempo visual ano a ano com as mudanças da reforma.",
+    "inputs": [],
+    "outputs": ["timeline", "datas"],
+    "seo": ["cronograma reforma tributária", "transição 2033 iva", "mudanças ano a ano"]
+  },
+  {
+    "title": "Dashboard da Reforma Tributária (Tempo Real)",
+    "labels": ["Dashboard", "Analytics"],
+    "route": "/dashboard-reforma",
+    "description": "Dashboard com gráficos, mapas e indicadores do impacto tributário.",
+    "inputs": ["setor", "estado", "faturamento"],
+    "outputs": ["graficos", "mapas"],
+    "seo": ["dashboard reforma tributária", "mapa ibs", "impacto reforma gráficos"]
+  },
+  {
+    "title": "Simulador para Dropshipping e Importações",
+    "labels": ["E-commerce", "Importação"],
+    "route": "/simulador-importacao-2026",
+    "description": "Calcula IBS/CBS sobre importações e revenda nacional.",
+    "inputs": ["valorImportacao", "frete", "ncm"],
+    "outputs": ["tributos", "custoFinal"],
+    "seo": ["reforma tributária importação", "dropshipping imposto 2026", "ibs importados"]
+  },
+  {
+    "title": "Calculadora de Créditos de Ativo Permanente",
+    "labels": ["Ativo Permanente", "Indústria"],
+    "route": "/creditos-ativo",
+    "description": "Simula créditos sobre máquinas, equipamentos e investimentos.",
+    "inputs": ["valorAtivo", "vidaUtil", "categoria"],
+    "outputs": ["creditoMensal", "creditoTotal"],
+    "seo": ["crédito ativo permanente ibs", "máquinas imposto 2026", "creditos cbs ativos"]
+  },
+  {
+    "title": "Regras do Comitê Gestor IBS (Consultor Automático)",
+    "labels": ["Institucional", "Regulatório"],
+    "route": "/consultor-ibs",
+    "description": "Explica de forma simples cada regra do Comitê Gestor do IBS.",
+    "inputs": ["tema", "pergunta"],
+    "outputs": ["explicacao", "exemplos"],
+    "seo": ["comitê gestor ibs", "regras ibs 2026", "legislação reforma tributária"]
+  },
+  {
+    "title": "Gerador de Recibo e Documento Fiscal 2026",
+    "labels": ["Viral", "Topo de Funil"],
+    "route": "/recibo-2026",
+    "description": "Gera recibos com estrutura adaptada à reforma.",
+    "inputs": ["nomePagador", "nomeRecebedor", "valor", "descricao"],
+    "outputs": ["pdf"],
+    "seo": ["gerar recibo 2026", "recibo ibs", "recibo online reforma"]
+  },
+  {
+    "title": "Simulador de Tributação Freelancer (pós-ISS)",
+    "labels": ["Autônomos", "Alta Busca"],
+    "route": "/freelancer-2026",
+    "description": "Mostra como freelancers e MEIs serão afetados com o fim do ISS.",
+    "inputs": ["valorServico", "estado", "deducoes"],
+    "outputs": ["tributo", "comparativoISS"],
+    "seo": ["freelancer ibs", "tributação autônomo reforma", "acabar ISS 2026"]
+  },
+  {
+    "title": "Calculadora de Benefícios Culturais (Setor Criativo)",
+    "labels": ["Cultura", "Eventos"],
+    "route": "/cultura-2026",
+    "description": "Simula tributos para produtores culturais, eventos, artistas e shows.",
+    "inputs": ["valorProjeto", "categoria"],
+    "outputs": ["tributo", "economia"],
+    "seo": ["tributação cultura reforma", "ibs shows", "imposto produtor cultural"]
+  },
+  {
+    "title": "Gerador de Guia IBS/CBS (Modelo Educativo)",
+    "labels": ["Educacional", "Topo de Funil"],
+    "route": "/guia-ibs-cbs",
+    "description": "Gera uma explicação simples e visual sobre a reforma baseada no seu setor.",
+    "inputs": ["setor", "estado"],
+    "outputs": ["pdf", "resumoExplicativo"],
+    "seo": ["entender reforma tributária", "guia ibs cbs", "explicação reforma 2026"]
+  },
+  {
+    "title": "Simulador de Risco Tributário na Reforma",
+    "labels": ["Risco", "Diagnóstico"],
+    "route": "/risco-reforma",
+    "description": "Calcula risco de aumento de carga, crédito indevido e obrigações.",
+    "inputs": ["setor", "compras", "margem"],
+    "outputs": ["score", "alertas"],
+    "seo": ["risco reforma tributária", "aumento carga 2026", "diagnóstico iva brasil"]
+  },
+  {
+    "title": "Comparador de Preço Final ao Consumidor",
+    "labels": ["Varejo", "SEO"],
+    "route": "/preco-consumidor-2026",
+    "description": "Compara preços ao consumidor antes e depois da reforma para varejo e alimentos.",
+    "inputs": ["valorProduto", "estado", "categoria"],
+    "outputs": ["precoAntes", "precoDepois", "grafico"],
+    "seo": ["preço consumidor reforma", "alimentos ibs cbs", "impacto no varejo 2026"]
+  },
+  {
+    "title": "Assistente Tributário IA — Reforma 2026",
+    "labels": ["IA", "Consultoria"],
+    "route": "/assistente-reforma-ia",
+    "description": "Assistente automatizado que responde perguntas sobre IBS/CBS.",
+    "inputs": ["pergunta", "setor"],
+    "outputs": ["respostaIA", "linksUteis"],
+    "seo": ["ia reforma tributária", "chatbot ibs", "assistente tributário ia"]
+  },
+  {
+    "title": "Calculadora Nacional de Alíquotas por Estado",
+    "labels": ["Estados", "Mapa Tributário"],
+    "route": "/mapa-aliquotas-2026",
+    "description": "Mapa interativo com a alíquota do IBS por estado.",
+    "inputs": ["estado", "setor"],
+    "outputs": ["aliquota", "comparativoEstados"],
+    "seo": ["aliquota ibs por estado", "mapa ibs", "imposto estados reforma"]
+  },
+  {
+    "title": "Gerador de Comprovante de Rendimentos (IRRF) via XML eSocial",
+    "labels": ["Fiscal", "Alta Complexidade", "Alta Retenção"],
+    "route": "/gerador-comprovante-rendimentos",
+    "description": "Ferramenta que recebe arquivos XML do eSocial (S-1210 – Pagamentos) via file uploader, extrai os dados de rendimentos, deduções, IRRF e demais informações, e gera automaticamente o Comprovante de Rendimentos Pagos e de Retenção de IRRF no padrão oficial da Receita Federal. Ao final, disponibiliza o PDF formatado para impressão.",
+    "inputs": ["arquivosXML"],
+    "outputs": ["comprovantePDF", "listaBeneficiarios"],
+    "seo": ["comprovante rendimentos esocial", "gerar informe rendimentos xml", "comprovante irrf pdf", "esocial s1210 comprovante"],
+    "status": "✅ IMPLEMENTADO",
+    "dataImplementacao": "2025-12-07",
+    "arquivo": "frontend/src/pages/GeradorComprovanteRendimentos.jsx"
+  }
+]
+
 }

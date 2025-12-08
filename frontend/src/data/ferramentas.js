@@ -4,6 +4,22 @@
  */
 
 export const ferramentas = [
+  // === FERRAMENTAS FISCAIS ===
+  {
+    id: 'gerador-comprovante-rendimentos',
+    nome: 'Gerador de Comprovante de Rendimentos (IRRF)',
+    descricao: 'Gere comprovantes de rendimentos a partir de XML eSocial',
+    descricaoCompleta: 'Ferramenta que processa arquivos XML do eSocial (S-1210) e gera automaticamente o Comprovante de Rendimentos Pagos e de Retenção de IRRF no padrão oficial da Receita Federal.',
+    rota: '/gerador-comprovante-rendimentos',
+    icone: '📄',
+    categoria: 'fiscal',
+    subcategoria: 'documentos-fiscais',
+    tags: ['irrf', 'comprovante', 'rendimentos', 'esocial', 'xml', 's1210', 'informe', 'imposto de renda'],
+    sinonimos: ['informe de rendimentos', 'comprovante irrf', 'declaração rendimentos', 'esocial s1210'],
+    palavrasChave: ['gerar comprovante', 'xml esocial', 'informe rendimentos', 'comprovante irrf pdf', 'imposto de renda'],
+    cor: 'teal'
+  },
+
   // === CALCULADORAS - SIMPLES NACIONAL ===
   {
     id: 'calculadora-das',
@@ -518,6 +534,52 @@ export const ferramentas = [
     sinonimos: ['break even', 'ponto equilibrio', 'quantas vendas preciso', 'quanto preciso faturar', 'custos fixos variáveis'],
     palavrasChave: ['ponto de equilíbrio', 'break even calculator', 'quanto preciso vender', 'calcular break even', 'margem de contribuição', 'custos fixos e variáveis'],
     cor: 'blue'
+  },
+
+  // === REFORMA TRIBUTÁRIA 2026 ===
+  {
+    id: 'simulador-impacto-reforma',
+    nome: 'Impacto Geral da Reforma 2026',
+    descricao: 'Compare tributação atual vs IBS + CBS',
+    descricaoCompleta: 'Simulador completo que compara a tributação atual (PIS, COFINS, ICMS, ISS) com o novo modelo unificado IBS + CBS da Reforma Tributária 2026.',
+    rota: '/simulador-impacto-reforma',
+    icone: '🔄',
+    categoria: 'simulador',
+    subcategoria: 'reforma-2026',
+    tags: ['reforma tributária', 'ibs', 'cbs', 'iva', '2026', 'impacto', 'comparação'],
+    sinonimos: ['reforma tributaria 2026', 'iva brasil', 'ibs cbs', 'novo imposto'],
+    palavrasChave: ['reforma tributária', 'simulador reforma 2026', 'ibs cbs calcular', 'antes e depois reforma', 'impacto reforma tributaria'],
+    cor: 'indigo',
+    destaque: true
+  },
+  {
+    id: 'simulador-iva-simplificado',
+    nome: 'IBS + CBS Simplificado',
+    descricao: 'Calculadora rápida para pequenos negócios',
+    descricaoCompleta: 'Ferramenta simples e rápida para calcular IBS + CBS. Ideal para pequenos negócios, autônomos e quem quer entender o novo sistema de forma fácil.',
+    rota: '/simulador-iva-simplificado',
+    icone: '⚡',
+    categoria: 'calculadora',
+    subcategoria: 'reforma-2026',
+    tags: ['ibs', 'cbs', 'reforma', 'simples', 'rápido', 'autônomo'],
+    sinonimos: ['calcular ibs', 'calcular cbs', 'iva simples', 'reforma fácil'],
+    palavrasChave: ['calcular ibs', 'calcular cbs', 'imposto reforma 2026 simples', 'iva brasil calculadora'],
+    cor: 'indigo'
+  },
+  {
+    id: 'simulador-transicao-reforma',
+    nome: 'Transição Tributária (2026-2033)',
+    descricao: 'Veja ano a ano como sua empresa será impactada',
+    descricaoCompleta: 'Simulador detalhado que mostra a evolução da carga tributária durante todos os 8 anos da transição. Visualize o peso de cada tributo antigo e novo em cada ano.',
+    rota: '/simulador-transicao-reforma',
+    icone: '📅',
+    categoria: 'simulador',
+    subcategoria: 'reforma-2026',
+    tags: ['transição', 'reforma', '2026', '2033', 'cronograma', 'planejamento', 'evolução'],
+    sinonimos: ['transição reforma tributária', 'cronograma reforma', 'mudança impostos ano a ano', 'planejamento reforma'],
+    palavrasChave: ['transição reforma tributária', '2026 2033 impostos', 'mudança impostos ano a ano', 'cronograma reforma 2026', 'planejamento tributário reforma'],
+    cor: 'indigo',
+    destaque: true
   }
 ];
 
@@ -612,6 +674,19 @@ export const categorias = {
     icone: '🚀',
     cor: 'violet',
     descricao: 'Métricas de startup'
+  },
+  reforma: {
+    nome: 'Reforma 2026',
+    icone: '🔄',
+    cor: 'indigo',
+    descricao: 'IBS + CBS e transição',
+    destaque: true
+  },
+  fiscal: {
+    nome: 'Fiscal',
+    icone: '📄',
+    cor: 'teal',
+    descricao: 'Documentos e obrigações fiscais'
   }
 };
 
@@ -632,7 +707,9 @@ export const subcategorias = {
   'metricas': 'Métricas',
   'investimento': 'Investimento',
   'comparacao': 'Comparação',
-  'trabalhista': 'Trabalhista'
+  'trabalhista': 'Trabalhista',
+  'reforma-2026': 'Reforma Tributária 2026',
+  'documentos-fiscais': 'Documentos Fiscais'
 };
 
 export default ferramentas;

@@ -1,10 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
+import MenuReformaTributaria from './MenuReformaTributaria';
 
 function Header() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [buscaAberta, setBuscaAberta] = useState(false);
+  const [menuReformaAberto, setMenuReformaAberto] = useState(false);
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
@@ -30,6 +32,12 @@ function Header() {
     <>
       {/* Modal de Busca */}
       {buscaAberta && <SearchBar onClose={() => setBuscaAberta(false)} />}
+
+      {/* Menu Reforma Tributária */}
+      <MenuReformaTributaria 
+        isOpen={menuReformaAberto} 
+        onClose={() => setMenuReformaAberto(false)} 
+      />
 
       <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
         {/* Barra superior decorativa */}
@@ -196,8 +204,8 @@ function Header() {
                 </Link>
               </div>
             </div>
-            
-            {/* Dropdown Educação - NOVO */}
+
+            {/* Dropdown Educação */}
             <div className="relative group">
               <button className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all flex items-center gap-1.5">
                 <span className="text-purple-500">📚</span>
@@ -335,6 +343,16 @@ function Header() {
                 </Link>
               </div>
             </div>
+            
+            {/* Botão Reforma Tributária - NOVO */}
+            <button 
+              onClick={() => setMenuReformaAberto(true)}
+              className="ml-2 px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg transition-all flex items-center gap-2"
+            >
+              <span className="text-lg">✨</span>
+              Reforma 2026
+              <span className="px-2 py-0.5 bg-white/20 rounded text-xs font-bold">NOVO</span>
+            </button>
             
             {/* Botão Ver Todas as Ferramentas */}
             <Link
@@ -513,10 +531,21 @@ function Header() {
                 ROI Simulator
               </Link>
               
+              {/* Botão Reforma Tributária Mobile */}
+              <button
+                onClick={() => {
+                  setMenuAberto(false);
+                  setMenuReformaAberto(true);
+                }}
+                className="block mt-6 mx-4 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-center shadow-lg border-2 border-white/20"
+              >
+                ✨ Reforma Tributária 2026
+              </button>
+
               {/* Botão Ver Todas as Ferramentas */}
               <Link 
                 to="/ferramentas" 
-                className="block mt-6 mx-4 px-4 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl font-bold text-center shadow-lg border-2 border-white/20" 
+                className="block mt-3 mx-4 px-4 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl font-bold text-center shadow-lg border-2 border-white/20" 
                 onClick={() => setMenuAberto(false)}
               >
                 🗂️ Ver Todas as Ferramentas
@@ -524,8 +553,8 @@ function Header() {
             </div>
           </div>
         )}
-      </div>
-    </header>
+        </div>
+      </header>
     </>
   );
 }
