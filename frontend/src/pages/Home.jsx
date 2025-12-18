@@ -66,7 +66,23 @@ function Home() {
         </div>
 
         {/* Grid de Ações Rápidas - Layout Equilibrado */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {/* Card Jornada de Economia - NOVO */}
+          <div 
+            onClick={() => navigate('/jornada-economia-home')}
+            className="group bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 text-white cursor-pointer hover:shadow-2xl transition-all transform hover:-translate-y-2 relative overflow-hidden"
+          >
+            <div className="absolute top-2 right-2 bg-green-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+              NOVO
+            </div>
+            <div className="text-4xl mb-3">💡</div>
+            <h3 className="font-bold text-lg mb-2">Jornada de Economia</h3>
+            <p className="text-blue-100 text-sm mb-4">Descubra oportunidades de economia</p>
+            <div className="flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all">
+              Descobrir <span>→</span>
+            </div>
+          </div>
+
           {/* Card Diagnóstico */}
           <div 
             onClick={() => navigate('/diagnostico-tributario')}

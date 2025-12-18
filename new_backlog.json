@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "id": "jornada-economia-empresarial",
+    "title": "Jornada de Economia Empresarial",
+    "description": "Diagnóstico guiado que identifica oportunidades legais de economia para empresas com base em informações fornecidas pelo empreendedor.",
+    "version": "1.0.0",
+    "type": "wizard",
+    "disclaimer": "Este diagnóstico é educativo e não substitui a análise de um contador ou consultor tributário."
+  },
+
+  "steps": [
+    {
+      "id": "step-empresa",
+      "title": "Sobre sua empresa",
+      "cards": [
+        {
+          "id": "tipo_empresa",
+          "label": "Tipo de empresa",
+          "type": "select",
+          "options": ["MEI", "ME", "EPP"],
+          "required": true
+        },
+        {
+          "id": "regime_tributario",
+          "label": "Regime tributário atual",
+          "type": "select",
+          "options": ["Simples Nacional", "Lucro Presumido", "Lucro Real"],
+          "required": true
+        },
+        {
+          "id": "faturamento_mensal",
+          "label": "Faturamento mensal médio (R$)",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "cnae",
+          "label": "CNAE principal",
+          "type": "text",
+          "placeholder": "Ex: 6201-5/01",
+          "required": false
+        }
+      ]
+    },
+
+    {
+      "id": "step-operacao",
+      "title": "Estrutura e operação",
+      "cards": [
+        {
+          "id": "possui_funcionarios",
+          "label": "Possui funcionários registrados?",
+          "type": "boolean"
+        },
+        {
+          "id": "quantidade_funcionarios",
+          "label": "Quantidade de funcionários",
+          "type": "number",
+          "dependsOn": {
+            "field": "possui_funcionarios",
+            "value": true
+          }
+        },
+        {
+          "id": "possui_contador",
+          "label": "Possui contador atualmente?",
+          "type": "boolean"
+        }
+      ]
+    },
+
+    {
+      "id": "step-remuneracao",
+      "title": "Remuneração e benefícios",
+      "cards": [
+        {
+          "id": "pro_labore",
+          "label": "Valor do pró-labore mensal (R$)",
+          "type": "number"
+        },
+        {
+          "id": "paga_plano_saude",
+          "label": "Paga plano de saúde?",
+          "type": "select",
+          "options": ["Não", "Pessoa Física", "Pessoa Jurídica"]
+        },
+        {
+          "id": "outros_beneficios",
+          "label": "Oferece outros benefícios (VA, VR, auxílio)?",
+          "type": "boolean"
+        }
+      ]
+    },
+
+    {
+      "id": "step-despesas",
+      "title": "Despesas relevantes",
+      "cards": [
+        {
+          "id": "aluguel_cnpj",
+          "label": "Paga aluguel no CNPJ?",
+          "type": "boolean"
+        },
+        {
+          "id": "veiculo_cnpj",
+          "label": "Possui veículo no CNPJ?",
+          "type": "boolean"
+        },
+        {
+          "id": "compra_mercadorias",
+          "label": "Compra mercadorias para revenda ou produção?",
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+
+  "rules": [
+    {
+      "id": "regime_alternativo",
+      "conditions": [
+        { "field": "regime_tributario", "operator": "equals", "value": "Simples Nacional" },
+        { "field": "faturamento_mensal", "operator": "greaterThan", "value": 20000 }
+      ],
+      "result": {
+        "type": "economia",
+        "priority": "alta",
+        "title": "Avaliar mudança de regime tributário",
+        "description": "Dependendo da margem e da atividade, o Lucro Presumido pode gerar menor carga tributária.",
+        "estimatedEconomy": "5% a 15% ao ano",
+        "action": [
+          "Simular Lucro Presumido",
+          "Comparar alíquotas efetivas",
+          "Validar com contador"
+        ],
+        "source": ["SN-LEI-123"]
+      }
+    },
+
+    {
+      "id": "pro_labore_excessivo",
+      "conditions": [
+        { "field": "pro_labore", "operator": "greaterThan", "value": 5000 }
+      ],
+      "result": {
+        "type": "economia",
+        "priority": "media",
+        "title": "Possível economia com ajuste de pró-labore",
+        "description": "Pró-labore acima do necessário aumenta a carga de INSS.",
+        "estimatedEconomy": "Até 20% sobre o INSS pago",
+        "action": [
+          "Reavaliar valor do pró-labore",
+          "Complementar renda com distribuição de lucros"
+        ],
+        "source": ["INSS-PRO-LABORE"]
+      }
+    },
+
+    {
+      "id": "plano_saude_pf",
+      "conditions": [
+        { "field": "paga_plano_saude", "operator": "equals", "value": "Pessoa Física" }
+      ],
+      "result": {
+        "type": "economia",
+        "priority": "media",
+        "title": "Plano de saúde pode ser pago pelo CNPJ",
+        "description": "O pagamento via PJ pode ser dedutível e reduzir impostos.",
+        "estimatedEconomy": "Variável conforme regime",
+        "action": [
+          "Consultar operadora",
+          "Verificar dedutibilidade fiscal"
+        ],
+        "source": ["RFB-DESPESAS"]
+      }
+    },
+
+    {
+      "id": "credito_tributario",
+      "conditions": [
+        { "field": "compra_mercadorias", "operator": "equals", "value": true },
+        { "field": "regime_tributario", "operator": "notEquals", "value": "Simples Nacional" }
+      ],
+      "result": {
+        "type": "oportunidade",
+        "priority": "alta",
+        "title": "Possível aproveitamento de créditos tributários",
+        "description": "Empresas fora do Simples podem aproveitar créditos de impostos.",
+        "estimatedEconomy": "Depende do volume de compras",
+        "action": [
+          "Mapear notas fiscais",
+          "Apurar créditos possíveis"
+        ],
+        "source": ["ICMS-CREDITO", "PIS-COFINS"]
+      }
+    }
+  ],
+
+  "report": {
+    "sections": [
+      {
+        "id": "resumo",
+        "title": "Resumo do diagnóstico",
+        "type": "summary"
+      },
+      {
+        "id": "oportunidades",
+        "title": "Oportunidades identificadas",
+        "type": "list",
+        "orderBy": "priority"
+      },
+      {
+        "id": "proximos_passos",
+        "title": "Próximos passos recomendados",
+        "type": "actions"
+      }
+    ]
+  },
+
+  "sources": {
+    "SN-LEI-123": {
+      "title": "Lei Complementar nº 123/2006",
+      "url": "https://www.planalto.gov.br"
+    },
+    "INSS-PRO-LABORE": {
+      "title": "INSS sobre Pró-labore",
+      "url": "https://www.gov.br/inss"
+    },
+    "RFB-DESPESAS": {
+      "title": "Receita Federal – Despesas Dedutíveis",
+      "url": "https://www.gov.br/receitafederal"
+    },
+    "ICMS-CREDITO": {
+      "title": "Créditos de ICMS",
+      "url": "https://www.confaz.fazenda.gov.br"
+    },
+    "PIS-COFINS": {
+      "title": "Créditos de PIS e COFINS",
+      "url": "https://www.gov.br/receitafederal"
+    }
+  },
+
+  "uiHints": {
+    "cardLayout": "one-question-per-card",
+    "progressIndicator": true,
+    "allowBack": true,
+    "generatePdf": true
+  }
+}

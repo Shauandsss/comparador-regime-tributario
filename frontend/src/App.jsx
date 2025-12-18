@@ -68,6 +68,9 @@ import PainelCreditosAcumulados from './pages/PainelCreditosAcumulados';
 import SimuladorExportacao from './pages/SimuladorExportacao';
 import SimuladorServicosFinanceiros from './pages/SimuladorServicosFinanceiros';
 import GeradorComprovanteRendimentos from './pages/GeradorComprovanteRendimentos';
+import JornadaEconomiaHome from './pages/JornadaEconomiaHome';
+import JornadaEconomia from './pages/JornadaEconomia';
+import JornadaEconomiaBasica from './pages/JornadaEconomiaBasica';
 
 function App() {
   return (
@@ -143,6 +146,9 @@ function App() {
           <Route path="/calculadora-icms-st" element={<CalculadoraIcmsSt />} />
           <Route path="/comparador-indicadores" element={<ComparadorIndicadores />} />
           <Route path="/gerador-comprovante-rendimentos" element={<GeradorComprovanteRendimentos />} />
+          <Route path="/jornada-economia-home" element={<JornadaEconomiaHome />} />
+          <Route path="/jornada-economia" element={<JornadaEconomia />} />
+          <Route path="/jornada-economia-basica" element={<JornadaEconomiaBasica />} />
         </Routes>
       </main>
     </div>

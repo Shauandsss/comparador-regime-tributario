@@ -4,6 +4,23 @@
  */
 
 export const ferramentas = [
+  // === FERRAMENTAS DE DIAGNÓSTICO E ECONOMIA ===
+  {
+    id: 'jornada-economia',
+    nome: 'Jornada de Economia Empresarial',
+    descricao: 'Descubra oportunidades legais de economia em impostos e custos',
+    descricaoCompleta: 'Diagnóstico inteligente guiado por perguntas que identifica oportunidades de economia tributária, otimização de custos e melhorias na gestão financeira. Disponível em versão rápida (5 min) e completa (15 min).',
+    rota: '/jornada-economia-home',
+    icone: '💡',
+    categoria: 'simulador',
+    subcategoria: 'diagnostico',
+    tags: ['economia', 'diagnóstico', 'oportunidades', 'redução', 'custos', 'impostos', 'planejamento', 'wizard'],
+    sinonimos: ['economizar impostos', 'reduzir tributos', 'otimização tributária', 'diagnóstico de economia'],
+    palavrasChave: ['como economizar', 'reduzir impostos', 'oportunidades economia', 'pagar menos imposto', 'otimizar custos'],
+    cor: 'blue',
+    destaque: true
+  },
+
   // === FERRAMENTAS FISCAIS ===
   {
     id: 'gerador-comprovante-rendimentos',

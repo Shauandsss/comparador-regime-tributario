@@ -146,6 +146,17 @@ function Header() {
                 </svg>
               </button>
               <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 py-3 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform group-hover:translate-y-0 translate-y-2 z-50">
+                <Link to="/jornada-economia-home" className="flex items-center gap-3 px-4 py-2.5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-colors border-l-4 border-transparent hover:border-blue-500">
+                  <span className="text-xl">💡</span>
+                  <div>
+                    <div className="font-medium text-gray-800 text-sm flex items-center gap-2">
+                      Jornada de Economia
+                      <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">NOVO</span>
+                    </div>
+                    <div className="text-xs text-gray-500">Descubra como economizar impostos</div>
+                  </div>
+                </Link>
+                <div className="border-t border-gray-100 my-2"></div>
                 <Link to="/diagnostico-tributario" className="flex items-center gap-3 px-4 py-2.5 hover:bg-emerald-50 transition-colors">
                   <span className="text-xl">🎯</span>
                   <div>
